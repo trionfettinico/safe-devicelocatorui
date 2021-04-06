@@ -1,0 +1,11 @@
+/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/Backend/target/debug/deps/state-6ef3c0b5c2ea0af3.rmeta: /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/lib.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/ident_hash.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/container.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/storage.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/init.rs
+
+/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/Backend/target/debug/deps/libstate-6ef3c0b5c2ea0af3.rlib: /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/lib.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/ident_hash.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/container.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/storage.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/init.rs
+
+/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/Backend/target/debug/deps/state-6ef3c0b5c2ea0af3.d: /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/lib.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/ident_hash.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/container.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/storage.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/init.rs
+
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/lib.rs:
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/ident_hash.rs:
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/container.rs:
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/storage.rs:
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/state-0.4.2/src/init.rs:

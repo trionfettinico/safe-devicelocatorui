@@ -1,0 +1,10 @@
+/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/Backend/target/debug/deps/ppv_lite86-b5c231b3ae995b69.rmeta: /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/lib.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/soft.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/types.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/generic.rs
+
+/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/Backend/target/debug/deps/libppv_lite86-b5c231b3ae995b69.rlib: /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/lib.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/soft.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/types.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/generic.rs
+
+/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/Backend/target/debug/deps/ppv_lite86-b5c231b3ae995b69.d: /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/lib.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/soft.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/types.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/generic.rs
+
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/lib.rs:
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/soft.rs:
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/types.rs:
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/ppv-lite86-0.2.10/src/generic.rs:

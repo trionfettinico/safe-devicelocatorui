@@ -1,0 +1,10 @@
+/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/Backend/target/debug/deps/proc_macro2-4f1ee71b964c29d7.rmeta: /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/lib.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/strnom.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/fallback.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/wrapper.rs
+
+/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/Backend/target/debug/deps/libproc_macro2-4f1ee71b964c29d7.rlib: /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/lib.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/strnom.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/fallback.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/wrapper.rs
+
+/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/Backend/target/debug/deps/proc_macro2-4f1ee71b964c29d7.d: /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/lib.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/strnom.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/fallback.rs /Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/wrapper.rs
+
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/lib.rs:
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/strnom.rs:
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/fallback.rs:
+/Users/lorenzotanganelli/.cargo/registry/src/github.com-1ecc6299db9ec823/proc-macro2-0.4.30/src/wrapper.rs:

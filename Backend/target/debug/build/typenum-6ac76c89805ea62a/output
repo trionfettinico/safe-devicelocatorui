@@ -1,0 +1,2 @@
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/Backend/target/debug/build/typenum-6ac76c89805ea62a/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/Backend/target/debug/build/typenum-6ac76c89805ea62a/out/op.rs

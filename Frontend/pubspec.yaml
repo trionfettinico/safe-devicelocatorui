@@ -21,7 +21,12 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  flutter_map: any # or the latest version on Pub
+  http:
+  flutter_map:
+  flutter_archive:
+  path_provider:
+  provider:
+
   flutter:
     sdk: flutter
 
