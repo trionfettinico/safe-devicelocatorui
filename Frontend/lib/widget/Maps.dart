@@ -38,19 +38,55 @@ class _Maps extends State<Maps> {
           FlutterMap(
             mapController: _mapController,
             options: MapOptions(
-              center: LatLng(43.129456, 13.055),
+              center: LatLng(43.140360, 13.068770),
               zoom: _currentZoom,
               maxZoom: 22.0,
-              swPanBoundary: LatLng(43.120, 13.048),
-              nePanBoundary: LatLng(43.140, 13.068),
+              swPanBoundary: LatLng(43.095360, 13.023770),
+              nePanBoundary: LatLng(43.185360, 13.113770),
               pinchZoomThreshold: 1.0,
             ),
             layers: [
               TileLayerOptions(
                 tileProvider: FileTileProvider(),
                 urlTemplate:
-                    "/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/mapDownloader/tiles/{z}_{x}_{y}.png",
+                    "/home/luca/Scrivania/safe-devicelocatorui/map_downloader/tiles/{z}_{x}_{y}.png",
                 maxZoom: 22.0,
+              ),
+              MarkerLayerOptions(
+                markers: [
+                  Marker(
+                    width: 35.0,
+                    height: 35.0,
+                    point: LatLng(43.144118, 13.060696),
+                    builder: (ctx) => Container(
+                      child: FlutterLogo(),
+                    ),
+                  ),
+                  Marker(
+                    width: 35.0,
+                    height: 35.0,
+                    point: LatLng(43.145463, 13.067670),
+                    builder: (ctx) => Container(
+                      child: FlutterLogo(),
+                    ),
+                  ),
+                  Marker(
+                    width: 35.0,
+                    height: 35.0,
+                    point: LatLng(43.143224, 13.080657),
+                    builder: (ctx) => Container(
+                      child: FlutterLogo(),
+                    ),
+                  ),
+                  Marker(
+                    width: 35.0,
+                    height: 35.0,
+                    point: LatLng(43.149503, 13.063626),
+                    builder: (ctx) => Container(
+                      child: FlutterLogo(),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

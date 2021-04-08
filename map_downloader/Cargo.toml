@@ -1,5 +1,5 @@
 [package]
-name = "mapDownloader"
+name = "map_downloader"
 version = "0.1.0"
 authors = ["nico <nico.trionfetti@studenti.unicam.it>"]
 edition = "2018"
