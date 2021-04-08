@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provaproject/providers/MapProvider.dart';
-import 'package:provaproject/services/implementation/MapClass.dart';
-import 'package:provaproject/view/PrincipalView.dart';
+import 'package:frontend/providers/MapProvider.dart';
+import 'package:frontend/services/implementation/MapClass.dart';
+import 'package:frontend/view/PrincipalView.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -24,6 +24,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: "SafeProject",
         debugShowCheckedModeBanner: false,
-        home: PrincipalView());
+        home: PrincipalView(),
+        theme: ThemeData(
+            // Define the default brightness and colors.
+            brightness: Brightness.dark,
+            primaryColor: Color(0xFF4C9EEA),
+            accentColor: Color(0xFF171F2A),
+            scaffoldBackgroundColor: Color(0xFF171F2A)));
   }
 }

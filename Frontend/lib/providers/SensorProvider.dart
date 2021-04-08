@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provaproject/model/Sensor.dart';
-import 'package:provaproject/services/SensorService.dart';
+import 'package:frontend/model/Sensor.dart';
+import 'package:frontend/services/SensorService.dart';
 
 class SensorProvider with ChangeNotifier {
   SensorService _sensorService;

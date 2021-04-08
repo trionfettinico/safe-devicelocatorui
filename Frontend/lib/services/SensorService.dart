@@ -1,4 +1,4 @@
-import 'package:provaproject/model/Sensor.dart';
+import 'package:frontend/model/Sensor.dart';
 
 abstract class SensorService {
   Future<List<Sensor>> getSensors(String id);

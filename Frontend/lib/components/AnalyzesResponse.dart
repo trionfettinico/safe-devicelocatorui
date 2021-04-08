@@ -1,6 +1,6 @@
 import 'package:http/http.dart';
 import 'dart:convert';
-import 'package:provaproject/exceptions/BackendException.dart';
+import 'package:frontend/exceptions/BackendException.dart';
 
 class AnalyzesResponse {
   static final AnalyzesResponse _singleton = AnalyzesResponse._internal();

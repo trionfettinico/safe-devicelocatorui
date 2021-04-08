@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provaproject/services/MapService.dart';
+import 'package:frontend/services/MapService.dart';
 
 class MapProvider with ChangeNotifier {
   MapService _mapService;

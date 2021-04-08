@@ -1,9 +1,9 @@
 import 'dart:convert';
 
-import 'package:provaproject/components/AnalyzesResponse.dart';
-import 'package:provaproject/components/BasicAuthConfig.dart';
+import 'package:frontend/components/AnalyzesResponse.dart';
+import 'package:frontend/components/BasicAuthConfig.dart';
 import 'package:http/http.dart' as http;
-import 'package:provaproject/model/Sensor.dart';
+import 'package:frontend/model/Sensor.dart';
 
 class SensorController {
   String _baseUrl;

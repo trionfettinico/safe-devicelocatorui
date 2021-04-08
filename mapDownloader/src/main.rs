@@ -33,7 +33,7 @@ async fn get_map_tiles(coordinates: Vec<[i32;3]>){
         .map(|coords| {
             let client = client.clone();
             tokio::spawn(async move {
-                let url = format!("https://a.tile.openstreetmap.org/{}/{}/{}.png",coords[0], coords[1], coords[2]);
+                let url = format!("http://tile.thunderforest.com/cycle/{}/{}/{}.png",coords[0], coords[1], coords[2]);
                 let mut headers = HeaderMap::new();
                 headers.insert(USER_AGENT,"User-Agent', 'Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:87.0) Gecko/20100101 Firefox/87.0".parse().unwrap());
                 let resp = client.get(url.as_str()).headers(headers).send().await?;

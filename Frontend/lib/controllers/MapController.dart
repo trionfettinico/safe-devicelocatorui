@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:provaproject/components/AnalyzesResponse.dart';
-import 'package:provaproject/components/BasicAuthConfig.dart';
+import 'package:frontend/components/AnalyzesResponse.dart';
+import 'package:frontend/components/BasicAuthConfig.dart';
 import 'package:http/http.dart' as http;
 
 class MapController {

@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:provaproject/components/MapsExctractor.dart';
-import 'package:provaproject/controllers/MapController.dart';
-import 'package:provaproject/services/MapService.dart';
+import 'package:frontend/components/MapsExctractor.dart';
+import 'package:frontend/controllers/MapController.dart';
+import 'package:frontend/services/MapService.dart';
 
 class MapClass implements MapService {
   MapController mapController;
