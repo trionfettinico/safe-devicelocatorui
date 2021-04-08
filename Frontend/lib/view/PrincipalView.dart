@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provaproject/providers/MapProvider.dart';
 import 'package:provaproject/widget/CardSensor.dart';
 import 'package:provaproject/widget/Maps.dart';
+import 'package:provider/provider.dart';
 
 class PrincipalView extends StatefulWidget {
   @override
@@ -8,8 +10,11 @@ class PrincipalView extends StatefulWidget {
 }
 
 class _PrincipalView extends State<PrincipalView> {
+  var _zoom = 15.0;
+
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
   }
 
@@ -31,7 +36,7 @@ class _PrincipalView extends State<PrincipalView> {
                   CardSensor(),
                 ],
               )),
-          Maps()
+          Maps(),
         ],
       ),
     );

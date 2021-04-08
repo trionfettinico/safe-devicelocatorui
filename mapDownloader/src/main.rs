@@ -4,21 +4,19 @@ use reqwest::header::{HeaderMap, USER_AGENT};
 use reqwest::{Client}; // 0.10.6
 use tokio; // 0.2.21, features = ["macros"]
 
-const PARALLEL_REQUESTS: usize = 8;
-static MIN_LAT: f64 = 43.153;
-static MAX_LAT: f64 = 43.112;
-static MIN_LON: f64 = 13.028;
-static MAX_LON: f64 = 13.098;
+const PARALLEL_REQUESTS: usize = 128;
+static MIN_LAT: f64 = 43.140;
+static MAX_LAT: f64 = 43.120;
+static MIN_LON: f64 = 13.048;
+static MAX_LON: f64 = 13.068;
 
 #[tokio::main]
 async fn main() {
-    let client = Client::new();
     let mut coordinates = Vec::new();
 
-    for z in 15..20 {
+    for z in 15..23 {
         let (min_x, min_y) = deg2num(MIN_LAT, MIN_LON, z);
         let (max_x, max_y) = deg2num(MAX_LAT, MAX_LON, z);
-        println!("downloading zoom = {}", z);
         for _x in min_x..max_x {
             for _y in min_y..max_y {
                 coordinates.push([z, _x, _y]);
@@ -26,6 +24,11 @@ async fn main() {
         }
     }
 
+    get_map_tiles(coordinates).await;
+}
+
+async fn get_map_tiles(coordinates: Vec<[i32;3]>){
+    let client = Client::new();
     let bodies = stream::iter(coordinates)
         .map(|coords| {
             let client = client.clone();

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provaproject/providers/MapProvider.dart';
+import 'package:provaproject/services/implementation/MapClass.dart';
 import 'package:provaproject/view/PrincipalView.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(SafeProject());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+        create: (context) => MapProvider(new MapClass("localhost")))
+  ], child: SafeProject()));
 }
 
 class SafeProject extends StatelessWidget {
