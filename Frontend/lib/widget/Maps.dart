@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_map/flutter_map.dart';
@@ -18,6 +20,8 @@ class _Maps extends State<Maps> {
   double _maxZoom = 22.0;
   double _minZoom = 15.0;
   MapController _mapController = MapController();
+  String tilesPath =
+      "/home/${Platform.environment['USER']}/.local/share/safemap/tiles";
 
   Marker _createMarker(Sensor sensor) {
     return Marker(
@@ -58,8 +62,7 @@ class _Maps extends State<Maps> {
             layers: [
               TileLayerOptions(
                 tileProvider: FileTileProvider(),
-                urlTemplate:
-                    "/home/tarzan/Desktop/map_downloader/tiles/{z}_{x}_{y}.png",
+                urlTemplate: "$tilesPath/{z}/{x}/{y}.png",
                 maxZoom: 22.0,
               ),
               MarkerLayerOptions(

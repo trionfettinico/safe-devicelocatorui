@@ -1,4 +1,3 @@
-
 const aMail = "sudo@mail.com";
 const aPsw = "Doit";
 
