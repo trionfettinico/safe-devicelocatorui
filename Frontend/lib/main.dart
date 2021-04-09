@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/providers/MapProvider.dart';
+import 'package:frontend/providers/SensorProvider.dart';
 import 'package:frontend/services/implementation/MapClass.dart';
+import 'package:frontend/services/implementation/SensorClass.dart';
 import 'package:frontend/view/PrincipalView.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
-        create: (context) => MapProvider(new MapClass("localhost")))
+        create: (context) => MapProvider(new MapClass("localhost"))),
+    ChangeNotifierProvider(
+        create: (context) => SensorProvider(new SensorClass("localhost")))
   ], child: SafeProject()));
 }
 

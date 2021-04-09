@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_map/flutter_map.dart';
+import 'package:frontend/model/Sensor.dart';
+import 'package:frontend/providers/MapProvider.dart';
+import 'package:frontend/providers/SensorProvider.dart';
 import "package:latlong/latlong.dart";
+import 'package:provider/provider.dart';
 
 class Maps extends StatefulWidget {
   @override
@@ -9,37 +13,43 @@ class Maps extends StatefulWidget {
 }
 
 class _Maps extends State<Maps> {
-  double _currentZoom = 15.0;
+  List<Sensor> sensors = [];
+  List<Marker> markers = [];
   double _maxZoom = 22.0;
   double _minZoom = 15.0;
   MapController _mapController = MapController();
 
-  _zoomIn() {
-    setState(() {
-      _currentZoom = _currentZoom + 1;
-      _mapController.move(_mapController.center, _currentZoom);
-    });
-  }
-
-  _zoomOut() {
-    setState(() {
-      _currentZoom = _currentZoom - 1;
-      _mapController.move(_mapController.center, _currentZoom);
-    });
+  Marker _createMarker(Sensor sensor) {
+    return Marker(
+        width: 35.0,
+        height: 35.0,
+        point: sensor.getLatLng(),
+        builder: (ctx) => CircleAvatar(
+            radius: 40,
+            backgroundColor: Colors.red,
+            child: Icon(
+              Icons.warning_amber_rounded,
+              color: Colors.yellow[400],
+              size: 30,
+            )));
   }
 
   @override
   Widget build(BuildContext context) {
+    context.read<>().
+    sensors.addAll(context.watch<SensorProvider>().getSensors());
+    for (Sensor sensor in sensors) markers.add(_createMarker(sensor));
+
     return Container(
-      width: 550,
+      width: 1030, //1030,
       alignment: Alignment.centerLeft,
       child: Stack(
         children: [
           FlutterMap(
-            mapController: _mapController,
+            mapController: context.watch<MapProvider>().getMapController(),
             options: MapOptions(
               center: LatLng(43.140360, 13.068770),
-              zoom: _currentZoom,
+              zoom: context.watch<MapProvider>().getCurrentZoom(),
               maxZoom: 22.0,
               swPanBoundary: LatLng(43.095360, 13.023770),
               nePanBoundary: LatLng(43.185360, 13.113770),
@@ -49,44 +59,11 @@ class _Maps extends State<Maps> {
               TileLayerOptions(
                 tileProvider: FileTileProvider(),
                 urlTemplate:
-                    "/home/luca/Scrivania/safe-devicelocatorui/map_downloader/tiles/{z}_{x}_{y}.png",
+                    "/home/tarzan/Desktop/map_downloader/tiles/{z}_{x}_{y}.png",
                 maxZoom: 22.0,
               ),
               MarkerLayerOptions(
-                markers: [
-                  Marker(
-                    width: 35.0,
-                    height: 35.0,
-                    point: LatLng(43.144118, 13.060696),
-                    builder: (ctx) => Container(
-                      child: FlutterLogo(),
-                    ),
-                  ),
-                  Marker(
-                    width: 35.0,
-                    height: 35.0,
-                    point: LatLng(43.145463, 13.067670),
-                    builder: (ctx) => Container(
-                      child: FlutterLogo(),
-                    ),
-                  ),
-                  Marker(
-                    width: 35.0,
-                    height: 35.0,
-                    point: LatLng(43.143224, 13.080657),
-                    builder: (ctx) => Container(
-                      child: FlutterLogo(),
-                    ),
-                  ),
-                  Marker(
-                    width: 35.0,
-                    height: 35.0,
-                    point: LatLng(43.149503, 13.063626),
-                    builder: (ctx) => Container(
-                      child: FlutterLogo(),
-                    ),
-                  ),
-                ],
+                markers: markers,
               ),
             ],
           ),
@@ -98,7 +75,10 @@ class _Maps extends State<Maps> {
                 Icons.zoom_in,
                 size: 36,
               ),
-              onPressed: _currentZoom == _maxZoom ? null : _zoomIn,
+              onPressed:
+                  context.read<MapProvider>().getCurrentZoom() == _maxZoom
+                      ? null
+                      : context.read<MapProvider>().zoomIn,
             ),
           ),
           Positioned(
@@ -109,7 +89,10 @@ class _Maps extends State<Maps> {
                 Icons.zoom_out,
                 size: 36,
               ),
-              onPressed: _currentZoom == _minZoom ? null : _zoomOut,
+              onPressed:
+                  context.read<MapProvider>().getCurrentZoom() == _minZoom
+                      ? null
+                      : context.read<MapProvider>().zoomOut,
             ),
           ),
         ],

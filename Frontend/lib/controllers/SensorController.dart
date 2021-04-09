@@ -4,6 +4,7 @@ import 'package:frontend/components/AnalyzesResponse.dart';
 import 'package:frontend/components/BasicAuthConfig.dart';
 import 'package:http/http.dart' as http;
 import 'package:frontend/model/Sensor.dart';
+import "package:latlong/latlong.dart";
 
 class SensorController {
   String _baseUrl;
@@ -17,7 +18,8 @@ class SensorController {
     var jsonSensors = json.decode(bodyRequest);
     List<Sensor> sensors = [];
     for (var sensor in jsonSensors) {
-      sensors.add(new Sensor(sensor["id"]));
+      sensors
+          .add(new Sensor(sensor["id"], LatLng(sensor["lat"], sensor["lng"])));
     }
 
     return sensors;

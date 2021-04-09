@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import "package:latlong/latlong.dart";
 import 'package:frontend/services/MapService.dart';
 
 class MapProvider with ChangeNotifier {
   MapService _mapService;
 
-  double _zoom = 15.0;
+  MapController _mapController = MapController();
+  double _currentZoom = 15.0;
 
   MapProvider(_mapService);
 
@@ -12,12 +15,28 @@ class MapProvider with ChangeNotifier {
     _mapService.downloadMap(0, 0, 18);
   }
 
-  void setZoom(double zoom) {
-    _zoom = zoom;
+  MapController getMapController() {
+    return _mapController;
+  }
+
+  double getCurrentZoom() {
+    return _currentZoom;
+  }
+
+  zoomOut() {
+    _currentZoom = _currentZoom - 1;
+    _mapController.move(_mapController.center, _currentZoom);
     notifyListeners();
   }
 
-  double getZoom() {
-    return _zoom;
+  zoomIn() {
+    _currentZoom = _currentZoom + 1;
+    _mapController.move(_mapController.center, _currentZoom);
+    notifyListeners();
+  }
+
+  moveToSensor(LatLng latLng) {
+    _mapController.move(latLng, _currentZoom);
+    notifyListeners();
   }
 }

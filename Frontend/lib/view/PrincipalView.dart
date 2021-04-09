@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/widget/CardListSensors.dart';
 import 'package:frontend/widget/CardSensor.dart';
 import 'package:frontend/widget/Maps.dart';
 
@@ -13,19 +14,7 @@ class _PrincipalView extends State<PrincipalView> {
     return Scaffold(
       body: Row(
         children: [
-          Container(
-              width: 250,
-              alignment: Alignment.centerLeft,
-              child: ListView(
-                children: [
-                  CardSensor(),
-                  CardSensor(),
-                  CardSensor(),
-                  CardSensor(),
-                  CardSensor(),
-                  CardSensor(),
-                ],
-              )),
+          CardListSensor(),
           Maps(),
         ],
       ),
