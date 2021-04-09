@@ -23,7 +23,7 @@ class _CardSensor extends State<CardSensor> {
             trailing: Text("directDistance"),
           ),
         ),
-        onTap: context
+        onTap: () => context
             .read<MapProvider>()
             .moveToSensor(widget.sensor.getLatLng()));
   }

@@ -19,7 +19,6 @@ class _Maps extends State<Maps> {
   List<Marker> markers = [];
   double _maxZoom = 22.0;
   double _minZoom = 15.0;
-  MapController _mapController = MapController();
   String tilesPath =
       "/home/${Platform.environment['USER']}/.local/share/safemap/tiles";
 

@@ -37,6 +37,5 @@ class MapProvider with ChangeNotifier {
 
   moveToSensor(LatLng latLng) {
     _mapController.move(latLng, _currentZoom);
-    notifyListeners();
   }
 }

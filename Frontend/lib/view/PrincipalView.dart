@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/widget/CardListSensors.dart';
-import 'package:frontend/widget/CardSensor.dart';
 import 'package:frontend/widget/Maps.dart';
 
 class PrincipalView extends StatefulWidget {
