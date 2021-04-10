@@ -11,13 +11,9 @@ class PrincipalView extends StatefulWidget {
 
 class _PrincipalView extends State<PrincipalView> {
   @override
-  void initState() {
-    super.initState();
-    context.read<SensorProvider>().readLocalDataSensors();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    Future.wait([context.read<SensorProvider>().readLocalDataSensors()]);
+
     return Scaffold(
       body: Row(
         children: [

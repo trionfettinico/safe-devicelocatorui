@@ -31,8 +31,10 @@ class _Maps extends State<Maps> {
             radius: 40,
             backgroundColor: sensor.getStatus() ? Colors.green : Colors.red,
             child: Icon(
-              sensor.getStatus() ? Icons.adjust : Icons.warning_amber_rounded,
-              color: sensor.getStatus() ? Colors.grey : Colors.yellow[400],
+              sensor.getStatus()
+                  ? Icons.check_outlined
+                  : Icons.warning_amber_rounded,
+              color: sensor.getStatus() ? Colors.black : Colors.yellow[400],
               size: 30,
             )));
   }

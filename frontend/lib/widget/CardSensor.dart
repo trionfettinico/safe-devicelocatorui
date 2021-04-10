@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 class CardSensor extends StatefulWidget {
   final Sensor sensor;
 
-  const CardSensor({Key key, this.sensor}) : super(key: key);
+  const CardSensor({Key key, @required this.sensor}) : super(key: key);
 
   @override
   _CardSensor createState() => _CardSensor();

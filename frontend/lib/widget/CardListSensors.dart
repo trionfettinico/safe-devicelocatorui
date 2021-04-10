@@ -17,6 +17,7 @@ class _CardListSensor extends State<CardListSensor> {
   @override
   Widget build(BuildContext context) {
     List<Sensor> sensors = context.watch<SensorProvider>().getSensors();
+    cardsSensor = [];
     for (Sensor sensor in sensors) cardsSensor.add(CardSensor(sensor: sensor));
     return Container(
         width: 250,
