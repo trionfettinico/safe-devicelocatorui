@@ -29,22 +29,21 @@ class _Maps extends State<Maps> {
         point: sensor.getLatLng(),
         builder: (ctx) => CircleAvatar(
             radius: 40,
-            backgroundColor: Colors.red,
+            backgroundColor: sensor.getStatus() ? Colors.green : Colors.red,
             child: Icon(
-              Icons.warning_amber_rounded,
-              color: Colors.yellow[400],
+              sensor.getStatus() ? Icons.adjust : Icons.warning_amber_rounded,
+              color: sensor.getStatus() ? Colors.grey : Colors.yellow[400],
               size: 30,
             )));
   }
 
   @override
   Widget build(BuildContext context) {
-    context.read<>().
     sensors.addAll(context.watch<SensorProvider>().getSensors());
     for (Sensor sensor in sensors) markers.add(_createMarker(sensor));
 
     return Container(
-      width: 1030, //1030,
+      width: 1030,
       alignment: Alignment.centerLeft,
       child: Stack(
         children: [

@@ -18,9 +18,14 @@ class _CardSensor extends State<CardSensor> {
     return GestureDetector(
         child: Card(
           child: ListTile(
-            title: Text(widget.sensor.getId()),
-            subtitle: Text("State"),
-            trailing: Text("directDistance"),
+            title: Text(widget.sensor.getName()),
+            subtitle: widget.sensor.getStatus()
+                ? Text(widget.sensor.getId() + "\ntrue")
+                : Text(widget.sensor.getId() + "\nfalse"),
+            trailing: Text("lat = " +
+                widget.sensor.getLat().toString() +
+                "\nlng = " +
+                widget.sensor.getLng().toString()),
           ),
         ),
         onTap: () => context

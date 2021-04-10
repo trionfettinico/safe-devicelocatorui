@@ -18,8 +18,8 @@ class SensorController {
     var jsonSensors = json.decode(bodyRequest);
     List<Sensor> sensors = [];
     for (var sensor in jsonSensors) {
-      sensors
-          .add(new Sensor(sensor["id"], LatLng(sensor["lat"], sensor["lng"])));
+      sensors.add(new Sensor(sensor["id"], sensor["name"],
+          LatLng(sensor["lat"], sensor["lng"]), sensor["status"]));
     }
 
     return sensors;

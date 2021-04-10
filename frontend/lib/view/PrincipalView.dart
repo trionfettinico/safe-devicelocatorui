@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/providers/SensorProvider.dart';
 import 'package:frontend/widget/CardListSensors.dart';
 import 'package:frontend/widget/Maps.dart';
+import 'package:provider/provider.dart';
 
 class PrincipalView extends StatefulWidget {
   @override
@@ -8,6 +10,12 @@ class PrincipalView extends StatefulWidget {
 }
 
 class _PrincipalView extends State<PrincipalView> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<SensorProvider>().readLocalDataSensors();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
