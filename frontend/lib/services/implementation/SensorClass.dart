@@ -8,8 +8,8 @@ import "package:latlong/latlong.dart";
 
 class SensorClass implements SensorService {
   SensorController sensorController;
-  String sensorsPath =
-      "/home/${Platform.environment['USER']}/.local/share/safemap/sensors/sensors.json";
+  String sensorsPath =Platform.isLinux?
+      "/home/${Platform.environment['USER']}/.local/share/safemap/sensors/sensors.json":"${Platform.environment['LOCALAPPDATA']}\\Safe\\SafeMap\\data\\sensors\\sensors.json";
 
   SensorClass(String ip) {
     sensorController = new SensorController(ip);

@@ -19,8 +19,8 @@ class _Maps extends State<Maps> {
   List<Marker> markers = [];
   double _maxZoom = 22.0;
   double _minZoom = 15.0;
-  String tilesPath =
-      "/home/${Platform.environment['USER']}/.local/share/safemap/tiles";
+  String tilesPath = Platform.isLinux?
+      "/home/${Platform.environment['USER']}/.local/share/safemap/tiles":"${Platform.environment['LOCALAPPDATA']}\\Safe\\SafeMap\\data\\tiles";
 
   Marker _createMarker(Sensor sensor) {
     return Marker(
@@ -62,7 +62,7 @@ class _Maps extends State<Maps> {
             layers: [
               TileLayerOptions(
                 tileProvider: FileTileProvider(),
-                urlTemplate: "$tilesPath/{z}/{x}/{y}.png",
+                urlTemplate: Platform.isLinux?"$tilesPath/{z}/{x}/{y}.png":"$tilesPath\\{z}\\{x}\\{y}.png",
                 maxZoom: 22.0,
               ),
               MarkerLayerOptions(

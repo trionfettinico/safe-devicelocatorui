@@ -49,5 +49,6 @@ app.*.map.json
 /ios
 /macos
 /web
+/windows
 pubspec.lock
 /.vscode
