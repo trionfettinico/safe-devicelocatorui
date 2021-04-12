@@ -1,11 +1,13 @@
 use std::collections::HashSet;
 use reqwest::Client;
 use reqwest::header::{HeaderMap, USER_AGENT};
-use std::path::{PathBuf, Path};
-use directories::ProjectDirs;
+use std::path::Path;
 use bytes::Bytes;
 use crate::map::TileCoords;
 use futures::{stream, StreamExt};
+use crate::map::utils::get_data_dir;
+use std::time::Duration;
+use walkdir::WalkDir;
 
 const PARALLEL_REQUESTS: usize = 128;
 
@@ -27,7 +29,7 @@ pub async fn get_map_tiles(coordinates: HashSet<TileCoords>){
         })
         .buffer_unordered(PARALLEL_REQUESTS);
 
-    let output_dir = get_output_dir();
+    let output_dir = get_data_dir();
 
     bodies
         .for_each(|b| async {
@@ -40,17 +42,15 @@ pub async fn get_map_tiles(coordinates: HashSet<TileCoords>){
         .await;
 }
 
-fn get_output_dir() -> PathBuf {
-    let proj_dirs = ProjectDirs::from("it", "Safe", "SafeMap");
-    return match proj_dirs {
-        Some(dirs) => dirs.data_local_dir().to_path_buf(),
-        None => Path::new("tiles/").to_path_buf()
-    }
-}
-
 fn save_image(coords: TileCoords, res: Bytes, output_dir: &Path) {
     let path = output_dir.join(String::from(format!("tiles/{}/{}/{}.png", coords.zoom, coords.x, coords.y)));
     std::fs::create_dir_all(path.parent().unwrap()).unwrap();
-    println!("writing {}_{}_{}.png",coords.zoom, coords.x, coords.y);
     std::fs::write(&path, res.as_ref()).unwrap();
+}
+
+pub fn get_percent() -> f32 {
+    let count :f32= WalkDir::new(get_data_dir().join("tiles").to_str().unwrap()).into_iter().count() as f32;
+    let total:f32 = 16196.0;
+    let percent = count / total * 100.0;
+    return percent;
 }
