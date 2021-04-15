@@ -2,16 +2,16 @@ import 'dart:io';
 
 import 'package:flutter_archive/flutter_archive.dart';
 
-class MapsExctractor {
-  static final MapsExctractor _singleton = MapsExctractor._internal();
+class FileManager {
+  static final FileManager _singleton = FileManager._internal();
 
-  factory MapsExctractor() {
+  factory FileManager() {
     return _singleton;
   }
 
-  MapsExctractor._internal();
+  FileManager._internal();
 
-  Future<bool> extractMap(
+  Future<bool> extractFile(
       File mapCompress, Directory extractToDirectory) async {
     ZipFile.extractToDirectory(
         zipFile: mapCompress, destinationDir: extractToDirectory);
