@@ -26,6 +26,7 @@ dependencies:
   flutter_archive:
   path_provider:
   provider:
+  geojson: ^0.10.0
   
   flutter:
     sdk: flutter

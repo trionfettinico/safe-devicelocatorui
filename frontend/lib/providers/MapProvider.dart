@@ -7,7 +7,7 @@ class MapProvider with ChangeNotifier {
   MapService _mapService;
 
   MapController _mapController = MapController();
-  double _currentZoom = 15.0;
+  double _currentZoom = 4.0;
 
   MapProvider(_mapService);
 

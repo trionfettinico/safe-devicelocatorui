@@ -12,7 +12,7 @@ class PrincipalView extends StatefulWidget {
 class _PrincipalView extends State<PrincipalView> {
   @override
   Widget build(BuildContext context) {
-    Future.wait([context.read<SensorProvider>().readLocalDataSensors()]);
+    Future.wait([context.read<SensorProvider>().readLocalDataSensors(),context.read<SensorProvider>().readGeoJson()]);
 
     return Scaffold(
       body: Row(
