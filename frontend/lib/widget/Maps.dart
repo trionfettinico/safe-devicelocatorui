@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_map/flutter_map.dart';
-import 'package:frontend/model/Sensor.dart';
 import 'package:frontend/providers/MapProvider.dart';
 import 'package:frontend/providers/SensorProvider.dart';
-import 'package:geojson/geojson.dart';
 import "package:latlong/latlong.dart";
 import 'package:provider/provider.dart';
 
@@ -16,43 +14,14 @@ class Maps extends StatefulWidget {
 }
 
 class _Maps extends State<Maps> {
-  List<Sensor> sensors = [];
-  List<Marker> markers = [];
   double _maxZoom = 22.0;
   double _minZoom = 4.0;
   String tilesPath = Platform.isLinux
       ? "/home/${Platform.environment['USER']}/.local/share/safemap/tiles"
       : "${Platform.environment['LOCALAPPDATA']}\\Safe\\SafeMap\\data\\tiles";
-  List<CircleMarker> _heatmapPoints = [];
-
-  Marker _createMarker(Sensor sensor) {
-    return Marker(
-        width: 35.0,
-        height: 35.0,
-        point: sensor.getLatLng(),
-        builder: (ctx) => CircleAvatar(
-            radius: 40,
-            backgroundColor: sensor.getStatus() ? Colors.green : Colors.red,
-            child: Icon(
-              sensor.getStatus()
-                  ? Icons.check_outlined
-                  : Icons.warning_amber_rounded,
-              color: sensor.getStatus() ? Colors.black : Colors.yellow[400],
-              size: 30,
-            )));
-  }
-
-  CircleMarker _createHeatmapPoint(LatLng point) {
-    return CircleMarker(
-        point: point, radius: 10, color: Colors.red);
-  }
 
   @override
   void initState() {
-    sensors.addAll(context.read<SensorProvider>().getSensors());
-    for (Sensor sensor in sensors) markers.add(_createMarker(sensor));
-    final points = context.read<SensorProvider>().getHeatmapPoints();
-    for (GeoJsonPoint point in points) _heatmapPoints.add(_createHeatmapPoint(LatLng(point.geoPoint.latitude, point.geoPoint.longitude)));
     super.initState();
   }
 
@@ -79,9 +48,9 @@ class _Maps extends State<Maps> {
                 maxZoom: _maxZoom,
               ),
               MarkerLayerOptions(
-                markers: markers,
+                markers: context.watch<SensorProvider>().getSensorMarkers(),
               ),
-              CircleLayerOptions(circles:_heatmapPoints,)
+              MarkerLayerOptions(markers:context.watch<SensorProvider>().getHeatmapMarkers(),)
             ],
           ),
           Positioned(
