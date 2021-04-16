@@ -34,10 +34,10 @@ class SensorProvider with ChangeNotifier {
             )));
   }
 
-  Color getColor(double value){
+  Color getColor(double value) {
     int range = 5;
-    int red = (255 * (value/range)).toInt();
-    int green = (255 * (1-(value/range))).toInt();
+    int red = (255 * (value / range)).toInt();
+    int green = (255 * (1 - (value / range))).toInt();
     return Color.fromARGB(0xFF, red, green, 00);
   }
 
@@ -48,21 +48,23 @@ class SensorProvider with ChangeNotifier {
         point: point,
         builder: (context) => DecoratedBox(
               decoration: BoxDecoration(
-                backgroundBlendMode: BlendMode.color,
+                  backgroundBlendMode: BlendMode.color,
                   shape: BoxShape.circle,
-                  gradient:
-                      RadialGradient(colors: [getColor(value), Colors.transparent])),
-                  position: DecorationPosition.foreground,
+                  gradient: RadialGradient(
+                      colors: [getColor(value), Colors.transparent])),
+              position: DecorationPosition.foreground,
             ));
   }
 
   Future readLocalDataSensors() async {
+    _sensors = new Set();
     _sensors.addAll((await _sensorService.readLocalDataSensors()));
     for (Sensor sensor in _sensors) _sensorMarkers.add(_createMarker(sensor));
     notifyListeners();
   }
 
   Future updateSensors(String id) async {
+    _sensors = new Set();
     _sensors.addAll((await _sensorService.getSensors(id)));
     for (Sensor sensor in _sensors) _sensorMarkers.add(_createMarker(sensor));
     notifyListeners();
@@ -78,15 +80,18 @@ class SensorProvider with ChangeNotifier {
 
   Future readGeoJson() async {
     try {
-      File file = File(
-          "${Platform.environment['LOCALAPPDATA']}\\Safe\\SafeMap\\data\\earthquakes.geojson");
+      File file = File(Platform.isLinux
+          ? "/home/${Platform.environment['USER']}/.local/share/safemap/data/earthquakes.geojson"
+          : "${Platform.environment['LOCALAPPDATA']}\\Safe\\SafeMap\\data\\earthquakes.geojson");
       final points = await featuresFromGeoJsonFile(file);
       points.collection.forEach((element) {
         _heatmapPoints.add(element);
       });
       for (GeoJsonFeature element in _heatmapPoints)
         _heatmapMarkers.add(_createHeatmapMarker(
-            LatLng(element.geometry.geoPoint.latitude, element.geometry.geoPoint.longitude), element.properties["mag"]));
+            LatLng(element.geometry.geoPoint.latitude,
+                element.geometry.geoPoint.longitude),
+            element.properties["mag"]));
       notifyListeners();
     } catch (e) {
       print(e.toString());
