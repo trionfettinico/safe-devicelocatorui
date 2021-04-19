@@ -17,7 +17,7 @@ class Maps extends StatefulWidget {
 
 class _Maps extends State<Maps> {
   double _maxZoom = 22.0;
-  double _minZoom = 4.0;
+  double _minZoom = 3.0;
   final PopupController _popupLayerController = PopupController();
   String tilesPath = Platform.isLinux
       ? "/home/${Platform.environment['USER']}/.local/share/safemap/tiles"

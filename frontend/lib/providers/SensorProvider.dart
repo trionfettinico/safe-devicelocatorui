@@ -81,8 +81,8 @@ class SensorProvider with ChangeNotifier {
   Future readGeoJson() async {
     try {
       File file = File(Platform.isLinux
-          ? "/home/${Platform.environment['USER']}/.local/share/safemap/data/earthquakes.geojson"
-          : "${Platform.environment['LOCALAPPDATA']}\\Safe\\SafeMap\\data\\earthquakes.geojson");
+          ? "/home/${Platform.environment['USER']}/.local/share/safemap/data/sampling.geojson"
+          : "${Platform.environment['LOCALAPPDATA']}\\Safe\\SafeMap\\data\\sampling.geojson");
       final points = await featuresFromGeoJsonFile(file);
       points.collection.forEach((element) {
         _heatmapPoints.add(element);
