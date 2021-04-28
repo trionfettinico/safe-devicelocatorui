@@ -27,6 +27,8 @@ dependencies:
   path_provider:
   provider:
   geojson: ^0.10.0
+  flutter_map_marker_popup:
+
   
   flutter:
     sdk: flutter

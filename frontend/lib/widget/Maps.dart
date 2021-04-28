@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_map/flutter_map.dart';
-import 'package:frontend/model/Sensor.dart';
+import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:frontend/providers/MapProvider.dart';
 import 'package:frontend/providers/SensorProvider.dart';
-import 'package:geojson/geojson.dart';
+import 'package:frontend/widget/PopupSensors.dart';
 import "package:latlong/latlong.dart";
 import 'package:provider/provider.dart';
 
@@ -16,49 +16,20 @@ class Maps extends StatefulWidget {
 }
 
 class _Maps extends State<Maps> {
-  List<Sensor> sensors = [];
-  List<Marker> markers = [];
   double _maxZoom = 22.0;
-  double _minZoom = 4.0;
+  double _minZoom = 3.0;
+  final PopupController _popupLayerController = PopupController();
   String tilesPath = Platform.isLinux
       ? "/home/${Platform.environment['USER']}/.local/share/safemap/tiles"
       : "${Platform.environment['LOCALAPPDATA']}\\Safe\\SafeMap\\data\\tiles";
-  List<CircleMarker> _heatmapPoints = [];
-
-  Marker _createMarker(Sensor sensor) {
-    return Marker(
-        width: 35.0,
-        height: 35.0,
-        point: sensor.getLatLng(),
-        builder: (ctx) => CircleAvatar(
-            radius: 40,
-            backgroundColor: sensor.getStatus() ? Colors.green : Colors.red,
-            child: Icon(
-              sensor.getStatus()
-                  ? Icons.check_outlined
-                  : Icons.warning_amber_rounded,
-              color: sensor.getStatus() ? Colors.black : Colors.yellow[400],
-              size: 30,
-            )));
-  }
-
-  CircleMarker _createHeatmapPoint(LatLng point) {
-    return CircleMarker(
-        point: point, radius: 10, color: Colors.red);
-  }
 
   @override
   void initState() {
-    sensors.addAll(context.read<SensorProvider>().getSensors());
-    for (Sensor sensor in sensors) markers.add(_createMarker(sensor));
-    final points = context.read<SensorProvider>().getHeatmapPoints();
-    for (GeoJsonPoint point in points) _heatmapPoints.add(_createHeatmapPoint(LatLng(point.geoPoint.latitude, point.geoPoint.longitude)));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       width: 1030,
       alignment: Alignment.centerLeft,
@@ -67,10 +38,12 @@ class _Maps extends State<Maps> {
           FlutterMap(
             mapController: context.watch<MapProvider>().getMapController(),
             options: MapOptions(
+              plugins: [PopupMarkerPlugin()],
               center: LatLng(43.140360, 13.068770),
               zoom: context.watch<MapProvider>().getCurrentZoom(),
               maxZoom: _maxZoom,
               pinchZoomThreshold: 1.0,
+              onTap: (_) => _popupLayerController.hidePopup(),
             ),
             layers: [
               TileLayerOptions(
@@ -79,9 +52,16 @@ class _Maps extends State<Maps> {
                 maxZoom: _maxZoom,
               ),
               MarkerLayerOptions(
-                markers: markers,
+                  markers: context.watch<SensorProvider>().getSensorMarkers()),
+              MarkerLayerOptions(
+                markers: context.watch<SensorProvider>().getHeatmapMarkers(),
               ),
-              CircleLayerOptions(circles:_heatmapPoints,)
+              PopupMarkerLayerOptions(
+                markers: context.watch<SensorProvider>().getSensorMarkers(),
+                popupController: _popupLayerController,
+                popupBuilder: (BuildContext _, Marker marker) =>
+                    MarkerPopup(marker),
+              )
             ],
           ),
           Positioned(
