@@ -1,0 +1,7 @@
+{
+  "name": "apptest",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
