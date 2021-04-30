@@ -1,19 +1,12 @@
-.ol-map {
-    min-width: 600px;
-    min-height: 500px;
-    margin: 50px;
-    height: 500px;
-    width: "100%";
-}
-
-.ol-control {
-    position: absolute;
-    background-color: rgba(255,255,255,0.4);
-    border-radius: 4px;
-    padding: 2px;
-}
-
-.ol-full-screen {
-    top: .5em;
-    right: .5em;
+.map {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  height: 1px;
+  width: 100%;
 }

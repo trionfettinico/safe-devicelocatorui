@@ -1,49 +1,64 @@
-import React, { useRef, useState, useEffect } from "react"
-import "./Map.css";
-import MapContext from "./MapContext";
-import * as ol from "ol";
+import React from "react";
+import Map from "ol/Map";
+import View from "ol/View";
+import TileLayer from "ol/layer/Tile";
+import XYZ from "ol/source/XYZ";
+import { HeatmapLayer, VectorLayer } from "./layers";
+import {Heatmap} from "ol/layer";
+import VectorSource from "ol/source/Vector";
+import KML from 'ol/format/KML';
+import { TMapProps, IMapContext, TMapState } from "./map-types";
+import "ol/ol.css";
+import "./map.css";
 
-const Map = (children: any, zoom: any, center: any ) => {
-	const mapRef = useRef();
-	const [map, setMap] = useState();
+export const MapContext = React.createContext<IMapContext | void>(undefined);
 
-	// on component mount
-	useEffect(() => {
-		let options = {
-			view: new ol.View({ zoom, center }),
-			layers: [],
-			controls: [],
-			overlays: []
-		};
+export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
+  private mapDivRef: React.RefObject<HTMLDivElement>;
+  state: TMapState = {};
 
-		let mapObject = new ol.Map(options);
-		mapObject.setTarget(mapRef.current);
-		setMap(mapObject);
+  constructor(props: TMapProps) {
+    super(props);
+    this.mapDivRef = React.createRef<HTMLDivElement>();
+  }
 
-		return () => mapObject.setTarget(undefined);
-	}, []);
+  componentDidMount() {
+    if (!this.mapDivRef.current) {
+      return;
+    }
 
-	// zoom change handler
-	useEffect(() => {
-		if (!map) return;
+    const map = new Map({
+      target: this.mapDivRef.current,
+      layers: [
+        new TileLayer({
+          source: new XYZ({
+            url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          }),
+        })
+      ],
+      view: new View({
+        center: [0, 0],
+        zoom: 3,
+      }),
+    });
 
-		map.getView().setZoom(zoom);
-	}, [zoom]);
+    const mapContext: IMapContext = { map };
+    this.setState({
+      mapContext: mapContext,
+    });
+  }
 
-	// center change handler
-	useEffect(() => {
-		if (!map) return;
 
-		map.getView().setCenter(center)
-	}, [center])
-
-	return (
-		<MapContext.Provider value={{ map }}>
-			<div ref={mapRef} className="ol-map">
-				{children}
-			</div>
-		</MapContext.Provider>
-	)
+  render() {
+    return (
+      <div className="map" ref={this.mapDivRef}>
+        {this.state.mapContext && (
+          <MapContext.Provider value={this.state.mapContext}>
+            <VectorLayer />
+            <HeatmapLayer />
+          </MapContext.Provider>
+        )}
+      </div>
+    );
+  }
 }
-
-export default Map;
