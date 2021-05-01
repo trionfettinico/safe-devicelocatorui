@@ -1,13 +1,6 @@
 import React from "react";
-import { MapBrowserEvent } from "ol";
 import {Heatmap} from "ol/layer";
 import VectorSource from "ol/source/Vector";
-import Feature from "ol/Feature";
-import Point from "ol/geom/Point";
-import Style from "ol/style/Style";
-import Circle from "ol/style/Circle";
-import Fill from "ol/style/Fill";
-import Stroke from "ol/style/Stroke";
 import KML from 'ol/format/KML';
 import { MapContext } from "../../map";
 import { IMapContext } from "../../map-types";
@@ -21,7 +14,7 @@ class HeatmapLayerComponent extends React.PureComponent<
 
   componentDidMount() {
     this.source = new VectorSource({
-      url: '/assets/prova.kml',
+      url: '/assets/file.kml',
       format: new KML({
         extractStyles: false,
       }),
@@ -29,15 +22,10 @@ class HeatmapLayerComponent extends React.PureComponent<
     console.log(this.source.getFeatures());
     this.layer = new Heatmap({
       source: this.source,
-      blur: 15,
+      blur: 20,
       radius: 8,
       weight: function (feature) {
-        // 2012_Earthquakes_Mag5.kml stores the magnitude of each earthquake in a
-        // standards-violating <magnitude> tag in each Placemark.  We extract it from
-        // the Placemark's name instead.
-        var name = feature.get('name');
-        var magnitude = parseFloat(name.substr(2));
-        return magnitude - 5;
+        return feature.get('rssi'); 
       },
     });
 

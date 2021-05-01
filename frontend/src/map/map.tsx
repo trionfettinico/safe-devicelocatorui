@@ -3,10 +3,7 @@ import Map from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
-import { HeatmapLayer, VectorLayer } from "./layers";
-import {Heatmap} from "ol/layer";
-import VectorSource from "ol/source/Vector";
-import KML from 'ol/format/KML';
+import { HeatmapLayer } from "./layers";
 import { TMapProps, IMapContext, TMapState } from "./map-types";
 import "ol/ol.css";
 import "./map.css";
@@ -37,8 +34,8 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
         })
       ],
       view: new View({
-        center: [0, 0],
-        zoom: 3,
+        center: [13.382255000000002,43.61945166666666],
+        zoom: 15,
       }),
     });
 
@@ -54,7 +51,6 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
       <div className="map" ref={this.mapDivRef}>
         {this.state.mapContext && (
           <MapContext.Provider value={this.state.mapContext}>
-            <VectorLayer />
             <HeatmapLayer />
           </MapContext.Provider>
         )}
