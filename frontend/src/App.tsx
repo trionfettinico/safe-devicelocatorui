@@ -1,9 +1,9 @@
-import React from "react";
-import { IonApp, IonRouterOutlet, IonSplitPane } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
 import { Redirect, Route } from 'react-router-dom';
-import Menu from './components/Menu';
-import Page from './pages/Page';
+import { IonApp, IonRouterOutlet } from '@ionic/react';
+import { IonReactRouter } from '@ionic/react-router';
+import Home from './pages/Home';
+import ViewSensor from './pages/ViewSensor';
+
 
 
 /* Core CSS required for Ionic components to work properly */
@@ -25,25 +25,22 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-function App() {
-  return (
-    <IonApp>
+const App: React.FC = () => (
+  <IonApp>
     <IonReactRouter>
-      <IonSplitPane contentId="main">
-        <Menu />
-        <IonRouterOutlet id="main">
-          <Route path="/" exact={true}>
-            <Redirect to="/page/Inbox" />
-          </Route>
-          <Route path="/page/:name" exact={true}>
-            <Page />
-          </Route>
-        </IonRouterOutlet>
-      </IonSplitPane>
+      <IonRouterOutlet>
+        <Route path="/" exact={true}>
+          <Redirect to="/home" />
+        </Route>
+        <Route path="/home" exact={true}>
+          <Home />
+        </Route>
+        <Route path="/message/:id">
+           <ViewSensor />
+        </Route>
+      </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
-  );
-}
+);
 
 export default App;
-
