@@ -1,9 +1,9 @@
 import React from "react";
-import Map from "ol/Map";
-import View from "ol/View";
-import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
-import { HeatmapLayer } from "./layers";
+import { HeatmapLayer, MarkerObject } from "./layers";
+import 'ol/ol.css';
+import Map from 'ol/Map';
+import {Tile as TileLayer} from 'ol/layer';
 import { TMapProps, IMapContext, TMapState } from "./map-types";
 import "ol/ol.css";
 import "./map.css";
@@ -21,9 +21,12 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
   }
 
   componentDidMount() {
+
     if (!this.mapDivRef.current) {
       return;
     }
+
+    var marker : any = new MarkerObject(this.props);
 
     const map = new Map({
       target: this.mapDivRef.current,
@@ -32,7 +35,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
           source: new XYZ({
             url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
           }),
-        })
+        }),marker.getMarker
       ],
       // view: new View({
       //   center: [13.068770000000000,43.140362000000000],
