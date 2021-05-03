@@ -7,6 +7,7 @@ import { HeatmapLayer } from "./layers";
 import { TMapProps, IMapContext, TMapState } from "./map-types";
 import "ol/ol.css";
 import "./map.css";
+import * as olProj from 'ol/proj';
 
 export const MapContext = React.createContext<IMapContext | void>(undefined);
 
@@ -33,12 +34,13 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
           }),
         })
       ],
-      view: new View({
-        center: [13.382255000000002,43.61945166666666],
-        zoom: 15,
-      }),
+      // view: new View({
+      //   center: [13.068770000000000,43.140362000000000],
+      //   zoom: 15,
+      // }),
     });
-
+    map.getView().setCenter(olProj.transform([13.068770000000000,43.140362000000000,], 'EPSG:4326', 'EPSG:3857'));
+    map.getView().setZoom(10);
     const mapContext: IMapContext = { map };
     this.setState({
       mapContext: mapContext,
