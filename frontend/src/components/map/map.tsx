@@ -31,7 +31,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
       layers: [
         new TileLayer({
           source: new XYZ({
-            url: "tiles/assets/{z}/{x}/{y}.png",
+            url: "assets/tiles/{z}/{x}/{y}.png",
           })
         }),
         //marker.getMarker
