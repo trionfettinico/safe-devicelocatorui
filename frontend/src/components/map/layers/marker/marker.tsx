@@ -19,6 +19,7 @@ import 'ol/ol.css';
 
 
 class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentProps> {
+<<<<<<< Updated upstream
   layer: VectorLayer = new VectorLayer();
   iconFeature: Feature = new Feature();
   iconStyle: Style = new Style();
@@ -55,6 +56,32 @@ class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentPr
   render() {
     return null;
   }
+=======
+    layer: VectorLayer = new VectorLayer;
+    componentDidMount() {
+      this.layer = new VectorLayer({
+            source: new VectorSource({
+                features: [new Feature({
+                    geometry: new Point(fromLonLat([13.382316666666668,43.61946166666666])),
+                    name: 'Null Island',
+                    style: new Style({
+                      image: new Icon({
+                        anchor: [0.5, 46],
+                        anchorXUnits: IconAnchorUnits.FRACTION,
+                        anchorYUnits: IconAnchorUnits.PIXELS,
+                        src: '/assets/marker.png',
+                      }),
+                  })})],
+              }),
+          });
+
+      this.props.map.addLayer(this.layer);
+    }
+
+    render(){
+        return null;
+    }
+>>>>>>> Stashed changes
 }
 
 export const MarkersLayerWithContext = (props: TMarkersLayerProps) => {

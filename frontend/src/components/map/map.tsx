@@ -4,11 +4,10 @@ import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
 import {fromLonLat} from 'ol/proj';
-import { HeatmapLayer } from "./layers";
+import { HeatmapLayer } from "./layers/heatmap";
 import { TMapProps, IMapContext, TMapState } from "./map-types";
 import "ol/ol.css";
 import "./map.css";
-import * as olProj from 'ol/proj';
 import { Markers } from "./layers/marker";
 
 export const MapContext = React.createContext<IMapContext | void>(undefined);
@@ -32,14 +31,14 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
       layers: [
         new TileLayer({
           source: new XYZ({
-            url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            url: "tiles/assets/{z}/{x}/{y}.png",
           })
         }),
         //marker.getMarker
       ],
       view: new View({
-        center: fromLonLat([13.382316666666668,43.61946166666666]),//([13.068309, 43.135764], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 18,
+        center: fromLonLat([13.068770,43.140362]),//([13.068309, 43.135764], 'EPSG:4326', 'EPSG:3857'),
+        zoom: 15,
       }),
     });
     // map.getView().setCenter(olProj.transform([13.068770000000000,43.140362000000000,], 'EPSG:4326', 'EPSG:3857'));
