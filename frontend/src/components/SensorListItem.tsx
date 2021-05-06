@@ -3,8 +3,8 @@ import {
     IonLabel,
     IonNote
     } from '@ionic/react';
-  import { Sensor } from '../data/sensors';
   import './MessageListItem.css';
+  import { Sensor } from '../data/sensors'
   
   interface SensorListItemProps {
     sensor: Sensor;
@@ -12,7 +12,7 @@ import {
   
   const SensorListItem: React.FC<SensorListItemProps> = ({ sensor }) => {
     return (
-      <IonItem routerLink={`/message/${sensor.id}`} detail={false}>
+      <IonItem routerLink={`/message/${sensor.id}`} detail={false} onClick={ ()=> console.log('abc')}>
         <div slot="start" className="dot dot-unread"></div>
         <IonLabel className="ion-text-wrap">
           <h2>
@@ -21,7 +21,7 @@ import {
               <IonNote>{sensor.status ? "true" : "false"}</IonNote>
             </span>
           </h2>
-          <h3>{sensor.coordinate}</h3>
+          <h3>{sensor.lat} {sensor.lng}</h3>
         </IonLabel>
       </IonItem>
     );

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Sensor, getSensor } from "../data/sensors";
 import {
   IonBackButton,
   IonButtons,
@@ -18,13 +17,6 @@ import { useParams } from "react-router";
 import "./ViewMessage.css";
 
 function ViewSensor() {
-  const [sensor, setSensors] = useState<Sensor>();
-  const params = useParams<{ id: string }>();
-
-  useIonViewWillEnter(() => {
-    const msg = getSensor(params.id);
-    setSensors(msg);
-  });
 
   return (
     <IonPage id="view-message-page">
@@ -37,23 +29,8 @@ function ViewSensor() {
       </IonHeader>
 
       <IonContent fullscreen>
-        {sensor ? (
-          <>
-            <IonItem>
-              <IonLabel className="ion-text-wrap">
-                <h2>
-                  {sensor.name}
-                  <span className="date">
-                    <IonNote>{sensor.status ? "true" : "false"}</IonNote>
-                  </span>
-                </h2>
-                <h3>{sensor.coordinate}</h3>
-              </IonLabel>
-            </IonItem>
-          </>
-        ) : (
-          <div>Sensor not found</div>
-        )}
+        
+          <div>Sensor not found, NON SERVO A NIENTE !</div>
       </IonContent>
     </IonPage>
   );

@@ -16,22 +16,9 @@ import {
 import './Home.css';
 import { Map } from "../components/map";
 import SensorListItem from '../components/SensorListItem';
-import { Sensor, getSensors } from '../data/sensors';
+import sensors from '../data/sensors.json';
 
 const Home: React.FC = () => {
-
-  const [sensors, setSensors] = useState<Sensor[]>([]);
-
-  useIonViewWillEnter(() => {
-    const msgs = getSensors();
-    setSensors(msgs);
-  });
-
-  const refresh = (e: CustomEvent) => {
-    setTimeout(() => {
-      e.detail.complete();
-    }, 3000);
-  };
 
   return (
     <IonPage id="home-page">
@@ -41,9 +28,6 @@ const Home: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        <IonRefresher slot="fixed" onIonRefresh={refresh}>
-          <IonRefresherContent></IonRefresherContent>
-        </IonRefresher>
 
         <IonHeader collapse="condense">
           <IonToolbar>
@@ -60,7 +44,7 @@ const Home: React.FC = () => {
               </IonList>
             </IonCol>
             <IonCol>
-              <Map></Map>
+              <Map> </Map>
             </IonCol>
           </IonRow>
         </IonGrid>

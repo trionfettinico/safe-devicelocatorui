@@ -31,23 +31,22 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
       layers: [
         new TileLayer({
           source: new XYZ({
-            url: "assets/tiles/{z}/{x}/{y}.png",
+            url: "assets/tiles/{z}/{x}/{y}.png",//"https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
           })
         }),
-        //marker.getMarker
       ],
       view: new View({
-        center: fromLonLat([13.068770,43.140362]),//([13.068309, 43.135764], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 15,
+        center: fromLonLat([13.382000,43.619722]),
+        zoom: 20,
       }),
     });
-    // map.getView().setCenter(olProj.transform([13.068770000000000,43.140362000000000,], 'EPSG:4326', 'EPSG:3857'));
-    // map.getView().setZoom(10);
     const mapContext: IMapContext = { map };
     this.setState({
       mapContext: mapContext,
     });
   }
+
+  
 
 
   render() {

@@ -1,7 +1,6 @@
-
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import React from "react";
+import React, { useState } from "react";
 import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import { fromLonLat } from "ol/proj";
@@ -14,38 +13,43 @@ import { MapContext } from "../../map";
 import { IMapContext } from "../../map-types";
 import { Icon, Style } from "ol/style";
 import IconAnchorUnits from "ol/style/IconAnchorUnits";
-import 'ol/ol.css';
+import "ol/ol.css";
 
-
+import sensors from "../../../../data/sensors.json";
 
 class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentProps> {
   layer: VectorLayer = new VectorLayer();
-  iconFeature: Feature = new Feature();
+  features: Feature[] = [];
   iconStyle: Style = new Style();
   vectorSource: VectorSource = new VectorSource();
   vectorLayer: VectorLayer = new VectorLayer();
 
   componentDidMount() {
-    this.iconFeature = new Feature({
-      geometry: new Point(fromLonLat([13.382316666666668, 43.61946166666666])),
-      name: 'Null Island'
-    });
-
     this.iconStyle = new Style({
       image: new Icon({
         //anchor: [0.5, 46],
         anchorXUnits: IconAnchorUnits.FRACTION,
         anchorYUnits: IconAnchorUnits.PIXELS,
-        src: '/assets/marker.png',
-        scale: 0.05,
+        src: "/assets/marker.png",
+        scale: 0.03,
       }),
     });
 
-    this.iconFeature.setStyle(this.iconStyle);
+    sensors.map(
+      (e) => this.features.push(new Feature({
+        geometry: new Point(fromLonLat([e.lng, e.lat])),
+        name: e.name,
+      }))
+    );
+
+    this.features.map(e => e.setStyle(this.iconStyle));
+
+    
+
 
     this.vectorLayer = new VectorLayer({
       source: new VectorSource({
-        features: [this.iconFeature],
+        features: this.features,
       }),
     });
 
