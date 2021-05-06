@@ -25,6 +25,7 @@ class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentPr
   vectorSource: VectorSource = new VectorSource();
   vectorLayer: VectorLayer = new VectorLayer();
 
+
   componentDidMount() {
     this.iconFeature = new Feature({
       geometry: new Point(fromLonLat([13.382316666666668, 43.61946166666666])),
