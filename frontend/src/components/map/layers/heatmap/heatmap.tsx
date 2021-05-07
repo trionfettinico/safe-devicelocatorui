@@ -13,13 +13,13 @@ class HeatmapLayerComponent extends React.PureComponent<
   layer: Heatmap = new Heatmap();
 
   componentDidMount() {
+    console.log("heatmap mount");
     this.source = new VectorSource({
       url: '/assets/file-2.kml',
       format: new KML({
         extractStyles: false,
       }),
     });
-    console.log(this.source.getFeatures());
     this.layer = new Heatmap({
       source: this.source,
       blur: 20,
@@ -33,17 +33,16 @@ class HeatmapLayerComponent extends React.PureComponent<
   }
 
   render() {
+    console.log("heatmap render");
     return null;
   }
 }
 
 export const HeatmapLayerWithContext = (props: THeatmapLayerProps) => {
-  console.log(props);
   return (
     <MapContext.Consumer>
       {(mapContext: IMapContext | void) => {
         if (mapContext) {
-          console.log(mapContext);
           return <HeatmapLayerComponent {...props} map={mapContext.map} />;
         }
       }}

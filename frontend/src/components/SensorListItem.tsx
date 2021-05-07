@@ -12,7 +12,7 @@ import {
   
   const SensorListItem: React.FC<SensorListItemProps> = ({ sensor }) => {
     return (
-      <IonItem routerLink={`/message/${sensor.id}`} detail={false} onClick={ ()=> console.log('abc')}>
+      <IonItem routerLink={`/message/${sensor.id}`} detail={false}>
         <div slot="start" className="dot dot-unread"></div>
         <IonLabel className="ion-text-wrap">
           <h2>

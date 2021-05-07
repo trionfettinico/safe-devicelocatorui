@@ -28,6 +28,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
   constructor(props: TMapProps) {
     super(props);
     this.mapDivRef = React.createRef<HTMLDivElement>();
+    console.log("map created");
   }
 
   async componentDidMount() {
@@ -40,13 +41,15 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
       layers: [
         new TileLayer({
           source: new XYZ({
-            url: "assets/tiles/{z}/{x}/{y}.png",//"https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
           })
         }),
       ],
       view: new View({
         center: fromLonLat([coord.coords.longitude, coord.coords.latitude]),//([13.068309, 43.135764], 'EPSG:4326', 'EPSG:3857'),
         zoom: 15,
+        maxZoom: 22,
+        minZoom: 15
       }),
     });
     const mapContext: IMapContext = { map };
@@ -66,6 +69,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
 
 
   render() {
+    console.log("map render");
     return (
       <div className="map" ref={this.mapDivRef}>
         {this.state.mapContext && (

@@ -71,5 +71,6 @@
     "mapbox-to-ol-style": "^99.0.0",
     "react-openlayers": "^0.1.5"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "homepage": "./"
 }

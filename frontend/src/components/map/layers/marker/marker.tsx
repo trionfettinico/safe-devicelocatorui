@@ -26,6 +26,7 @@ class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentPr
 
 
   componentDidMount() {
+    console.log("marker mount");
     this.iconStyle = new Style({
       image: new Icon({
         anchorXUnits: IconAnchorUnits.FRACTION,
@@ -44,9 +45,6 @@ class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentPr
 
     this.features.map(e => e.setStyle(this.iconStyle));
 
-    
-
-
     this.vectorLayer = new VectorLayer({
       source: new VectorSource({
         features: this.features,
@@ -57,6 +55,7 @@ class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentPr
   }
 
   render() {
+    console.log("marker render");
     return null;
   }
 }
@@ -66,8 +65,6 @@ export const MarkersLayerWithContext = (props: TMarkersLayerProps) => {
     <MapContext.Consumer>
       {(mapContext: IMapContext | void) => {
         if (mapContext) {
-          console.log("mapContextMarker");
-          console.log(mapContext);
           return <MarkersLayerComponent {...props} map={mapContext.map} />;
         }
       }}

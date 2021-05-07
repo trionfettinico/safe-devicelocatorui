@@ -3,8 +3,8 @@
 mod map;
 mod device;
 
-static CITY_LAT: f32= 43.140360;
-static CITY_LON: f32= 13.068770;
+static CITY_LAT: f32= 43.619640;
+static CITY_LON: f32= 13.382522;
 
 #[macro_use] extern crate rocket;
 
