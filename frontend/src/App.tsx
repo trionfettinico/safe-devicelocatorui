@@ -1,7 +1,6 @@
 import { IonApp } from '@ionic/react';
 import Home from './pages/Home';
-
-
+import { Map } from './components/map'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -28,5 +27,8 @@ const App: React.FC = () => (
     <Home/>
   </IonApp>
 );
+// function App() {
+//   return <Map></Map>;
+// }
 
 export default App;

@@ -4,13 +4,13 @@ import VectorLayer from 'ol/layer/Vector';
 import Feature from 'ol/Feature';
 import Point from "ol/geom/Point";
 import { fromLonLat } from "ol/proj";
-import IconAnchorUnits from 'ol/style/IconAnchorUnits';
 import { Icon, Style } from 'ol/style';
 import VectorSource from 'ol/source/Vector';
 import { TPositionLayerComponentProps } from "./position-types";
 import { TMarkersLayerProps } from "../marker/marker-types";
 import { MapContext } from "../../map";
 import { IMapContext } from "../../map-types";
+
 const { Geolocation } = Plugins;
 
 class GeolocationButton extends React.PureComponent<TPositionLayerComponentProps> {
@@ -21,8 +21,11 @@ class GeolocationButton extends React.PureComponent<TPositionLayerComponentProps
     vectorSource: VectorSource = new VectorSource();
     vectorLayer: VectorLayer = new VectorLayer();
 
-    async componentDidMount() {
+    componentDidMount() {
+        this.addPositionLayer();
+    }
 
+    async addPositionLayer(){
         var position = await Geolocation.getCurrentPosition();
 
         this.iconFeature = new Feature({
@@ -32,10 +35,8 @@ class GeolocationButton extends React.PureComponent<TPositionLayerComponentProps
 
         this.iconStyle = new Style({
             image: new Icon({
-                anchorXUnits: IconAnchorUnits.FRACTION,
-                anchorYUnits: IconAnchorUnits.PIXELS,
-                src: '/assets/current.png',
-                scale: 0.05,
+                src: "/assets/icon/location.svg",
+                color: "green"
             }),
         });
 

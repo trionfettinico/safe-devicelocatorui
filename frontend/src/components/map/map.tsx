@@ -13,11 +13,12 @@ import { Plugins } from "@capacitor/core";
 import { GeolocationLayer } from "./layers/position/position";
 import {
   IonFab,
-  IonFabButton
+  IonFabButton,
+  IonIcon
 } from '@ionic/react';
+import { location } from "ionicons/icons";
 
 const { Geolocation } = Plugins;
-
 
 export const MapContext = React.createContext<IMapContext | void>(undefined);
 
@@ -31,11 +32,10 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
     console.log("map created");
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     if (!this.mapDivRef.current) {
       return;
     }
-    var coord = await Geolocation.getCurrentPosition();
     const map = new Map({
       target: this.mapDivRef.current,
       layers: [
@@ -46,12 +46,17 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
         }),
       ],
       view: new View({
-        center: fromLonLat([coord.coords.longitude, coord.coords.latitude]),//([13.068309, 43.135764], 'EPSG:4326', 'EPSG:3857'),
+        center: fromLonLat([13.382000, 43.619722]),
         zoom: 15,
         maxZoom: 22,
         minZoom: 15
       }),
     });
+    Geolocation.getCurrentPosition().then(
+      (coords) => {
+        //this.state.mapContext?.map.getView().setCenter(fromLonLat([coords.coords.longitude, coords.coords.latitude]));
+      }
+    );
     const mapContext: IMapContext = { map };
     this.setState({
       mapContext: mapContext,
@@ -65,9 +70,6 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
     this.state.mapContext?.map.getView().setCenter(fromLonLat([coord.coords.longitude, coord.coords.latitude]));
   }
 
-  
-
-
   render() {
     console.log("map render");
     return (
@@ -79,6 +81,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
             <GeolocationLayer />
             <IonFab vertical="bottom" horizontal="end" slot="fixed">
               <IonFabButton onClick={() => this.setCenter()}>
+              <IonIcon icon={location}/>
               </IonFabButton>
             </IonFab>
           </MapContext.Provider>

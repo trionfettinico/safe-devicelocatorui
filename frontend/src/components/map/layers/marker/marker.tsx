@@ -1,6 +1,6 @@
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import React, { useState } from "react";
+import React from "react";
 import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 import { fromLonLat } from "ol/proj";
@@ -12,7 +12,6 @@ import {
 import { MapContext } from "../../map";
 import { IMapContext } from "../../map-types";
 import { Icon, Style } from "ol/style";
-import IconAnchorUnits from "ol/style/IconAnchorUnits";
 import "ol/ol.css";
 
 import sensors from "../../../../data/sensors.json";
@@ -29,10 +28,8 @@ class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentPr
     console.log("marker mount");
     this.iconStyle = new Style({
       image: new Icon({
-        anchorXUnits: IconAnchorUnits.FRACTION,
-        anchorYUnits: IconAnchorUnits.PIXELS,
-        src: "/assets/marker.png",
-        scale: 0.03,
+        src: "/assets/icon/location.svg",
+        color: "blue"
       }),
     });
 
