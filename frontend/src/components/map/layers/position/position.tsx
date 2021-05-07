@@ -1,59 +1,72 @@
-import { IonButton, IonLoading, IonToast } from '@ionic/react';
-import { Plugins} from "@capacitor/core";
-import { useState } from 'react';
-const { Geolocation,Geoposition} = Plugins;
+import { Plugins } from "@capacitor/core";
+import React from 'react';
+import VectorLayer from 'ol/layer/Vector';
+import Feature from 'ol/Feature';
+import Point from "ol/geom/Point";
+import { fromLonLat } from "ol/proj";
+import IconAnchorUnits from 'ol/style/IconAnchorUnits';
+import { Icon, Style } from 'ol/style';
+import VectorSource from 'ol/source/Vector';
+import { TPositionLayerComponentProps } from "./position-types";
+import { TMarkersLayerProps } from "../marker/marker-types";
+import { MapContext } from "../../map";
+import { IMapContext } from "../../map-types";
+const { Geolocation } = Plugins;
 
+class GeolocationButton extends React.PureComponent<TPositionLayerComponentProps> {
 
-interface LocationError {
-    showError: boolean;
-    message?: string;
+    layer: VectorLayer = new VectorLayer();
+    iconFeature: Feature = new Feature();
+    iconStyle: Style = new Style();
+    vectorSource: VectorSource = new VectorSource();
+    vectorLayer: VectorLayer = new VectorLayer();
+
+    async componentDidMount() {
+
+        var position = await Geolocation.getCurrentPosition();
+
+        this.iconFeature = new Feature({
+            geometry: new Point(fromLonLat([position.coords.longitude, position.coords.latitude])),
+            name: 'Null Island'
+        });
+
+        this.iconStyle = new Style({
+            image: new Icon({
+                anchorXUnits: IconAnchorUnits.FRACTION,
+                anchorYUnits: IconAnchorUnits.PIXELS,
+                src: '/assets/current.png',
+                scale: 0.05,
+            }),
+        });
+
+        this.iconFeature.setStyle(this.iconStyle);
+
+        this.vectorLayer = new VectorLayer({
+            source: new VectorSource({
+                features: [this.iconFeature],
+            }),
+        });
+
+        this.props.map.addLayer(this.vectorLayer);
+    }
+
+    render() {
+        return null;
+    }
+
 }
 
-const GeolocationButton: React.FC = () => {
 
-    const [loading, setLoading] = useState<boolean>(false);
-    const [error, setError] = useState<LocationError>({ showError: false });
-    var position:any = null;
-
-    function setPosition(cord:any){
-        position = cord;
-    }
-
-    const getLocation = async () => {
-        setLoading(true);
-
-        try {
-            const position = await Geolocation.getCurrentPosition();
-            setPosition(position);
-            setLoading(false);
-            setError({ showError: false });
-            console.log("okay");
-            console.log(position);
-        } catch (e) {
-            setError({ showError: true, message: e.message });
-            setLoading(false);
-            console.log("error");
-            console.log(position);
-        }
-
-    }
-
+export const GeolocationLayer = (props: TMarkersLayerProps) => {
     return (
-        <>
-            <IonLoading
-                isOpen={loading}
-                onDidDismiss={() => setLoading(false)}
-                message={'Getting Location...'}
-            />
-            <IonToast
-                isOpen={error.showError}
-                onDidDismiss={() => setError({ message: "", showError: false })}
-                message={error.message}
-                duration={3000}
-            />
-            <IonButton color="primary" onClick={getLocation}>{position ? `${position.coords.latitude} ${position.coords.longitude}` : "Get Location"}</IonButton>
-        </>
+        <MapContext.Consumer>
+            {(mapContext: IMapContext | void) => {
+                if (mapContext) {
+                    console.log("mapContextMarker");
+                    console.log(mapContext);
+                    return <GeolocationButton {...props} map={mapContext.map} />;
+                }
+            }}
+        </MapContext.Consumer>
     );
 };
-
-export default GeolocationButton;

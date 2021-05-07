@@ -28,7 +28,6 @@ class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentPr
   componentDidMount() {
     this.iconStyle = new Style({
       image: new Icon({
-        //anchor: [0.5, 46],
         anchorXUnits: IconAnchorUnits.FRACTION,
         anchorYUnits: IconAnchorUnits.PIXELS,
         src: "/assets/marker.png",

@@ -3,12 +3,21 @@ import Map from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
 import XYZ from "ol/source/XYZ";
-import {fromLonLat} from 'ol/proj';
+import { fromLonLat } from 'ol/proj';
 import { HeatmapLayer } from "./layers/heatmap";
 import { TMapProps, IMapContext, TMapState } from "./map-types";
 import "ol/ol.css";
 import "./map.css";
 import { Markers } from "./layers/marker";
+import { Plugins } from "@capacitor/core";
+import { GeolocationLayer } from "./layers/position/position";
+import {
+  IonFab,
+  IonFabButton
+} from '@ionic/react';
+
+const { Geolocation } = Plugins;
+
 
 export const MapContext = React.createContext<IMapContext | void>(undefined);
 
@@ -21,11 +30,11 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
     this.mapDivRef = React.createRef<HTMLDivElement>();
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     if (!this.mapDivRef.current) {
       return;
     }
-
+    var coord = await Geolocation.getCurrentPosition();
     const map = new Map({
       target: this.mapDivRef.current,
       layers: [
@@ -36,14 +45,21 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
         }),
       ],
       view: new View({
-        center: fromLonLat([13.382000,43.619722]),
-        zoom: 20,
+        center: fromLonLat([coord.coords.longitude, coord.coords.latitude]),//([13.068309, 43.135764], 'EPSG:4326', 'EPSG:3857'),
+        zoom: 15,
       }),
     });
     const mapContext: IMapContext = { map };
     this.setState({
       mapContext: mapContext,
     });
+    console.log(map.getView().getCenter());
+
+  }
+
+  async setCenter() {
+    var coord = await Geolocation.getCurrentPosition();
+    this.state.mapContext?.map.getView().setCenter(fromLonLat([coord.coords.longitude, coord.coords.latitude]));
   }
 
   
@@ -56,6 +72,11 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
           <MapContext.Provider value={this.state.mapContext}>
             <HeatmapLayer />
             <Markers />
+            <GeolocationLayer />
+            <IonFab vertical="bottom" horizontal="end" slot="fixed">
+              <IonFabButton onClick={() => this.setCenter()}>
+              </IonFabButton>
+            </IonFab>
           </MapContext.Provider>
         )}
       </div>
