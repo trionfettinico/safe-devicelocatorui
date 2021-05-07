@@ -24,6 +24,7 @@ class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentPr
   vectorSource: VectorSource = new VectorSource();
   vectorLayer: VectorLayer = new VectorLayer();
 
+
   componentDidMount() {
     this.iconStyle = new Style({
       image: new Icon({

@@ -16,6 +16,7 @@ import {
 import './Home.css';
 import { Map } from "../components/map";
 import SensorListItem from '../components/SensorListItem';
+import GeolocationButton from '../components/map/layers/position/position';
 import sensors from '../data/sensors.json';
 
 const Home: React.FC = () => {
@@ -41,6 +42,9 @@ const Home: React.FC = () => {
             <IonCol size='3'>
               <IonList>
                 {sensors.map(e => <SensorListItem key={e.id} sensor={e} />)}
+                <div className="container">
+          <GeolocationButton />
+        </div>
               </IonList>
             </IonCol>
             <IonCol>
