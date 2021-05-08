@@ -15,7 +15,7 @@ class HeatmapLayerComponent extends React.PureComponent<
   componentDidMount() {
     console.log("heatmap mount");
     this.source = new VectorSource({
-      url: '/assets/file-2.kml',
+      url: './assets/file-2.kml',
       format: new KML({
         extractStyles: false,
       }),

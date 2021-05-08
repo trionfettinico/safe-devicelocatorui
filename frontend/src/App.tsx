@@ -1,6 +1,5 @@
-import { IonApp } from '@ionic/react';
+import { IonApp, IonRouterOutlet, isPlatform } from '@ionic/react';
 import Home from './pages/Home';
-import { Map } from './components/map'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -21,14 +20,18 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 import React from "react";
+import { Redirect, Route } from 'react-router';
+import { IonReactHashRouter, IonReactMemoryRouter, IonReactRouter } from '@ionic/react-router';
+
+const Router = IonReactRouter;
 
 const App: React.FC = () => (
   <IonApp>
-    <Home/>
+    <Router>
+        <Route path="/home" component={Home} />
+        <Redirect exact from="/" to="/home" />
+    </Router>
   </IonApp>
 );
-// function App() {
-//   return <Map></Map>;
-// }
 
 export default App;

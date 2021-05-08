@@ -5,27 +5,40 @@ import {
   IonMenu,
   IonPage,
   IonSplitPane,
+  useIonRouter,
+  useIonViewDidEnter,
 } from '@ionic/react';
 import './Home.css';
 import { Map } from "../components/map";
 import SensorListItem from '../components/SensorListItem';
 import sensors from '../data/sensors.json';
+import { Plugins } from '@capacitor/core';
+const { App } = Plugins;
 
 const Home: React.FC = () => {
 
+  const ionRouter = useIonRouter();
+  document.addEventListener('ionBackButton', (ev: any) => {
+    ev.detail.register(-1, () => {
+      if (!ionRouter.canGoBack()) {
+        App.exitApp();
+      }
+    });
+  });
+
   return (
-    <IonSplitPane contentId="home-page" when="(min-width: 0px)">
-      <IonMenu contentId="home-page">
-        <IonList>
-          {sensors.map(e => <SensorListItem key={e.id} sensor={e} />)}
-        </IonList>
-      </IonMenu>
-      <IonPage id="home-page">
-        <IonContent>
-          <Map></Map>
+    <IonPage id="home-page">
+      <IonSplitPane contentId="map" when="xs">
+        <IonMenu contentId="map" id="device-menu">
+          <IonList>
+            {sensors.map(e => <SensorListItem key={e.id} sensor={e} />)}
+          </IonList>
+        </IonMenu>
+        <IonContent id="map">
+          <Map />
         </IonContent>
-      </IonPage>
-    </IonSplitPane>
+      </IonSplitPane>
+    </IonPage>
   );
 };
 

@@ -28,7 +28,7 @@ class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentPr
     console.log("marker mount");
     this.iconStyle = new Style({
       image: new Icon({
-        src: "/assets/icon/location.svg",
+        src: "./assets/icon/location.svg",
         color: "blue"
       }),
     });

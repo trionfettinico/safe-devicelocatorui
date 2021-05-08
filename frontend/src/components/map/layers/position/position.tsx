@@ -26,7 +26,8 @@ class GeolocationButton extends React.PureComponent<TPositionLayerComponentProps
     }
 
     async addPositionLayer(){
-        var position = await Geolocation.getCurrentPosition();
+        var position = await Geolocation.getCurrentPosition({enableHighAccuracy: true});
+        console.log(position);
 
         this.iconFeature = new Feature({
             geometry: new Point(fromLonLat([position.coords.longitude, position.coords.latitude])),
@@ -35,7 +36,7 @@ class GeolocationButton extends React.PureComponent<TPositionLayerComponentProps
 
         this.iconStyle = new Style({
             image: new Icon({
-                src: "/assets/icon/location.svg",
+                src: "./assets/icon/location.svg",
                 color: "green"
             }),
         });
@@ -56,7 +57,6 @@ class GeolocationButton extends React.PureComponent<TPositionLayerComponentProps
     }
 
 }
-
 
 export const GeolocationLayer = (props: TMarkersLayerProps) => {
     return (

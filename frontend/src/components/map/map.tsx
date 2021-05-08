@@ -17,6 +17,7 @@ import {
   IonIcon
 } from '@ionic/react';
 import { location } from "ionicons/icons";
+import { Coordinate } from "ol/coordinate";
 
 const { Geolocation } = Plugins;
 
@@ -36,6 +37,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
     if (!this.mapDivRef.current) {
       return;
     }
+    console.log("map mount");
     const map = new Map({
       target: this.mapDivRef.current,
       layers: [
@@ -53,7 +55,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
       }),
     });
     Geolocation.getCurrentPosition().then(
-      (coords) => {
+      (coords: any) => {
         //this.state.mapContext?.map.getView().setCenter(fromLonLat([coords.coords.longitude, coords.coords.latitude]));
       }
     );
@@ -61,7 +63,6 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
     this.setState({
       mapContext: mapContext,
     });
-    console.log(map.getView().getCenter());
 
   }
 
@@ -72,6 +73,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
 
   render() {
     console.log("map render");
+    console.log(this.state.mapContext);
     return (
       <div className="map" ref={this.mapDivRef}>
         {this.state.mapContext && (
