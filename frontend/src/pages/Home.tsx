@@ -10,9 +10,9 @@ import {
 } from '@ionic/react';
 import './Home.css';
 import { Map } from "../components/map";
-import SensorListItem from '../components/SensorListItem';
 import sensors from '../data/sensors.json';
 import { Plugins } from '@capacitor/core';
+import SensorItem from '../components/sensoritem/SensorItem';
 const { App } = Plugins;
 
 const Home: React.FC = () => {
@@ -31,7 +31,7 @@ const Home: React.FC = () => {
       <IonSplitPane contentId="map" when="xs">
         <IonMenu contentId="map" id="device-menu">
           <IonList>
-            {sensors.map(e => <SensorListItem key={e.id} sensor={e} />)}
+            {sensors.map(e => <SensorItem key={e.id} sensor={e} />)}
           </IonList>
         </IonMenu>
         <IonContent id="map">

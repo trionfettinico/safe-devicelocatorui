@@ -10,7 +10,7 @@ import "ol/ol.css";
 import "./map.css";
 import { Markers } from "./layers/marker";
 import { Plugins } from "@capacitor/core";
-import { GeolocationLayer } from "./layers/position/position";
+import { GeolocationLayer } from "../position/position";
 import {
   IonFab,
   IonFabButton,
@@ -63,6 +63,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
     this.setState({
       mapContext: mapContext,
     });
+    console.log("map mount");
 
   }
 
@@ -78,7 +79,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
       <div className="map" ref={this.mapDivRef}>
         {this.state.mapContext && (
           <MapContext.Provider value={this.state.mapContext}>
-            <HeatmapLayer />
+            <HeatmapLayer/>
             <Markers />
             <GeolocationLayer />
             <IonFab vertical="bottom" horizontal="end" slot="fixed">
