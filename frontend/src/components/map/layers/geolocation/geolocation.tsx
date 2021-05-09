@@ -6,14 +6,14 @@ import Point from "ol/geom/Point";
 import { fromLonLat } from "ol/proj";
 import { Icon, Style } from 'ol/style';
 import VectorSource from 'ol/source/Vector';
-import { TPositionLayerComponentProps } from "./position-types";
+import { TGeolocationLayerComponentProps } from "./geolocation-types";
 import { TMarkersLayerProps } from "../marker/marker-types";
 import { MapContext } from "../../map";
 import { IMapContext } from "../../map-types";
 
 const { Geolocation } = Plugins;
 
-class GeolocationButton extends React.PureComponent<TPositionLayerComponentProps> {
+class GeolocationLayerComponent extends React.PureComponent<TGeolocationLayerComponentProps> {
 
     layer: VectorLayer = new VectorLayer();
     iconFeature: Feature = new Feature();
@@ -22,7 +22,9 @@ class GeolocationButton extends React.PureComponent<TPositionLayerComponentProps
     vectorLayer: VectorLayer = new VectorLayer();
 
     componentDidMount() {
+        console.log("pre mount");
         this.addPositionLayer();
+        console.log("post mount");
     }
 
     async addPositionLayer(){
@@ -58,14 +60,14 @@ class GeolocationButton extends React.PureComponent<TPositionLayerComponentProps
 
 }
 
-export const GeolocationLayer = (props: TMarkersLayerProps) => {
+export const GeolocationLayerWithContext = (props: TMarkersLayerProps) => {
     return (
         <MapContext.Consumer>
             {(mapContext: IMapContext | void) => {
                 if (mapContext) {
                     console.log("mapContextMarker");
                     console.log(mapContext);
-                    return <GeolocationButton {...props} map={mapContext.map} />;
+                    return <GeolocationLayerComponent {...props} map={mapContext.map} />;
                 }
             }}
         </MapContext.Consumer>

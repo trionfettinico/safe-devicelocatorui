@@ -10,14 +10,13 @@ import "ol/ol.css";
 import "./map.css";
 import { Markers } from "./layers/marker";
 import { Plugins } from "@capacitor/core";
-import { GeolocationLayer } from "../position/position";
 import {
   IonFab,
   IonFabButton,
   IonIcon
 } from '@ionic/react';
 import { location } from "ionicons/icons";
-import { Coordinate } from "ol/coordinate";
+import { GeolocationLayer } from "./layers/geolocation";
 
 const { Geolocation } = Plugins;
 

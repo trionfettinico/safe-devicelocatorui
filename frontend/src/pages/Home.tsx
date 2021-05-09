@@ -13,6 +13,7 @@ import { Map } from "../components/map";
 import sensors from '../data/sensors.json';
 import { Plugins } from '@capacitor/core';
 import SensorItem from '../components/sensoritem/SensorItem';
+import { locationOutline } from 'ionicons/icons';
 const { App } = Plugins;
 
 const Home: React.FC = () => {
@@ -25,6 +26,8 @@ const Home: React.FC = () => {
       }
     });
   });
+
+  console.log(locationOutline);
 
   return (
     <IonPage id="home-page">

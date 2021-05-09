@@ -17,7 +17,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
   return (
-    <IonItem detail={false}>
+    <IonItem detail={false} className="sensor-item">
       <div
         slot="start"
         className={sensor.status ? "dot dot-read" : "dot dot-unread"}
