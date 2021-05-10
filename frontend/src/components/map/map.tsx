@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Map from "ol/Map";
 import View from "ol/View";
 import TileLayer from "ol/layer/Tile";
@@ -10,13 +10,14 @@ import "ol/ol.css";
 import "./map.css";
 import { Markers } from "./layers/marker";
 import { Plugins } from "@capacitor/core";
+import { GeolocationLayer } from "./layers/geolocation";
 import {
   IonFab,
   IonFabButton,
-  IonIcon
+  IonIcon,
 } from '@ionic/react';
-import { location } from "ionicons/icons";
-import { GeolocationLayer } from "./layers/geolocation";
+import { location, settingsOutline } from "ionicons/icons";
+import Popover from "./Popover";
 
 const { Geolocation } = Plugins;
 
@@ -25,6 +26,7 @@ export const MapContext = React.createContext<IMapContext | void>(undefined);
 export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
   private mapDivRef: React.RefObject<HTMLDivElement>;
   state: TMapState = {};
+  statusHeatMap: boolean = true;
 
   constructor(props: TMapProps) {
     super(props);
@@ -36,7 +38,6 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
     if (!this.mapDivRef.current) {
       return;
     }
-    console.log("map mount");
     const map = new Map({
       target: this.mapDivRef.current,
       layers: [
@@ -54,7 +55,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
       }),
     });
     Geolocation.getCurrentPosition().then(
-      (coords: any) => {
+      (coords) => {
         //this.state.mapContext?.map.getView().setCenter(fromLonLat([coords.coords.longitude, coords.coords.latitude]));
       }
     );
@@ -62,7 +63,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
     this.setState({
       mapContext: mapContext,
     });
-    console.log("map mount");
+    console.log(map.getView().getCenter());
 
   }
 
@@ -73,17 +74,17 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
 
   render() {
     console.log("map render");
-    console.log(this.state.mapContext);
     return (
       <div className="map" ref={this.mapDivRef}>
         {this.state.mapContext && (
           <MapContext.Provider value={this.state.mapContext}>
-            <HeatmapLayer/>
+            <HeatmapLayer />
             <Markers />
             <GeolocationLayer />
+            <Popover/>          
             <IonFab vertical="bottom" horizontal="end" slot="fixed">
               <IonFabButton onClick={() => this.setCenter()}>
-              <IonIcon icon={location}/>
+                <IonIcon icon={location} />
               </IonFabButton>
             </IonFab>
           </MapContext.Provider>

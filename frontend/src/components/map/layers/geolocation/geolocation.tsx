@@ -27,8 +27,8 @@ class GeolocationLayerComponent extends React.PureComponent<TGeolocationLayerCom
         console.log("post mount");
     }
 
-    async addPositionLayer(){
-        var position = await Geolocation.getCurrentPosition({enableHighAccuracy: true});
+    async addPositionLayer() {
+        var position = await Geolocation.getCurrentPosition({ enableHighAccuracy: true });
         console.log(position);
 
         this.iconFeature = new Feature({
@@ -49,6 +49,8 @@ class GeolocationLayerComponent extends React.PureComponent<TGeolocationLayerCom
             source: new VectorSource({
                 features: [this.iconFeature],
             }),
+            className: "position",
+            visible: true,
         });
 
         this.props.map.addLayer(this.vectorLayer);

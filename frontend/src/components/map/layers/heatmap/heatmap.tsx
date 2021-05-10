@@ -21,6 +21,8 @@ class HeatmapLayerComponent extends React.PureComponent<
       }),
     });
     this.layer = new Heatmap({
+      className:"heatmap", 
+      visible : true,
       source: this.source,
       blur: 20,
       radius: 8,

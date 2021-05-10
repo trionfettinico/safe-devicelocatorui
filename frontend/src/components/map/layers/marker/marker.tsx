@@ -46,6 +46,8 @@ class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentPr
       source: new VectorSource({
         features: this.features,
       }),
+      className:"marker",      
+      visible : true,
     });
 
     this.props.map.addLayer(this.vectorLayer);
