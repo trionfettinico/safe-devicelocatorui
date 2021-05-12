@@ -29,25 +29,27 @@ class MarkersLayerComponent extends React.PureComponent<TMarkersLayerComponentPr
     this.iconStyle = new Style({
       image: new Icon({
         src: "./assets/icon/location.svg",
-        color: "blue"
+        color: "blue",
       }),
     });
 
-    sensors.map(
-      (e) => this.features.push(new Feature({
-        geometry: new Point(fromLonLat([e.lng, e.lat])),
-        name: e.name,
-      }))
+    sensors.forEach((e) =>
+      this.features.push(
+        new Feature({
+          geometry: new Point(fromLonLat([e.lng, e.lat])),
+          name: e.name,
+        })
+      )
     );
 
-    this.features.map(e => e.setStyle(this.iconStyle));
+    this.features.forEach((e) => e.setStyle(this.iconStyle));
 
     this.vectorLayer = new VectorLayer({
       source: new VectorSource({
         features: this.features,
       }),
-      className:"marker",      
-      visible : true,
+      className: "marker",
+      visible: true,
     });
 
     this.props.map.addLayer(this.vectorLayer);

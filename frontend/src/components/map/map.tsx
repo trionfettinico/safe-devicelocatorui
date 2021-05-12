@@ -38,6 +38,7 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
     if (!this.mapDivRef.current) {
       return;
     }
+    console.log("map mount");
     const map = new Map({
       target: this.mapDivRef.current,
       layers: [
@@ -54,11 +55,6 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
         minZoom: 15
       }),
     });
-    Geolocation.getCurrentPosition().then(
-      (coords) => {
-        //this.state.mapContext?.map.getView().setCenter(fromLonLat([coords.coords.longitude, coords.coords.latitude]));
-      }
-    );
     const mapContext: IMapContext = { map };
     this.setState({
       mapContext: mapContext,

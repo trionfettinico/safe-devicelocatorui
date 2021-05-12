@@ -1,19 +1,17 @@
-import {
-  IonFab,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonNote,
-} from "@ionic/react";
+import { IonFab, IonIcon, IonItem, IonLabel, IonNote } from "@ionic/react";
 import "./MessageListItem.css";
 import { Sensor } from "../../data/sensors";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { arrowDownSharp, information, searchCircle } from "ionicons/icons";
+import { MapContext } from "../map/map";
+import { fromLonLat } from "ol/proj";
+
 interface SensorListItemProps {
   sensor: Sensor;
 }
 
 const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
+  
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
   return (
@@ -34,16 +32,15 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
         </h2>
         {showMenu ? (
           <div>
-            <h3>
+            <h6>
               <br />
-              {sensor.lat} {sensor.lng} <br/>
-              Qui ci vanno un pò di stronzate da mostrare <br/>
+              {sensor.lat} {sensor.lng} <br />
+              Qui ci vanno un pò di stronzate da mostrare <br />
               <br />
-            </h3>
-            <IonFab vertical="bottom" horizontal="end" slot="fixed">
-              <IonIcon
-                icon={searchCircle}
-              />
+            </h6>
+            <IonFab vertical="bottom" horizontal="end" slot="fixed" id={'sensor_'+sensor.id}>
+              <span className="date">Find</span>
+              <IonIcon icon={searchCircle} />
             </IonFab>
           </div>
         ) : null}
@@ -53,7 +50,3 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
 };
 
 export default SensorItem;
-function IMapContext(IMapContext: any) {
-  throw new Error("Function not implemented.");
-}
-
