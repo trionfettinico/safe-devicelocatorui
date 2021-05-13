@@ -14,6 +14,10 @@ import sensors from '../data/sensors.json';
 import { Plugins } from '@capacitor/core';
 import SensorItem from '../components/sensoritem/SensorItem';
 import { locationOutline } from 'ionicons/icons';
+
+import SerialPort from "serialport";
+import GPS from "gps";
+
 const { App } = Plugins;
 
 const Home: React.FC = () => {
@@ -27,7 +31,20 @@ const Home: React.FC = () => {
     });
   });
 
-  console.log(locationOutline);
+  const port = new SerialPort("/dev/ttyS0", { baudRate: 9600 });
+  const gps = new GPS();
+
+  const parser = port.pipe(new SerialPort.parsers.Readline({delimiter:'\n'}));
+  gps.on("data", async data => {
+    if(data.type == "GGA") {
+      if(data.quality != null) {
+          console.log(data);
+      } else {
+          console.log("error");
+      }
+  }
+  });
+  parser.on("data", data => {gps.update(data)});
 
   return (
     <IonPage id="home-page">
