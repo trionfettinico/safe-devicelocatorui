@@ -1,0 +1,17 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {italian}{}
+\babel@toc {italian}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Introduzione}{2}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Processo di sviluppo}{3}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{Prima iterazione}{3}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Requisiti}{3}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Progettazione e Implementazione}{3}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Validazione e rilascio}{4}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Riferimenti bibliografici}{5}{}%
