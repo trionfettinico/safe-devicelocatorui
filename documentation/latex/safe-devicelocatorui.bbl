@@ -259,6 +259,181 @@
       \verb https://www.openstreetmap.org/
       \endverb
     \endentry
+    \entry{IonicReact}{online}{}
+      \name{author}{1}{}{%
+        {{hash=3b5c646991030888d827d08eaf69eeda}{%
+           family={Drifty},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{3b5c646991030888d827d08eaf69eeda}
+      \strng{fullhash}{3b5c646991030888d827d08eaf69eeda}
+      \strng{bibnamehash}{3b5c646991030888d827d08eaf69eeda}
+      \strng{authorbibnamehash}{3b5c646991030888d827d08eaf69eeda}
+      \strng{authornamehash}{3b5c646991030888d827d08eaf69eeda}
+      \strng{authorfullhash}{3b5c646991030888d827d08eaf69eeda}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Ionic React}
+      \verb{urlraw}
+      \verb https://ionicframework.com/docs/react
+      \endverb
+      \verb{url}
+      \verb https://ionicframework.com/docs/react
+      \endverb
+    \endentry
+    \entry{React}{online}{}
+      \name{author}{2}{}{%
+        {{hash=d85544fce402c7a2a96a48078edaf203}{%
+           family={Facebook},
+           familyi={F\bibinitperiod}}}%
+        {{hash=82df41632da476065ce2997900554442}{%
+           family={community},
+           familyi={c\bibinitperiod}}}%
+      }
+      \strng{namehash}{04903dd0c954c9a6f519b733ee03cb45}
+      \strng{fullhash}{04903dd0c954c9a6f519b733ee03cb45}
+      \strng{bibnamehash}{04903dd0c954c9a6f519b733ee03cb45}
+      \strng{authorbibnamehash}{04903dd0c954c9a6f519b733ee03cb45}
+      \strng{authornamehash}{04903dd0c954c9a6f519b733ee03cb45}
+      \strng{authorfullhash}{04903dd0c954c9a6f519b733ee03cb45}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{React}
+      \verb{urlraw}
+      \verb https://it.reactjs.org
+      \endverb
+      \verb{url}
+      \verb https://it.reactjs.org
+      \endverb
+    \endentry
+    \entry{Ionic}{online}{}
+      \name{author}{1}{}{%
+        {{hash=3b5c646991030888d827d08eaf69eeda}{%
+           family={Drifty},
+           familyi={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{3b5c646991030888d827d08eaf69eeda}
+      \strng{fullhash}{3b5c646991030888d827d08eaf69eeda}
+      \strng{bibnamehash}{3b5c646991030888d827d08eaf69eeda}
+      \strng{authorbibnamehash}{3b5c646991030888d827d08eaf69eeda}
+      \strng{authornamehash}{3b5c646991030888d827d08eaf69eeda}
+      \strng{authorfullhash}{3b5c646991030888d827d08eaf69eeda}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Ionic}
+      \verb{urlraw}
+      \verb https://ionicframework.com/
+      \endverb
+      \verb{url}
+      \verb https://ionicframework.com/
+      \endverb
+    \endentry
+    \entry{Capacitor}{online}{}
+      \name{author}{1}{}{%
+        {{hash=70d481439f9146177564bff364eab487}{%
+           family={Ionic},
+           familyi={I\bibinitperiod}}}%
+      }
+      \strng{namehash}{70d481439f9146177564bff364eab487}
+      \strng{fullhash}{70d481439f9146177564bff364eab487}
+      \strng{bibnamehash}{70d481439f9146177564bff364eab487}
+      \strng{authorbibnamehash}{70d481439f9146177564bff364eab487}
+      \strng{authornamehash}{70d481439f9146177564bff364eab487}
+      \strng{authorfullhash}{70d481439f9146177564bff364eab487}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Capacitor}
+      \verb{urlraw}
+      \verb https://capacitorjs.com
+      \endverb
+      \verb{url}
+      \verb https://capacitorjs.com
+      \endverb
+    \endentry
+    \entry{Electron}{online}{}
+      \name{author}{1}{}{%
+        {{hash=320883bcf7b761d1913ed4ecfab9a09b}{%
+           family={Inc},
+           familyi={I\bibinitperiod},
+           given={GitHub},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{320883bcf7b761d1913ed4ecfab9a09b}
+      \strng{fullhash}{320883bcf7b761d1913ed4ecfab9a09b}
+      \strng{bibnamehash}{320883bcf7b761d1913ed4ecfab9a09b}
+      \strng{authorbibnamehash}{320883bcf7b761d1913ed4ecfab9a09b}
+      \strng{authornamehash}{320883bcf7b761d1913ed4ecfab9a09b}
+      \strng{authorfullhash}{320883bcf7b761d1913ed4ecfab9a09b}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Electron}
+      \verb{urlraw}
+      \verb https://www.electronjs.org
+      \endverb
+      \verb{url}
+      \verb https://www.electronjs.org
+      \endverb
+    \endentry
+    \entry{OpenLayers}{online}{}
+      \name{author}{1}{}{%
+        {{hash=e386d9b712ae530fffb142cf31f91208}{%
+           family={OSGeo},
+           familyi={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{e386d9b712ae530fffb142cf31f91208}
+      \strng{fullhash}{e386d9b712ae530fffb142cf31f91208}
+      \strng{bibnamehash}{e386d9b712ae530fffb142cf31f91208}
+      \strng{authorbibnamehash}{e386d9b712ae530fffb142cf31f91208}
+      \strng{authornamehash}{e386d9b712ae530fffb142cf31f91208}
+      \strng{authorfullhash}{e386d9b712ae530fffb142cf31f91208}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{OpenLayers}
+      \verb{urlraw}
+      \verb https://openlayers.org
+      \endverb
+      \verb{url}
+      \verb https://openlayers.org
+      \endverb
+    \endentry
+    \entry{cordova-plugin-geolocation}{online}{}
+      \name{author}{1}{}{%
+        {{hash=b6efd606d118d0f62066e31419ff04cc}{%
+           family={apache},
+           familyi={a\bibinitperiod}}}%
+      }
+      \strng{namehash}{b6efd606d118d0f62066e31419ff04cc}
+      \strng{fullhash}{b6efd606d118d0f62066e31419ff04cc}
+      \strng{bibnamehash}{b6efd606d118d0f62066e31419ff04cc}
+      \strng{authorbibnamehash}{b6efd606d118d0f62066e31419ff04cc}
+      \strng{authornamehash}{b6efd606d118d0f62066e31419ff04cc}
+      \strng{authorfullhash}{b6efd606d118d0f62066e31419ff04cc}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Cordova Plugin Geolocation}
+      \verb{urlraw}
+      \verb https://github.com/apache/cordova-plugin-geolocation#readme
+      \endverb
+      \verb{url}
+      \verb https://github.com/apache/cordova-plugin-geolocation#readme
+      \endverb
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

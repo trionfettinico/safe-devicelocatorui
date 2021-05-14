@@ -107,6 +107,10 @@ Per la generazione di mappe offline si è scelto di creare un eseguibile in \cit
 \end{center}
 dove \{z\} indica lo zoom dell'immagine, mentre \{x\} e \{y\} indicano rispettivamente latitudine e longitudine.
 Per generare le mappe da rendere disponibili offline ci appoggiamo a \citetitle{Thunderforest}\cite{Thunderforest}: un fornitore di tiles renderizzati dai dati di \citetitle{OpenStreetMap}\cite{OpenStreetMap}.
+Una volta terminato il processo di download la directory generata viene compressa nel file \textit{tiles.zip}
+Si è deciso di scaricare le immagini da zoom 15 (scala 1:15 mila) a zoom 22 (scala 1:125) in un raggio di 5km dal punto centrale. Questa scelta è motivata dal fatto che vogliamo dare una visione generale di un quartiere o di un paese fino ad arrivare ad avere una visione dettagliata di singoli edifici.
+
+%TODO Inserire informazioni riguardati i tiles!! formule utilizzate e aspetti tecnici + citazioni
 
 \addcontentsline{toc}{subsubsection}{Validazione e rilascio}
 \subsubsection*{{Validazione e rilascio}}
@@ -118,18 +122,66 @@ Terminata l'attività di sviluppo del prototipo abbiamo soddisfatto quasi tutti 
     \label{marker_flutter}
 \end{figure}
 
-Per quanto riguarda il funzionamento offline della mappa l'eseguibile prende in input latitudine e longitudine di un punto e genera un file \textit{tiles.zip} contenente la directory
-\setnewpathsep{/} \directory{./tiles/\{z\}/\{x\}/\{y\}/*.png} che va da zoom 15 (scala 1:15 mila) a zoom 22 (scala 1:125) e ricopre un aria di . 
-
-
 L'unico requisito che non è stato soddisfatto a pieno è stato quello di disegnare la heatmap, in quanto necessitavamo di visualizzare una mappa di calore che, in base alla scala della mappa, si ridisegnasse mettendo in relazione la distanza dei punti e l'RSSI rilevato (\textit{Received Signal Strength Indication}).
 
-Come si può notare nella Figura~\ref{heatmap_flutter}, abbiamo disegnato dei punti che tenevano conto dell'RSSI ma non siamo stati in grado di tenere in considerazione la densità dei punti. Questo ci portava a visualizzare una heatmap che, se avevamo tanti punti vicino ma tutti con intensità molto bassa venivano disegnati di verde, invece noi necessitavamo che in questa circostanza la zona interessata fosse colorata di rosso. 
+Come si può notare nella Figura~\ref{heatmap_flutter}, abbiamo disegnato dei punti che tenevano conto dell'RSSI ma non siamo stati in grado di tenere in considerazione la densità dei punti. Questo ci portava a visualizzare una heatmap che, se avevamo tanti punti vicino ma con intensità molto bassa venivano disegnati di verde, invece noi necessitavamo che in questa circostanza la zona interessata fosse colorata di rosso. 
 \begin{figure}[tbp]
     \centering
-    \includegraphics[width=\textwidth]{figure/heatmap_flutter.png}
+    \includegraphics[width=.7\textwidth]{figure/heatmap_flutter_small.png}\hfill
+    \includegraphics[width=.7\textwidth]{figure/heatmap_flutter_large.png}\hfill
     \caption{Heatmap Flutter}
     \label{heatmap_flutter}
+\end{figure}
+
+\addcontentsline{toc}{subsection}{Seconda iterazione}
+\subsection*{{Seconda iterazione}}
+
+Visti i feedback della precedente iterazione abbiamo deciso di mantenere i medesimi requisiti riguardanti il rendering della mappa ma di rivedere progettazione e implementazione cambiando tecnologie utilizzate. Questo cambiamento è motivato dal fatto che implementare un'heatmap che soddisfa il relativo requisito avrebbe richiesto più tempo che sviluppare un nuovo prototipo con una tecnologia differente, e per questo avremmo rischiato di non rispettare le scadenze. Della precendente iterazione abbiamo mantenuto l'eseguibile per rendere disponibili i tiles offline.
+
+\addcontentsline{toc}{subsubsection}{Progettazione e Implementazione}
+\subsubsection*{{Progettazione e Implementazione}}
+In questa iterazione si è scelto di utilizzare il framework \citetitle*{IonicReact}\cite*{IonicReact}: versione \citetitle*{React}\cite*{React} di \citetitle*{Ionic}\cite*{Ionic}, per sviluppare il frontend. Abbiamo scelto Ionic React così da creare app per dispositivi mobili e desktop utilizzando \citetitle*{Capacitor}\cite*{Capacitor} e \citetitle*{Electron}\cite*{Electron}.
+
+Ionic React utilizza standard web ed è compatibile con librerie web come \citetitle*{OpenLayers}\cite*{OpenLayers}: libreria che permette di visualizzare tiles, marker e dati vettoriali come heatmap e centroidi. 
+
+Come mostrato in Figura \ref{IonicReact_2iterazione} si è scelto di mantenere la medesima struttura del primo prototipo per quanto riguarda la UI (\textit{User Interface}).
+%TODO aggiungere informazioni sullo sviluppo 
+\begin{figure}[tbp]
+    \centering
+    \includegraphics[width=.7\textwidth]{figure/ionicreact_2iterazione_large.png}\hfill
+    \includegraphics[width=.7\textwidth]{figure/ionicreact_2iterazione_small.png}\hfill
+
+    \caption{IonicReact}
+    \label{IonicReact_2iterazione}
+\end{figure}
+
+\addcontentsline{toc}{subsubsection}{Validazione e rilascio}
+\subsubsection*{{Validazione e rilascio}}
+Terminata l'attività di implementazione abbiamo soddisfatto tutti i requisiti che ci eravamo prefissati di sviluppare in questa iterazione. 
+
+Si è notato che le informazioni aggiunte alla mappa, come marker e heatmap, possono essere elemento di disturbo nella situazione in cui l'operatote voglia visualizzare la mappa utilizzando una scala molto grande, per questo nelle prossime iterazioni si è scelto sviluppare un menu per selezionare quali layer mostrare.
+
+\addcontentsline{toc}{subsection}{Terza iterazione}
+\subsection*{{Terza iterazione}}
+
+\addcontentsline{toc}{subsubsection}{Requisiti}
+\subsubsection*{{Requisiti}}
+Tra i requisiti individuati inizialmente abbiamo deciso di aggiungere, al prototipo validato nella precendente iterazione, le funzionalità riguardanti il requisito di geolocalizzazione del dispositivo.
+
+Inoltre, si è deciso di implementare anche la funzionalità risultante dai feedback della seconda iterazione: un menù per selezionare quali layer mostrare sulla cartina.
+
+\addcontentsline{toc}{subsubsection}{Progettazione e Implementazione}
+\subsubsection*{{Progettazione e Implementazione}}
+Come mostrato nella Figura \ref{IonicReact_3iterazione} sono stati aggiunti due bottoni sul lato destro dell'interfaccia. Il pulsante in alto a destra permette di visualizzare un menù all'interno di un popover contenente la lista dei layer disponibili e i relativi switch per abilitarne o meno la sovrampressione della mappa. Mentre, il pulsante nell'angolo inferiore destro, esegue le funzioni di geolocalizzazione e centra la visuale della mappa sulle coordinaete del dispositivo.
+Per individuare la posizione geografica del dispositivo utilizziamo \citetitle*{cordova-plugin-geolocation}\cite*{cordova-plugin-geolocation} il quale sfrutta il sistema GPS o network signal: WiFi e GSM, per dedurre latitudine e longitudine.
+
+\begin{figure}[tbp]
+    \centering
+    \includegraphics[width=.7\textwidth]{figure/ionicreact_3iterazione_geolocalizzazione.png}\hfill
+    \includegraphics[width=.49\textwidth]{figure/ionicreact_3iterazione_menu1.png}\hfill
+    \includegraphics[width=.49\textwidth]{figure/ionicreact_3iterazione_menu2.png}
+    \caption{Geolocalizzazione e menu layers}
+    \label{IonicReact_3iterazione}
 \end{figure}
 
 \addcontentsline{toc}{section}{Riferimenti bibliografici}

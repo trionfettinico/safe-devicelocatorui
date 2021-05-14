@@ -2361,6 +2361,20 @@
     <bcf:citekey order="15">Thunderforest</bcf:citekey>
     <bcf:citekey order="16">OpenStreetMap</bcf:citekey>
     <bcf:citekey order="17">OpenStreetMap</bcf:citekey>
+    <bcf:citekey order="18">IonicReact</bcf:citekey>
+    <bcf:citekey order="19">IonicReact</bcf:citekey>
+    <bcf:citekey order="20">React</bcf:citekey>
+    <bcf:citekey order="21">React</bcf:citekey>
+    <bcf:citekey order="22">Ionic</bcf:citekey>
+    <bcf:citekey order="23">Ionic</bcf:citekey>
+    <bcf:citekey order="24">Capacitor</bcf:citekey>
+    <bcf:citekey order="25">Capacitor</bcf:citekey>
+    <bcf:citekey order="26">Electron</bcf:citekey>
+    <bcf:citekey order="27">Electron</bcf:citekey>
+    <bcf:citekey order="28">OpenLayers</bcf:citekey>
+    <bcf:citekey order="29">OpenLayers</bcf:citekey>
+    <bcf:citekey order="30">cordova-plugin-geolocation</bcf:citekey>
+    <bcf:citekey order="31">cordova-plugin-geolocation</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
