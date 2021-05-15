@@ -9,6 +9,7 @@ import { TMapProps, IMapContext, TMapState } from "./map-types";
 import "ol/ol.css";
 import "./map.css";
 import { Markers } from "./layers/marker";
+import sensors from '../../data/sensors.json';
 import { Plugins } from "@capacitor/core";
 import { GeolocationLayer } from "./layers/geolocation";
 import {
@@ -16,8 +17,18 @@ import {
   IonFabButton,
   IonIcon,
 } from '@ionic/react';
+import {
+  IonContent,
+  IonList,
+  IonMenu,
+  IonPage,
+  IonSplitPane,
+  useIonRouter,
+  useIonViewDidEnter,
+} from '@ionic/react';
 import { location, settingsOutline } from "ionicons/icons";
 import Popover from "./Popover";
+import SensorItem from "../sensoritem/SensorItem";
 
 const { Geolocation } = Plugins;
 
@@ -71,7 +82,15 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
   render() {
     console.log("map render");
     return (
-      <div className="map" ref={this.mapDivRef}>
+      <IonPage id="home-page">
+      <IonSplitPane contentId="map" when="xs">
+        <IonMenu contentId="map" id="device-menu">
+          <IonList>
+            {sensors.map(e => <SensorItem key={e.id} sensor={e} context={this.state.mapContext}/>)}
+          </IonList>
+        </IonMenu>
+        <IonContent id="map">
+        <div className="map" ref={this.mapDivRef}>
         {this.state.mapContext && (
           <MapContext.Provider value={this.state.mapContext}>
             <HeatmapLayer />
@@ -86,6 +105,9 @@ export class MapComponent extends React.PureComponent<TMapProps, TMapState> {
           </MapContext.Provider>
         )}
       </div>
+        </IonContent>
+      </IonSplitPane>
+    </IonPage>
     );
   }
 }

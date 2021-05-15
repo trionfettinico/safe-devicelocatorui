@@ -10,7 +10,6 @@ import {
 } from '@ionic/react';
 import './Home.css';
 import { Map } from "../components/map";
-import sensors from '../data/sensors.json';
 import { Plugins } from '@capacitor/core';
 import SensorItem from '../components/sensoritem/SensorItem';
 import { locationOutline } from 'ionicons/icons';
@@ -30,18 +29,7 @@ const Home: React.FC = () => {
   console.log(locationOutline);
 
   return (
-    <IonPage id="home-page">
-      <IonSplitPane contentId="map" when="xs">
-        <IonMenu contentId="map" id="device-menu">
-          <IonList>
-            {sensors.map(e => <SensorItem key={e.id} sensor={e} />)}
-          </IonList>
-        </IonMenu>
-        <IonContent id="map">
-          <Map />
-        </IonContent>
-      </IonSplitPane>
-    </IonPage>
+   <Map></Map>
   );
 };
 
