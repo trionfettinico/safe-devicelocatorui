@@ -1,13 +1,13 @@
 # Fdb version 3
-["biber safe-devicelocatorui"] 1621007333 "safe-devicelocatorui.bcf" "safe-devicelocatorui.bbl" "safe-devicelocatorui" 1621007546
-  "safe-devicelocatorui.bcf" 1621007546 107571 dab83a5c24f126cda226fd374d8b5f43 "pdflatex"
-  "safe-devicelocatorui.bib" 1621006339 2271 ac64c5f951dc42ec4277bb3d9ceb6ef2 ""
+["biber safe-devicelocatorui"] 1621181760 "safe-devicelocatorui.bcf" "safe-devicelocatorui.bbl" "safe-devicelocatorui" 1621181772
+  "safe-devicelocatorui.bcf" 1621181772 107741 f6304b520487853908512969074e1f45 "pdflatex"
+  "safe-devicelocatorui.bib" 1621180993 2905 8abf15d66f1b9affd78b6751a616b09e ""
   (generated)
   "safe-devicelocatorui.blg"
   "safe-devicelocatorui.bbl"
-["pdflatex"] 1621007542 "/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/documentation/latex/safe-devicelocatorui.tex" "/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/documentation/latex/safe-devicelocatorui.pdf" "safe-devicelocatorui" 1621007546
-  "/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/documentation/latex/safe-devicelocatorui.aux" 1621007545 6305 8f8db24c7fc4b14b4639046ed86ba6a9 ""
-  "/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/documentation/latex/safe-devicelocatorui.tex" 1621007542 14133 fe9b8b18cef279c07a1a64b6aa6e9884 ""
+["pdflatex"] 1621181768 "/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/documentation/latex/safe-devicelocatorui.tex" "/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/documentation/latex/safe-devicelocatorui.pdf" "safe-devicelocatorui" 1621181772
+  "/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/documentation/latex/safe-devicelocatorui.aux" 1621181772 6723 9151bc7a4afae0543e9964eebbe7a531 ""
+  "/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/documentation/latex/safe-devicelocatorui.tex" 1621181755 17120 ae7e714bef79c367fa770293991ec8d5 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -188,17 +188,17 @@
   "figure/ionicreact_3iterazione_menu1.png" 1621007458 787391 1b7cf241d77d87ffbffc9d98633fd065 ""
   "figure/ionicreact_3iterazione_menu2.png" 1621007451 1049608 a4eb3405a4cabb3a23b2914bf6685603 ""
   "figure/marker_flutter.png" 1620990847 677855 58da7c39197a8d80908ee088c9dbffe6 ""
-  "safe-devicelocatorui.aux" 1621007545 6305 8f8db24c7fc4b14b4639046ed86ba6a9 "pdflatex"
-  "safe-devicelocatorui.bbl" 1621007334 16346 6d5399ba3fd646845d080bb144470405 "biber safe-devicelocatorui"
-  "safe-devicelocatorui.run.xml" 1621007546 2427 faec8ca34376dd942cbfae1bd1e7303b "pdflatex"
-  "safe-devicelocatorui.tex" 1621007542 14133 fe9b8b18cef279c07a1a64b6aa6e9884 ""
-  "safe-devicelocatorui.toc" 1621007546 1334 3a22fed56f76e413ae34937920085f43 "pdflatex"
+  "safe-devicelocatorui.aux" 1621181772 6723 9151bc7a4afae0543e9964eebbe7a531 "pdflatex"
+  "safe-devicelocatorui.bbl" 1621181761 19655 bd1cadcf7c0ea8e2a7c4db3c28bd013d "biber safe-devicelocatorui"
+  "safe-devicelocatorui.run.xml" 1621181772 2427 faec8ca34376dd942cbfae1bd1e7303b "pdflatex"
+  "safe-devicelocatorui.tex" 1621181755 17120 ae7e714bef79c367fa770293991ec8d5 ""
+  "safe-devicelocatorui.toc" 1621181772 1334 072061dc27f5106de7d48eb3f52660f9 "pdflatex"
   (generated)
   "/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/documentation/latex/safe-devicelocatorui.pdf"
-  "/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/documentation/latex/safe-devicelocatorui.log"
-  "safe-devicelocatorui.aux"
-  "safe-devicelocatorui.toc"
-  "safe-devicelocatorui.log"
-  "safe-devicelocatorui.pdf"
   "safe-devicelocatorui.run.xml"
+  "safe-devicelocatorui.log"
+  "/Users/lorenzotanganelli/Documents/Development/safe-devicelocatorui/documentation/latex/safe-devicelocatorui.log"
+  "safe-devicelocatorui.toc"
+  "safe-devicelocatorui.pdf"
+  "safe-devicelocatorui.aux"
   "safe-devicelocatorui.bcf"

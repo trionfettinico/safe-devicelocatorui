@@ -73,14 +73,14 @@ Trovandosi in uno stato d'emergenza, l'applicazione punta ad avere un interfacci
 
 Durante l'attività di analisi sono emersi i seguenti requisiti:
 \begin{itemize}
-    \item Visualizzazione di mappe.
-    \item Rendering di dati vettoriali come heatmap.
-    \item Rendering di marker sulla base delle posizioni dei sensori.
-    \item Rendering di dati vettoriali come centroidi.
-    \item Geolocalizzazione del dispositivo.
-    \item Visualizzazione delle informazioni inviate dai sensori.
-    \item Mantenimento dello stato nel caso in cui venga terminata l'applicazione.
-    \item Funzionamento senza comunicazione internet.
+    \item \textbf{Visualizzazione di una mappa}\newline Il soccorritore necessitta di una mappa sempre visibile del luogo in quanto potrebbe non conoscere la zona da soccorrere.
+    \item \textbf{Rendering di dati vettoriali come heatmap}\newline La posizione del sensore individuata nella fase d'analisi dati potrebbe non essere corretta, quindi si prevede la possibilita di far visualizzare la heatmap degli RSSI all'operatore così da poter fare ulteriori supposizioni in base alle condizioni delle macerie e velocizzare il recupero del disperso.
+    \item \textbf{Rendering di marker sulla base delle posizioni dei sensori}\newline Si necessita l'utilizzo di marker per visualizzare probabile la posizione del sensore.
+    \item \textbf{Rendering di dati vettoriali come centroidi}\newline Si prevede la possibilità  di visualizzare poligoni con i marker come centroidi così da delimitare l'aria di ricerca.
+    \item \textbf{Geolocalizzazione del dispositivo}\newline Le macerie degli edifici potrebbero aver ricoperto le strade e individuare la posizione GPS del dispositivo sopra la mappa può essere di supporto all'operatore per orientarsi.
+    \item \textbf{Visualizzazione delle informazioni inviate dai sensori}\newline Conoscere lo stato di salute dei dispersi è fondamentale per i soccorittori, così da poter decidere a chi dare la precedenza durante il salvataggio.
+    \item \textbf{Mantenimento dello stato nel caso in cui venga terminata l'applicazione}\newline Si prevede che l'applicativo mantenga il suo stato in caso di chiusura e successivo riavvio. Per esempio, se il dispositivo si dovesse scaricare, al riavvio l'applicazione dovrà trovarsi allo stato precedente lo spegnimento, così da minimizzare i tempi di attesa.
+    \item \textbf{Funzionamento senza comunicazione internet}\newline Il terremoto potrebbe causare l'interruzione delle comunicazioni, per questo motivo si prevede che l'applicazioni non necessiti di internet per funzionare.
     \end{itemize} 
 In questa iterazione abbiamo scelto di sviluppare questi requisiti:
 \begin{itemize}
@@ -93,24 +93,25 @@ In questa iterazione abbiamo scelto di sviluppare questi requisiti:
 
 \addcontentsline{toc}{subsubsection}{Progettazione e Implementazione}
 \subsubsection*{{Progettazione e Implementazione}}
-Terminata la prima attività di progettazione si é scelto di utilizzare il framework \citetitle{Flutter}\cite{Flutter} basato su \citetitle{Dart}\cite{Dart} per lo sviluppo del frontend, così da creare un applicazione nativa compilata sia per mobile che per desktop. 
+Terminata la prima attività di progettazione si é scelto di utilizzare il framework \citetitle{Flutter}\cite{Flutter} basato su \citetitle{Dart}\cite{Dart} per lo sviluppo del frontend, così da creare un applicazione nativa compilata sia per mobile che per desktop. Flutter utilizza i widget come elemento principale che consentono di risparmiare tempo nello sviluppo di elementi dell'interfaccia utente di base per ogni schermo e risoluzione. Flutter ha il proprio toolkit widget, ma tutti i componenti vengono renderizzati in modo nativo. Ciò conferisce alle app un aspetto nativo e migliora le prestazioni. Flutter è fondamentalmente un wrapper attorno a un'app che utilizza uno speciale metodo di comunicazione chiamato Platform Channels per connettere i dati alle lingue native. È facile da usare e consente agli sviluppatori di accedere all'hardware in quando dispone di librerie che consentono di collegarsi al chip GPS, fotocamera e microfono\cite*{FlutterMedium}.
 
-In particolare, abbiamo deciso di sfruttare l'implementazione Dart di Leaflet per Flutter denominata \citetitle{FlutterMap}\cite{FlutterMap}; Leaflet è la principale libreria JavaScript open source per mappe interattive ottimizzate per dispositivi mobili. Il pacchetto Flutter\_Map rende disponibili una serie di implementazioni della classe \textit{LayerOptions}, come per esempio \textit{CircleLayerOptions, MarkerLayerOptions, PolygonLayerOptions} e \textit{TileLayerOptions}, i quali permettono di fare il rendering della mappa e di aggiungerci informazioni. 
-
+Per visualizzare la mappa abbiamo deciso di appoggiarci all'implementazione Dart di Leaflet per Flutter denominata \citetitle{FlutterMap}\cite{FlutterMap}; Leaflet è la principale libreria JavaScript open source per mappe interattive ottimizzate per dispositivi mobili. Il pacchetto Flutter\_Map rende disponibili una serie di implementazioni della classe \textit{LayerOptions}, come per esempio \textit{CircleLayerOptions, MarkerLayerOptions, PolygonLayerOptions} e \textit{TileLayerOptions}, i quali permettono di fare il rendering della mappa e di aggiungerci informazioni. 
 Purtoppo Flutter\_Map non dispone di un implementazione di LayerOptions per fare il rendering di una heatmap da aggiungere come layer alla mappa. Per questo motivo è stato deciso di adattare la classe CircleLayerOptions così da creare manualmente l'heatmap.
 
 Invece, per lo state management, si è scelto di utilizzare il pacchetto \citetitle*{Provider}\cite{Provider} così da condividere i dati più facilmente nel widget tree. 
  
-Per la generazione di mappe offline si è scelto di creare un eseguibile in \citetitle{Rust}\cite{Rust} che, prese delle coordinate geografiche, scarica delle immagini organizzate in cartelle:
+Per la generazione di mappe da utilizzare offline si è scelto di creare un eseguibile in \citetitle{Rust}\cite{Rust}. Rust è un linguaggio di programmazione multi-paradigma incentrato sulla sicurezza e sulle prestazioni, velocità ed efficienza. Rust risolve i problemi associati a C / C ++ come la garbage collection e la sicurezza\cite*{RustArticle}.
+
+
+L'eseguibile in questione prende delle coordinaete geografiche in input, scarica i tiles in formato \textit{.png} e li organizza in cartelle nella seguente maniera:
 \begin{center}
     {\setnewpathsep{/} \directory{./tiles/\{z\}/\{x\}/\{y\}/*.png}}
 \end{center}
 dove \{z\} indica lo zoom dell'immagine, mentre \{x\} e \{y\} indicano rispettivamente latitudine e longitudine.
-Per generare le mappe da rendere disponibili offline ci appoggiamo a \citetitle{Thunderforest}\cite{Thunderforest}: un fornitore di tiles renderizzati dai dati di \citetitle{OpenStreetMap}\cite{OpenStreetMap}.
 Una volta terminato il processo di download la directory generata viene compressa nel file \textit{tiles.zip}
 Si è deciso di scaricare le immagini da zoom 15 (scala 1:15 mila) a zoom 22 (scala 1:125) in un raggio di 5km dal punto centrale. Questa scelta è motivata dal fatto che vogliamo dare una visione generale di un quartiere o di un paese fino ad arrivare ad avere una visione dettagliata di singoli edifici.
-
 %TODO Inserire informazioni riguardati i tiles!! formule utilizzate e aspetti tecnici + citazioni
+Per scaricare la mappa da rendere disponibili offline ci appoggiamo a \citetitle{Thunderforest}\cite{Thunderforest}: un fornitore di tiles renderizzati dai dati di \citetitle{OpenStreetMap}\cite{OpenStreetMap}.
 
 \addcontentsline{toc}{subsubsection}{Validazione e rilascio}
 \subsubsection*{{Validazione e rilascio}}
@@ -140,7 +141,9 @@ Visti i feedback della precedente iterazione abbiamo deciso di mantenere i medes
 
 \addcontentsline{toc}{subsubsection}{Progettazione e Implementazione}
 \subsubsection*{{Progettazione e Implementazione}}
-In questa iterazione si è scelto di utilizzare il framework \citetitle*{IonicReact}\cite*{IonicReact}: versione \citetitle*{React}\cite*{React} di \citetitle*{Ionic}\cite*{Ionic}, per sviluppare il frontend. Abbiamo scelto Ionic React così da creare app per dispositivi mobili e desktop utilizzando \citetitle*{Capacitor}\cite*{Capacitor} e \citetitle*{Electron}\cite*{Electron}.
+In questa iterazione si è scelto di utilizzare il framework \citetitle*{IonicReact}\cite*{IonicReact}: versione \citetitle*{React}\cite*{React} di \citetitle*{Ionic}\cite*{Ionic}, per sviluppare il frontend. Abbiamo scelto Ionic React così da creare app per dispositivi mobili e desktop utilizzando \citetitle*{Capacitor}\cite*{Capacitor} e \citetitle*{Electron}\cite*{Electron}. 
+
+Ionic è un framework di riferimento per lo sviluppo industriale. Le applicazioni aziendali sono, per loro natura, semplici e raramente funzionano con milioni di utenti: devono solo essere affidabili e intuitive. Ionic, quindi, risulta essere un framework affidabile che consente di ridurre i costi e la durata dello sviluppo pur offrendo un'esperienza utente eccellente e prestazioni stabili. \cite*{IonicReactArticle}
 
 Ionic React utilizza standard web ed è compatibile con librerie web come \citetitle*{OpenLayers}\cite*{OpenLayers}: libreria che permette di visualizzare tiles, marker e dati vettoriali come heatmap e centroidi. 
 

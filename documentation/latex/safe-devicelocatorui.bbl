@@ -131,6 +131,30 @@
       \verb https://dart.dev/
       \endverb
     \endentry
+    \entry{FlutterMedium}{online}{}
+      \name{author}{1}{}{%
+        {{hash=309646e0b9797e193adcd6af678d4c14}{%
+           family={Mobindustry},
+           familyi={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{309646e0b9797e193adcd6af678d4c14}
+      \strng{fullhash}{309646e0b9797e193adcd6af678d4c14}
+      \strng{bibnamehash}{309646e0b9797e193adcd6af678d4c14}
+      \strng{authorbibnamehash}{309646e0b9797e193adcd6af678d4c14}
+      \strng{authornamehash}{309646e0b9797e193adcd6af678d4c14}
+      \strng{authorfullhash}{309646e0b9797e193adcd6af678d4c14}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Top 7 Reasons to Choose Flutter for Your Cross-platform App Development Project}
+      \verb{urlraw}
+      \verb https://medium.com/mobindustry/top-7-reasons-to-choose-flutter-for-your-cross-platform-app-development-project-62cf35133d37
+      \endverb
+      \verb{url}
+      \verb https://medium.com/mobindustry/top-7-reasons-to-choose-flutter-for-your-cross-platform-app-development-project-62cf35133d37
+      \endverb
+    \endentry
     \entry{FlutterMap}{online}{}
       \name{author}{1}{}{%
         {{hash=83f5ea18f4ea7a2767b9a47da000a147}{%
@@ -145,8 +169,8 @@
       \strng{authorbibnamehash}{83f5ea18f4ea7a2767b9a47da000a147}
       \strng{authornamehash}{83f5ea18f4ea7a2767b9a47da000a147}
       \strng{authorfullhash}{83f5ea18f4ea7a2767b9a47da000a147}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Flutter\_Map}
@@ -205,6 +229,32 @@
       \endverb
       \verb{url}
       \verb https://www.rust-lang.org/
+      \endverb
+    \endentry
+    \entry{RustArticle}{online}{}
+      \name{author}{1}{}{%
+        {{hash=03e93719675ed3fb7ba6b25c3b9962fe}{%
+           family={Ikechi},
+           familyi={I\bibinitperiod},
+           given={Fortune},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{03e93719675ed3fb7ba6b25c3b9962fe}
+      \strng{fullhash}{03e93719675ed3fb7ba6b25c3b9962fe}
+      \strng{bibnamehash}{03e93719675ed3fb7ba6b25c3b9962fe}
+      \strng{authorbibnamehash}{03e93719675ed3fb7ba6b25c3b9962fe}
+      \strng{authornamehash}{03e93719675ed3fb7ba6b25c3b9962fe}
+      \strng{authorfullhash}{03e93719675ed3fb7ba6b25c3b9962fe}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Why is Rust so popular?}
+      \verb{urlraw}
+      \verb https://blog.logrocket.com/why-is-rust-popular/
+      \endverb
+      \verb{url}
+      \verb https://blog.logrocket.com/why-is-rust-popular/
       \endverb
     \endentry
     \entry{Thunderforest}{online}{}
@@ -272,8 +322,8 @@
       \strng{authornamehash}{3b5c646991030888d827d08eaf69eeda}
       \strng{authorfullhash}{3b5c646991030888d827d08eaf69eeda}
       \field{extraname}{1}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{Ionic React}
@@ -386,6 +436,32 @@
       \verb https://www.electronjs.org
       \endverb
     \endentry
+    \entry{IonicReactArticle}{online}{}
+      \name{author}{1}{}{%
+        {{hash=5e1025e4ad8d6938d3ecadaeaf79f22a}{%
+           family={Kirill\bibnamedelima Yusov},
+           familyi={K\bibinitperiod\bibinitdelim Y\bibinitperiod},
+           given={CPO},
+           giveni={C\bibinitperiod}}}%
+      }
+      \strng{namehash}{5e1025e4ad8d6938d3ecadaeaf79f22a}
+      \strng{fullhash}{5e1025e4ad8d6938d3ecadaeaf79f22a}
+      \strng{bibnamehash}{5e1025e4ad8d6938d3ecadaeaf79f22a}
+      \strng{authorbibnamehash}{5e1025e4ad8d6938d3ecadaeaf79f22a}
+      \strng{authornamehash}{5e1025e4ad8d6938d3ecadaeaf79f22a}
+      \strng{authorfullhash}{5e1025e4ad8d6938d3ecadaeaf79f22a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Ionic vs React Native: How to Make The Right Choice}
+      \verb{urlraw}
+      \verb https://jelvix.com/blog/ionic-vs-react-native
+      \endverb
+      \verb{url}
+      \verb https://jelvix.com/blog/ionic-vs-react-native
+      \endverb
+    \endentry
     \entry{OpenLayers}{online}{}
       \name{author}{1}{}{%
         {{hash=e386d9b712ae530fffb142cf31f91208}{%
@@ -398,8 +474,8 @@
       \strng{authorbibnamehash}{e386d9b712ae530fffb142cf31f91208}
       \strng{authornamehash}{e386d9b712ae530fffb142cf31f91208}
       \strng{authorfullhash}{e386d9b712ae530fffb142cf31f91208}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{title}{OpenLayers}

@@ -10,20 +10,20 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Requisiti}{3}{}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Progettazione e Implementazione}{3}{}%
+\contentsline {subsubsection}{Progettazione e Implementazione}{4}{}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Validazione e rilascio}{4}{}%
+\contentsline {subsubsection}{Validazione e rilascio}{5}{}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{Seconda iterazione}{5}{}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Progettazione e Implementazione}{5}{}%
+\contentsline {subsubsection}{Progettazione e Implementazione}{6}{}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Validazione e rilascio}{6}{}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Terza iterazione}{6}{}%
+\contentsline {subsection}{Terza iterazione}{8}{}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Requisiti}{7}{}%
+\contentsline {subsubsection}{Requisiti}{8}{}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Progettazione e Implementazione}{7}{}%
+\contentsline {subsubsection}{Progettazione e Implementazione}{8}{}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Riferimenti bibliografici}{7}{}%
+\contentsline {section}{Riferimenti bibliografici}{8}{}%
