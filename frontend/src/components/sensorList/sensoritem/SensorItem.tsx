@@ -1,43 +1,38 @@
-import { IonFab, IonIcon, IonItem, IonLabel, IonNote } from "@ionic/react";
+import { IonFab, IonIcon, IonItem, IonLabel } from "@ionic/react";
 import "./MessageListItem.css";
-import { Sensor } from "../../data/sensors";
-import React, { Context, useContext, useState } from "react";
-import { arrowDownSharp, information, searchCircle } from "ionicons/icons";
-import { MapContext } from "../map/map";
-import { fromLonLat } from "ol/proj";
-import { IMapContext, TMapProps } from "../map/map-types";
+import { Sensor } from "../../../data/sensors";
+import React, { useContext, useState } from "react";
+import { arrowDownSharp, arrowUpSharp, information, searchCircle } from "ionicons/icons";
+import { MapContext } from "../../../provider/MapProvider";
+import { ContextType } from "../../../provider/type";
 
 interface SensorListItemProps {
   sensor: Sensor;
-  context:IMapContext|undefined;
 }
 
-const SensorItem: React.FC<SensorListItemProps> = ({ sensor , context }) => {
+const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
   
   const [showMenu, setShowMenu] = useState<boolean>(false);
-
-
-  function changePosition(sensor:Sensor){
-    context?.map.getView().setCenter(fromLonLat([sensor.lng,sensor.lat]));
-  }
+  const {setCenter} = useContext(MapContext) as ContextType;
 
   return (
-    <IonItem detail={false} className="sensor-item">
+    <IonItem detail={false}>
       <div
         slot="start"
         className={sensor.status ? "dot dot-read" : "dot dot-unread"}
       ></div>
       <IonLabel className="ion-text-wrap">
-        <h2 onClick={() => setShowMenu(!showMenu)}>
+        <h2 onClick={() => setShowMenu(!showMenu)} className="clickable">
           {sensor.name}
           <span className="date">
             <IonFab vertical="top" horizontal="end" slot="fixed">
               <IonIcon icon={information} />
-              <IonIcon icon={arrowDownSharp} />
+              {showMenu ? (<IonIcon icon={arrowUpSharp} />):
+              (<IonIcon icon={arrowDownSharp} />)}
             </IonFab>
           </span>
         </h2>
-        {showMenu ? (
+      {showMenu ? (
           <div>
             <h6>
               <br />
@@ -45,7 +40,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor , context }) => {
               Qui ci vanno un pò di stronzate da mostrare <br />
               <br />
             </h6>
-            <IonFab onClick={()=> changePosition(sensor)} vertical="bottom" horizontal="end" slot="fixed" id={'sensor_'+sensor.id}>
+            <IonFab onClick={()=>setCenter({lat: sensor.lat, lon: sensor.lng})} vertical="bottom" horizontal="end" slot="fixed" id={'sensor_'+sensor.id}  className="clickable">
               <span className="date">Find</span>
               <IonIcon icon={searchCircle} />
             </IonFab>
