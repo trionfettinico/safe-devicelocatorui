@@ -1,19 +1,19 @@
 import React from 'react';
 import {
   IonContent,
-  IonList,
   IonMenu,
   IonPage,
   IonSplitPane,
   useIonRouter,
-  useIonViewDidEnter,
 } from '@ionic/react';
 import './Home.css';
 import { Map } from "../components/map";
-import sensors from '../data/sensors.json';
 import { Plugins } from '@capacitor/core';
-import SensorItem from '../components/sensoritem/SensorItem';
-import { locationOutline } from 'ionicons/icons';
+import SensorList from '../components/sensorList/sensorList';
+import Popover from '../components/mapControls/Popover';
+import { LocationFab } from '../components/mapControls/locationButton';
+import sensors from '../data/sensors.json';
+
 const { App } = Plugins;
 
 const Home: React.FC = () => {
@@ -27,18 +27,16 @@ const Home: React.FC = () => {
     });
   });
 
-  console.log(locationOutline);
-
   return (
     <IonPage id="home-page">
       <IonSplitPane contentId="map" when="xs">
         <IonMenu contentId="map" id="device-menu">
-          <IonList>
-            {sensors.map(e => <SensorItem key={e.id} sensor={e} />)}
-          </IonList>
+          <SensorList sensors={sensors} />
         </IonMenu>
         <IonContent id="map">
           <Map />
+          <Popover />
+          <LocationFab />
         </IonContent>
       </IonSplitPane>
     </IonPage>
