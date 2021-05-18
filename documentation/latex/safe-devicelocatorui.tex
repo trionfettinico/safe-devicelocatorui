@@ -9,6 +9,7 @@
 \usepackage{menukeys}
 \begin{document}
 
+%TODO -> aggiungere su prima iterazione riferimento a GeoJson per Heatmap e KML per la seconda iterazione , 
 
 \makeatletter
 
@@ -110,7 +111,7 @@ L'eseguibile in questione prende delle coordinaete geografiche in input, scarica
 dove \{z\} indica lo zoom dell'immagine, mentre \{x\} e \{y\} indicano rispettivamente latitudine e longitudine.
 Una volta terminato il processo di download la directory generata viene compressa nel file \textit{tiles.zip}
 Si è deciso di scaricare le immagini da zoom 15 (scala 1:15 mila) a zoom 22 (scala 1:125) in un raggio di 5km dal punto centrale. Questa scelta è motivata dal fatto che vogliamo dare una visione generale di un quartiere o di un paese fino ad arrivare ad avere una visione dettagliata di singoli edifici.
-%TODO Inserire informazioni riguardati i tiles!! formule utilizzate e aspetti tecnici + citazioni
+%TODO Inserire informazioni riguardati i tiles!! formule utilizzate e aspetti tecnici + citazioni https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
 Per scaricare la mappa da rendere disponibili offline ci appoggiamo a \citetitle{Thunderforest}\cite{Thunderforest}: un fornitore di tiles renderizzati dai dati di \citetitle{OpenStreetMap}\cite{OpenStreetMap}.
 
 \addcontentsline{toc}{subsubsection}{Validazione e rilascio}
