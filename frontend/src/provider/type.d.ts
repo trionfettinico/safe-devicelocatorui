@@ -10,9 +10,13 @@ type ContextType = {
     heatmapVisible: boolean;
     markerVisible: boolean;
     locationVisible: boolean;
+    blur:number;
+    radius:number;
     toggleHeatmap: () => void;
     toggleMarker: () => void;
     toggleLocation: () => void;
     setCenter: (LocationType) => void;
     setGeolocation: (LocationType) => void;
+    setBlur: (number) => void;
+    setRadius:(number) => void;
 };

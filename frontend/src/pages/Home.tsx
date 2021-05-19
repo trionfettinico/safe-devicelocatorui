@@ -1,8 +1,12 @@
 import React from 'react';
 import {
+  IonButton,
   IonContent,
+  IonItem,
   IonMenu,
   IonPage,
+  IonRange,
+  IonRow,
   IonSplitPane,
   useIonRouter,
 } from '@ionic/react';
@@ -32,6 +36,7 @@ const Home: React.FC = () => {
       <IonSplitPane contentId="map" when="xs">
         <IonMenu contentId="map" id="device-menu">
           <SensorList sensors={sensors} />
+          <IonButton>SYNC</IonButton>
         </IonMenu>
         <IonContent id="map">
           <Map />
