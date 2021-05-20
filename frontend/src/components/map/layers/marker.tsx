@@ -14,7 +14,6 @@ import { ContextType } from "../../../provider/type";
 
 export const MarkerLayer: React.FC<MapLayerProps> = ({ map }) => {
   const { markerVisible } = useContext(MapContext) as ContextType;
-  const marker = map.getLayers().getArray().filter((layer) => layer.getClassName() == "marker");
   const [iconStyle] = useState<Style>(
     new Style({
       image: new Icon({
@@ -40,8 +39,11 @@ export const MarkerLayer: React.FC<MapLayerProps> = ({ map }) => {
       style:iconStyle
     })
   );
+
   useEffect(() => {
     map.addLayer(vectorLayer);
   }, []);
+
+  vectorLayer.setVisible(markerVisible);
   return null;
 }

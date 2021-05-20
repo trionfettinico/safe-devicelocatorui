@@ -13,7 +13,11 @@ interface SensorListItemProps {
 const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
   
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const {setCenter} = useContext(MapContext) as ContextType;
+  const {goToLocation, setFollowUser} = useContext(MapContext) as ContextType;
+
+  function onClick(){
+    
+  }
 
   return (
     <IonItem detail={false}>
@@ -40,7 +44,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
               Qui ci vanno un pò di stronzate da mostrare <br />
               <br />
             </h6>
-            <IonFab onClick={()=>setCenter({lat: sensor.lat, lon: sensor.lng})} vertical="bottom" horizontal="end" slot="fixed" id={'sensor_'+sensor.id}  className="clickable">
+            <IonFab onClick={()=>goToLocation({lat: sensor.lat, lon: sensor.lng})} vertical="bottom" horizontal="end" slot="fixed" id={'sensor_'+sensor.id}  className="clickable">
               <span className="date">Find</span>
               <IonIcon icon={searchCircle} />
             </IonFab>

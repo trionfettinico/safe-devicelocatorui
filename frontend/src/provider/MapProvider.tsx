@@ -1,7 +1,16 @@
+import { Motion, Geolocation } from "@capacitor/core";
 import React from "react";
 import { LocationType, ContextType } from "./type";
+import { toRadians } from 'ol/math';
 
 export const MapContext = React.createContext<ContextType | null>(null);
+
+class MapCenterListener {
+    notify: (center:LocationType)=>void;
+    constructor(fun: (center:LocationType)=>void){
+        this.notify=fun;
+    }
+}
 
 const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [heatmapVisible, setHeatmapVisible] = React.useState<boolean>(true);
@@ -9,8 +18,10 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [radius,setRadius] = React.useState<number>(8);
     const [markerVisible, setMarkerVisible] = React.useState<boolean>(true);
     const [locationVisible, setLocationVisible] = React.useState<boolean>(true);
-    const [center, setCenterState] = React.useState<LocationType>({ lat: 0, lon: 0 });
     const [geolocation, setGeolocationState] = React.useState<LocationType>({ lat: 0, lon: 0 });
+    const [orientation, setOrientationState] = React.useState<number>(0);
+    const [followUser, setFollowUser] = React.useState<boolean>(true);
+    const [centerChangeListeners] = React.useState<Array<MapCenterListener>>(new Array());
 
     const toggleHeatmap = () => {
         setHeatmapVisible(!heatmapVisible);
@@ -24,16 +35,55 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
         setLocationVisible(!locationVisible);
     }
 
-    const setCenter = (newCenter: LocationType) => {
-        setCenterState(newCenter);
-    }
-
-    const setGeolocation = (newGeolocation: LocationType)=>{
+    const setGeolocation = (newGeolocation: LocationType) => {
         setGeolocationState(newGeolocation);
     }
 
+    const setOrientation = (newOrientation: number) => {
+        setOrientationState(newOrientation);
+    }
+
+    const startLocationListeners = () => {
+        Geolocation.watchPosition({ enableHighAccuracy: true }, (position) => {
+            setGeolocation({ lat: position.coords.latitude, lon: position.coords.longitude });
+        });
+
+        Motion.addListener('orientation', (values) => {
+            setOrientation(toRadians(values.alpha));
+        });
+    }
+
+    const addMapListener = (fun: (center:LocationType)=>void)=>{
+        centerChangeListeners.push(new MapCenterListener(fun));
+    }
+
+    const goToLocation = (location: LocationType)=>{
+        setFollowUser(false);
+        centerChangeListeners.forEach((it)=>it.notify(location));
+    }
+
     return (
-        <MapContext.Provider value={{ heatmapVisible, markerVisible, locationVisible,blur,radius, center, geolocation, setGeolocation, toggleHeatmap, toggleMarker, toggleLocation, setCenter,setBlur,setRadius }}>
+        <MapContext.Provider value={{
+            heatmapVisible,
+            markerVisible,
+            locationVisible,
+            geolocation,
+            orientation,
+            followUser,
+            setFollowUser,
+            setOrientation,
+            setGeolocation,
+            toggleHeatmap,
+            toggleMarker,
+            toggleLocation,
+            startLocationListeners,
+            addMapListener,
+            goToLocation,
+            blur,
+            setBlur,
+            radius,
+            setRadius
+        }}>
             {children}
         </MapContext.Provider>
     );

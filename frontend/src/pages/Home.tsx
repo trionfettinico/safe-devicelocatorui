@@ -12,7 +12,7 @@ import {
 } from '@ionic/react';
 import './Home.css';
 import { Map } from "../components/map";
-import { Plugins } from '@capacitor/core';
+import { Motion, Plugins } from '@capacitor/core';
 import SensorList from '../components/sensorList/sensorList';
 import Popover from '../components/mapControls/Popover';
 import { LocationFab } from '../components/mapControls/locationButton';
