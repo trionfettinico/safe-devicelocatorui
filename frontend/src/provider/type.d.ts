@@ -1,4 +1,6 @@
 import { PluginListenerHandle } from '@capacitor/core';
+import Geometry from 'ol/geom/Geometry';
+import VectorSource from 'ol/source/Vector';
 import { ContextType } from 'react';
 type LocationType = {
     lat: number;
@@ -25,4 +27,6 @@ type ContextType = {
     goToLocation: (location:LocationType) => void;
     setBlur: (number) => void;
     setRadius:(number) => void;
+    sensors: VectorSource<Geometry>;
+    setSensors: (VectorSource) => void;
 };

@@ -25,7 +25,7 @@ export const MapComponent: React.FC = () => {
       center: fromLonLat([0,0]),
       zoom: 15,
       maxZoom: 22,
-      minZoom: 15
+      minZoom: 2
     })
   }));
 

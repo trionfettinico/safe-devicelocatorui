@@ -1,16 +1,14 @@
 import { IonList } from '@ionic/react';
 import React from 'react';
-import { Sensor } from '../../data/sensors';
+import { MapContext } from '../../provider/MapProvider';
+import { ContextType } from '../../provider/type';
 import SensorItem from './sensoritem/SensorItem';
 
-interface SensorListProps {
-    sensors: Array<Sensor>;
-}
-
-const SensorList: React.FC<SensorListProps> = ({ sensors }) => {
+const SensorList: React.FC = () => {
+    const {sensors} = React.useContext(MapContext) as ContextType;
     return (
         <IonList>
-            {sensors.map(e => <SensorItem key={e.id} sensor={e} />)}
+            {sensors.getFeatures().map(e => <SensorItem key={e.getId()} sensor={e} />)}
         </IonList>
     );
 };
