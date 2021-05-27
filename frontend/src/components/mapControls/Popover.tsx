@@ -49,13 +49,13 @@ const Popover: React.FC = () => {
           <IonLabel>
             Radius
           </IonLabel>
-          <IonRange min={1} max={50} step={1} value={radius} onIonChange={(e) => { setRadius(e.detail.value as number) }} />
+          <IonRange min={5} max={20} step={1} value={radius} onIonChange={(e) => { setRadius(e.detail.value as number) }} />
         </IonItem>
         <IonItem>
           <IonLabel>
             Blur
           </IonLabel>
-          <IonRange min={1} max={50} step={1} value={blur} onIonChange={(e) => { setBlur(e.detail.value as number) }} />
+          <IonRange min={5} max={30} step={1} value={blur} onIonChange={(e) => { setBlur(e.detail.value as number) }} />
         </IonItem>
       </IonPopover>
       <IonFab vertical="top" horizontal="end" slot="fixed">

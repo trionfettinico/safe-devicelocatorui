@@ -1,9 +1,9 @@
 import { Motion, Geolocation } from "@capacitor/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { LocationType, ContextType } from "./type";
 import { toRadians } from 'ol/math';
-import KML from "ol/format/KML";
 import VectorSource from "ol/source/Vector";
+import StorageService from "../services/storage";
 
 export const MapContext = React.createContext<ContextType | null>(null);
 
@@ -16,34 +16,51 @@ class MapCenterListener {
 
 const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [heatmapVisible, setHeatmapVisible] = React.useState<boolean>(true);
-    const [blur, setBlur] = React.useState<number>(20);
-    const [radius, setRadius] = React.useState<number>(8);
+    const [blur, setBlurState] = React.useState<number>(20);
+    const [radius, setRadiusState] = React.useState<number>(8);
     const [markerVisible, setMarkerVisible] = React.useState<boolean>(true);
     const [locationVisible, setLocationVisible] = React.useState<boolean>(true);
-    const [geolocation, setGeolocationState] = React.useState<LocationType>({ lat: 0, lon: 0 });
-    const [orientation, setOrientationState] = React.useState<number>(0);
+    const [geolocation, setGeolocation] = React.useState<LocationType>({ lat: 0, lon: 0 });
+    const [orientation, setOrientation] = React.useState<number>(0);
     const [followUser, setFollowUser] = React.useState<boolean>(true);
     const [centerChangeListeners] = React.useState<Array<MapCenterListener>>(new Array());
-    const [sensors, setSensors] = React.useState(new VectorSource());
+    const [sensors, setSensorsLocal] = React.useState(new VectorSource());
+    const [storageService] = React.useState(new StorageService());
+
+    async function loadData(){
+        setHeatmapVisible(await storageService.getHeatmapVisible());
+        setLocationVisible(await storageService.getLocationVisible());
+        setBlur(await storageService.getBlur());
+        setRadius(await storageService.getRadius());
+    }
+
+    useEffect(()=>{
+        loadData();
+    }, []);
 
     const toggleHeatmap = () => {
         setHeatmapVisible(!heatmapVisible);
+        storageService.saveHeatmapVisible(!heatmapVisible);
     };
 
     const toggleMarker = () => {
         setMarkerVisible(!markerVisible);
+        storageService.saveMarkerVisible(!markerVisible);
     }
 
     const toggleLocation = () => {
         setLocationVisible(!locationVisible);
+        storageService.saveLocationVisible(!locationVisible);
     }
 
-    const setGeolocation = (newGeolocation: LocationType) => {
-        setGeolocationState(newGeolocation);
+    const setBlur = (value: number)=>{
+        setBlurState(value);
+        storageService.saveBlur(value);
     }
 
-    const setOrientation = (newOrientation: number) => {
-        setOrientationState(newOrientation);
+    const setRadius = (value: number)=>{
+        setRadiusState(value);
+        storageService.saveRadius(value);
     }
 
     const startLocationListeners = () => {
@@ -63,7 +80,13 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
 
     const goToLocation = (location: LocationType) => {
         setFollowUser(false);
+        setMarkerVisible(true);
         centerChangeListeners.forEach((it) => it.notify(location));
+    }
+
+    const setSensors = async (vector: VectorSource) => {
+        setSensorsLocal(vector);
+        setMarkerVisible(await storageService.getMarkerVisible());
     }
 
     return (
