@@ -25,8 +25,8 @@ extern crate rocket;
 
 #[get("/<lat>/<lng>")]
 fn index(lat: String, lng: String) -> Result<NamedFile, NotFound<String>> {
-   // map::zip();
-    let path = Path::new("/home/nico/.local/share/safemap/tiles.zip");
+    map::zip();
+    let path = map::get_dir();
     NamedFile::open(&path).map_err(|e| NotFound(e.to_string()))
 }
 

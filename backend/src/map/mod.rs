@@ -1,4 +1,3 @@
-use crate::device;
 use std::thread::{sleep, spawn, JoinHandle};
 use std::time::Duration;
 use walkdir::WalkDir;
@@ -6,6 +5,8 @@ use std::sync::mpsc::{Sender, Receiver, channel};
 use std::borrow::Borrow;
 use futures::StreamExt;
 use futures::stream::ReadyChunks;
+use std::path::{PathBuf, Path};
+
 
 mod coordinates;
 mod tiles;
@@ -21,9 +22,8 @@ pub struct TileCoords {
 
 pub async fn download_map(lat: f32, lon: f32){
     println!("Getting devices");
-    let devices = device::get_devices();
     println!("Generating tiles coordinates");
-    let coordinates = coordinates::get_tiles_coordinates(lat, lon, devices);
+    let coordinates = coordinates::get_tiles_coordinates(lat, lon);
     println!("Downloading map");
     let (tx, rx) = channel();
     let receiver = spawn(move || {
@@ -41,6 +41,10 @@ pub fn zip(){
     println!("Zipping files");
     zip::zip_tiles();
     println!("Done.");
+}
+
+pub fn get_dir()-> PathBuf{
+    return utils::get_data_dir().join(Path::new("tiles.zip"));
 }
 
 pub fn createDir(){

@@ -1,12 +1,11 @@
 use std::collections::HashSet;
 use crate::map::TileCoords;
-use crate::device::Device;
 
 static SURROUNDING_RANGE: f32 = 0.045;
 static CITY_RANGE: f32 = 0.01;
 static DEVICE_RANGE: f32 = 0.0018;
 
-pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32, devices: HashSet<Device>) -> HashSet<TileCoords>{
+pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32) -> HashSet<TileCoords>{
     let mut coordinates = HashSet::new();
 
     for z in 15..16 {
