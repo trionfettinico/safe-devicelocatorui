@@ -23,12 +23,14 @@ import React from "react";
 import { Redirect, Route } from 'react-router';
 import { IonReactRouter } from '@ionic/react-router';
 import MapProvider from './provider/MapProvider';
+import Welcome from './pages/sync';
 
 const App: React.FC = () => (
   <MapProvider>
     <IonApp>
       <IonReactRouter>
         <Route path="/home" component={Home} />
+        <Route path="/welcome" component={Welcome}/>
         <Redirect exact from="/" to="/home" />
       </IonReactRouter>
     </IonApp>

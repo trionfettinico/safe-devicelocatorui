@@ -9,7 +9,7 @@ static DEVICE_RANGE: f32 = 0.0018;
 pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32, devices: HashSet<Device>) -> HashSet<TileCoords>{
     let mut coordinates = HashSet::new();
 
-    for z in 15..18 {
+    for z in 15..20 {
         let (min_x, min_y) = deg2num(city_lat+SURROUNDING_RANGE, city_lon-SURROUNDING_RANGE, z);
         let (max_x, max_y) = deg2num(city_lat-SURROUNDING_RANGE, city_lon+SURROUNDING_RANGE, z);
         for _x in min_x..max_x {
@@ -18,26 +18,26 @@ pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32, devices: HashSet<Devi
             }
         }
     }
-    for z in 15..20 {
-        let (min_x, min_y) = deg2num(city_lat+CITY_RANGE, city_lon-CITY_RANGE, z);
-        let (max_x, max_y) = deg2num(city_lat-CITY_RANGE, city_lon+CITY_RANGE, z);
-        for _x in min_x..max_x {
-            for _y in min_y..max_y {
-                coordinates.insert(TileCoords {zoom:z, x:_x, y:_y});
-            }
-        }
-    }
-    for device in devices{
-        for z in 15..23 {
-            let (min_x, min_y) = deg2num(device.lat+DEVICE_RANGE, device.lon-DEVICE_RANGE, z);
-            let (max_x, max_y) = deg2num(device.lat-DEVICE_RANGE, device.lon+DEVICE_RANGE, z);
-            for _x in min_x..max_x {
-                for _y in min_y..max_y {
-                    coordinates.insert(TileCoords {zoom:z, x:_x, y:_y});
-                }
-            }
-        }
-    }
+    // for z in 15..20 {
+    //     let (min_x, min_y) = deg2num(city_lat+CITY_RANGE, city_lon-CITY_RANGE, z);
+    //     let (max_x, max_y) = deg2num(city_lat-CITY_RANGE, city_lon+CITY_RANGE, z);
+    //     for _x in min_x..max_x {
+    //         for _y in min_y..max_y {
+    //             coordinates.insert(TileCoords {zoom:z, x:_x, y:_y});
+    //         }
+    //     }
+    // }
+    // for device in devices{
+    //     for z in 15..23 {
+    //         let (min_x, min_y) = deg2num(device.lat+DEVICE_RANGE, device.lon-DEVICE_RANGE, z);
+    //         let (max_x, max_y) = deg2num(device.lat-DEVICE_RANGE, device.lon+DEVICE_RANGE, z);
+    //         for _x in min_x..max_x {
+    //             for _y in min_y..max_y {
+    //                 coordinates.insert(TileCoords {zoom:z, x:_x, y:_y});
+    //             }
+    //         }
+    //     }
+    // }
     return coordinates;
 }
 

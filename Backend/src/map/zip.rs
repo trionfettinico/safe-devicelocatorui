@@ -8,6 +8,8 @@ use zip::{ZipWriter, CompressionMethod};
 use std::io::Error as IOError;
 use std::io::ErrorKind as IoErrorKind;
 use std::io::copy;
+use std::fs;
+
 
 pub struct RecursiveZipWriter<W: Write + Seek> {
     zip_writer: ZipWriter<W>,
@@ -46,6 +48,16 @@ impl<W: Write + Seek> RecursiveZipWriter<W> {
     pub fn finish(&mut self) -> ZipResult<W> {
         self.zip_writer.finish()
     }
+}
+
+pub fn createDirectory() -> std::io::Result<()> {
+    fs::create_dir("./static/temporary")?;
+    Ok(())
+}
+
+pub fn removeDirectory() -> std::io::Result<()> {
+    fs::remove_dir_all("./static/temporary")?;
+    Ok(())
 }
 
 pub fn zip_tiles() {

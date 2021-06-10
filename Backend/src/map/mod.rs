@@ -9,8 +9,8 @@ use futures::stream::ReadyChunks;
 
 mod coordinates;
 mod tiles;
-mod zip;
 mod utils;
+mod zip;
 
 #[derive (Eq, PartialEq, Hash)]
 pub struct TileCoords {
@@ -35,7 +35,22 @@ pub async fn download_map(lat: f32, lon: f32){
     tiles::get_map_tiles(coordinates).await;
     tx.send(());
     receiver.join();
+}
+
+pub fn zip(){
     println!("Zipping files");
     zip::zip_tiles();
     println!("Done.");
+}
+
+pub fn createDir(){
+    utils::createDirectory();
+}
+
+pub fn removeDir(){
+    utils::removeDirectory();
+}
+
+pub fn copy(){
+    utils::copy("./static/prova","./static/tempo");
 }

@@ -50,7 +50,8 @@ fn save_image(coords: TileCoords, res: Bytes, output_dir: &Path) {
 
 pub fn get_percent() -> f32 {
     let count :f32= WalkDir::new(get_data_dir().join("tiles").to_str().unwrap()).into_iter().count() as f32;
-    let total:f32 = 16196.0;
+    let mut total:f32 = 16196.0;
+    total = total * 3.0;
     let percent = count / total * 100.0;
     return percent;
 }
