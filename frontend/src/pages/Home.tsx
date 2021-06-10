@@ -24,7 +24,7 @@ const Home: React.FC = () => {
 
   async function test(){
     console.log("Starting download");
-    await JarvisTransferPlugin.download({url:"http://192.168.5.99/tiles.zip"});
+    await JarvisTransferPlugin.download({url:"http://www.lucapatarca.cloud/12/12"});
     console.log("Download completed");
     console.log("Starting unzip");
     await JarvisTransferPlugin.unzip({});
