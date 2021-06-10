@@ -28,17 +28,7 @@ public class Unzipper {
 
     public void unzip(){
         Log.d("UNZIP", "Unzip started");
-        unzipRecursive(filename);
-        Log.d("UNZIP", "Unzip finished");
-    }
-
-    public boolean deleteZipFile(){
         File file = new File(filename);
-        return file.delete();
-    }
-
-    private void unzipRecursive(String zipFile) {
-        File file = new File(zipFile);
         try (ZipFile zip = new ZipFile(file)) {
             File outputPathFile = new File(outputPath);
             if(!outputPathFile.mkdir())
@@ -47,6 +37,12 @@ public class Unzipper {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Log.d("UNZIP", "Unzip finished");
+    }
+
+    public boolean deleteZipFile(){
+        File file = new File(filename);
+        return file.delete();
     }
 
     private void unzipAllEntries(ZipFile zip) throws IOException {
@@ -61,11 +57,6 @@ public class Unzipper {
 
             if (!entry.isDirectory()) {
                 unzipEntry(zip,entry,outputFile);
-            }
-
-            if (currentEntryName.endsWith(".zip")) {
-                // found a zip file, try to open
-                unzipRecursive(outputFile.getAbsolutePath());
             }
         }
     }
