@@ -20,8 +20,12 @@ const Home: React.FC = () => {
   const ionRouter = useIonRouter();
 
   async function test(){
-    const test = await JarvisTransferPlugin.test({value:"http://192.168.5.99/tiles.zip"});
-    console.log(test.value);
+    console.log("Starting download");
+    await JarvisTransferPlugin.download({url:"http://192.168.5.99/tiles.zip"});
+    console.log("Download completed");
+    console.log("Starting unzip");
+    await JarvisTransferPlugin.unzip({});
+    console.log("Unzip completed");
   }
 
   useEffect(() => {

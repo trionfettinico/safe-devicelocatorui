@@ -7,6 +7,8 @@ import com.getcapacitor.Plugin;
 
 import java.util.ArrayList;
 
+import io.ionic.starter.jarvisTransferPlugin.JarvisTransferPlugin;
+
 public class MainActivity extends BridgeActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
