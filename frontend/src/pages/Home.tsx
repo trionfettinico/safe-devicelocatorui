@@ -17,7 +17,7 @@ import SensorList from '../components/sensorList/sensorList';
 import Popover from '../components/mapControls/Popover';
 import { LocationFab } from '../components/mapControls/locationButton';
 
-const { App } = Plugins;
+const { App, JarvisTransferPlugin } = Plugins;
 
 const Home: React.FC = () => {
   const ionRouter = useIonRouter();
@@ -39,6 +39,8 @@ const Home: React.FC = () => {
         }
       });
     });
+
+    test();
   }, []);
 
   return (
