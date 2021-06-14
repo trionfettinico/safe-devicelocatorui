@@ -15,7 +15,7 @@ export const MarkerLayer: React.FC<MapLayerProps> = ({ map }) => {
   const [vectorLayer] = useState<VectorLayer>(
     new VectorLayer({
       source: new VectorSource({
-        url: "http://135.181.24.224:5000/api/sampling/centroid?sensor=0504&format=kml",
+        url: "http://127.0.0.1:1234/api/centroid?sensor=0504&format=kml",
         format: new KML({
           extractStyles: false,
         })

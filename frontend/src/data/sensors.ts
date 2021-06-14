@@ -1,7 +1,5 @@
 export interface Sensor {
     id: string;
-    name: string;
-    lat: number;
-    lng: number;
+    team: string;
     status: boolean;
 }

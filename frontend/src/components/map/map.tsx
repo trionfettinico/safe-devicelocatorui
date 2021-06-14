@@ -9,6 +9,7 @@ import "./map.css";
 import { HeatmapLayer, GeolocationLayer, MarkerLayer } from "./layers";
 import { MapContext } from "../../provider/MapProvider";
 import { ContextType } from "../../provider/type";
+import { CentroidsLayer } from "./layers/centroids";
 
 export const MapComponent: React.FC = () => {
   const { orientation, setFollowUser, followUser, geolocation, addMapListener } = useContext(MapContext) as ContextType;
@@ -17,7 +18,7 @@ export const MapComponent: React.FC = () => {
     layers: [
       new TileLayer({
         source: new XYZ({
-          url: (window['Ionic' as any]['WebView' as any] as any).convertFileSrc("file:///storage/emulated/0/Android/data/io.ionic.starter/files/tiles/tiles/{z}/{x}/{y}.png"),
+          url: "https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",//(window['Ionic' as any]['WebView' as any] as any).convertFileSrc("file:///storage/emulated/0/Android/data/io.ionic.starter/files/tiles/tiles/{z}/{x}/{y}.png"),
         })
       }),
     ],
@@ -53,6 +54,9 @@ export const MapComponent: React.FC = () => {
       <HeatmapLayer map={map} />
       <MarkerLayer map={map} />
       <GeolocationLayer map={map} />
+      
     </div>
   );
 }
+
+//<CentroidsLayer map={map} />

@@ -10,7 +10,7 @@ export const HeatmapLayer: React.FC<MapLayerProps> = ({ map }) => {
   const { heatmapVisible, radius, blur } = useContext(MapContext) as ContextType;
   const [source] = useState<VectorSource>(
     new VectorSource({
-      url: 'http://135.181.24.224:5000/api/sampling/heatmap?sensor=0504&format=kml',
+      url: 'http://localhost:1234/api/heatmap?sensor=0504&format=kml',
       format: new KML({
         extractStyles: false,
       }),

@@ -43,6 +43,18 @@ class StorageService {
             return true;
     }
 
+    saveCentroidsVisible(value: boolean) {
+        this.storage.set("CentroidsVisible", value);
+    }
+
+    async getCentroidsVisible(): Promise<boolean> {
+        const centroidsVisible = await this.storage.get("CentroidsVisible");
+        if(centroidsVisible != null)
+            return centroidsVisible;
+        else 
+            return true;
+    }
+
     saveBlur(value: number) {
         this.storage.set("Blur", value);
     }
@@ -65,6 +77,45 @@ class StorageService {
             return radius;
         else
             return 10;
+    }
+
+    saveTeams(value: Array<string>) {
+        this.storage.set("Teams", JSON.stringify(value));
+    }
+
+    async getTeams(): Promise<Array<string>> {
+        const teams = await this.storage.get("Teams");
+        if(teams != null)
+            return JSON.parse(teams);
+        else
+            return [];
+        
+    }
+
+    saveTeam(value: string) {
+        this.storage.set("Team", value);
+    }
+
+    async getTeam(): Promise<string> {
+        const teams = await this.storage.get("Team");
+        if(teams != null)
+            return teams;
+        else
+            return "";
+        
+    }
+
+    saveSensorSelected(value: string) {
+        this.storage.set("Team", value);
+    }
+
+    async getSensorSelected(): Promise<string> {
+        const teams = await this.storage.get("Team");
+        if(teams != null)
+            return teams;
+        else
+            return "";
+        
     }
 }
 

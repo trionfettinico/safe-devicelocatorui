@@ -4,6 +4,7 @@ import { LocationType, ContextType } from "./type";
 import { toRadians } from 'ol/math';
 import VectorSource from "ol/source/Vector";
 import StorageService from "../services/storage";
+import { Sensor } from "../data/sensors";
 
 export const MapContext = React.createContext<ContextType | null>(null);
 
@@ -24,14 +25,22 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [orientation, setOrientation] = React.useState<number>(0);
     const [followUser, setFollowUser] = React.useState<boolean>(true);
     const [centerChangeListeners] = React.useState<Array<MapCenterListener>>(new Array());
-    const [sensors, setSensorsLocal] = React.useState(new VectorSource());
+    const [sensors, setSensorsLocal] = React.useState(new Array<Sensor>());
+    const [sensorSelect, setSensorSelectedLocal] = React.useState<string>("");
     const [storageService] = React.useState(new StorageService());
+    const [centroidsVisible, setCentroidsVisible] = React.useState<boolean>(true);
+    const [teams, setTeamsLocal] = React.useState<Array<string>>([]);
+    const [team, setTeamLocal] = React.useState<string>("");
+
 
     async function loadData(){
         setHeatmapVisible(await storageService.getHeatmapVisible());
         setLocationVisible(await storageService.getLocationVisible());
+        setCentroidsVisible(await storageService.getCentroidsVisible());
         setBlur(await storageService.getBlur());
         setRadius(await storageService.getRadius());
+        setTeams(await storageService.getTeams());
+        setTeam(await storageService.getTeam());
     }
 
     useEffect(()=>{
@@ -52,6 +61,11 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
         setLocationVisible(!locationVisible);
         storageService.saveLocationVisible(!locationVisible);
     }
+
+    const toggleCentroids = () => {
+        setCentroidsVisible(!centroidsVisible);
+        storageService.saveCentroidsVisible(!centroidsVisible);
+    };
 
     const setBlur = (value: number)=>{
         setBlurState(value);
@@ -80,13 +94,27 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
 
     const goToLocation = (location: LocationType) => {
         setFollowUser(false);
-        setMarkerVisible(true);
+        if(!markerVisible)toggleMarker();
         centerChangeListeners.forEach((it) => it.notify(location));
     }
 
-    const setSensors = async (vector: VectorSource) => {
-        setSensorsLocal(vector);
+    const setSensors = async (sensorsList: Array<Sensor>) => {
+        setSensorsLocal(sensorsList);
         setMarkerVisible(await storageService.getMarkerVisible());
+    }
+
+    const setSensorSelected = async (sensor: string) => {
+        setSensorSelectedLocal(sensor);
+    }
+
+    const setTeams = async (teams: Array<string>) => {
+        setTeamsLocal(teams);
+        storageService.saveTeams(teams);
+    }
+
+    const setTeam = async (team: string) => {
+        setTeamLocal(team);
+        storageService.saveTeam(team);
     }
 
     return (
@@ -94,6 +122,7 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
             heatmapVisible,
             markerVisible,
             locationVisible,
+            centroidsVisible,
             geolocation,
             orientation,
             followUser,
@@ -103,6 +132,7 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
             toggleHeatmap,
             toggleMarker,
             toggleLocation,
+            toggleCentroids,
             startLocationListeners,
             addMapListener,
             goToLocation,
@@ -111,7 +141,11 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
             radius,
             setRadius,
             sensors,
-            setSensors
+            setSensors,
+            teams,
+            setTeams,
+            team,
+            setTeam
         }}>
             {children}
         </MapContext.Provider>

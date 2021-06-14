@@ -24,6 +24,7 @@ import { Redirect, Route } from 'react-router';
 import { IonReactRouter } from '@ionic/react-router';
 import MapProvider from './provider/MapProvider';
 import Welcome from './pages/sync';
+import Teams from './pages/Team';
 
 const App: React.FC = () => (
   <MapProvider>
@@ -31,6 +32,7 @@ const App: React.FC = () => (
       <IonReactRouter>
         <Route path="/home" component={Home} />
         <Route path="/welcome" component={Welcome}/>
+        <Route path="/teams" component={Teams}/>
         <Redirect exact from="/" to="/home" />
       </IonReactRouter>
     </IonApp>

@@ -1,0 +1,14 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "apptest",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "build",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {},
+  "linuxAndroidStudioPath": "/home/nico/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/201.7042882/bin/studio.sh"
+}

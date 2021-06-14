@@ -2,6 +2,7 @@ import { PluginListenerHandle } from '@capacitor/core';
 import Geometry from 'ol/geom/Geometry';
 import VectorSource from 'ol/source/Vector';
 import { ContextType } from 'react';
+import { Sensor } from '../data/sensors';
 type LocationType = {
     lat: number;
     lon: number;
@@ -12,6 +13,7 @@ type ContextType = {
     heatmapVisible: boolean;
     markerVisible: boolean;
     locationVisible: boolean;
+    centroidsVisible: boolean;
     orientation: number;
     followUser: boolean;
     setFollowUser: (boolean) => void;
@@ -20,6 +22,7 @@ type ContextType = {
     radius:number;
     toggleHeatmap: () => void;
     toggleMarker: () => void;
+    toggleCentroids: () => void;
     toggleLocation: () => void;
     setGeolocation: (LocationType) => void;
     startLocationListeners: () => void;
@@ -27,6 +30,10 @@ type ContextType = {
     goToLocation: (location:LocationType) => void;
     setBlur: (number) => void;
     setRadius:(number) => void;
-    sensors: VectorSource<Geometry>;
-    setSensors: (VectorSource) => void;
+    sensors: Array<Sensor>;
+    setSensors: (sensorsList: Array<Sensor>) => void;
+    teams: Array<string>;
+    setTeams: (Array) => void;
+    team: string;
+    setTeam: (string) => void;
 };
