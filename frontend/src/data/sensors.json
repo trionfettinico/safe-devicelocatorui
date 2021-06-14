@@ -1,0 +1,23 @@
+[
+	{
+		"id":"0",
+		"name":"Filippetti Computer",
+		"lat":43.619627,
+		"lng":13.382223,
+		"status": false
+	},
+	{
+		"id":"1",
+		"name":"Pegaso",
+		"lat":43.619640,
+		"lng":13.382522,
+		"status": true
+	},
+	{
+		"id":"2",
+		"name":"Filippetti SPA",
+		"lat":43.619273,
+		"lng":13.383464,
+		"status": false
+	}
+]

@@ -145,7 +145,9 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
             teams,
             setTeams,
             team,
-            setTeam
+            setTeam,
+            sensorSelect,
+            setSensorSelected
         }}>
             {children}
         </MapContext.Provider>

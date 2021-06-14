@@ -10,12 +10,12 @@ import { ContextType } from "../../../provider/type";
 import KML from "ol/format/KML";
 
 export const MarkerLayer: React.FC<MapLayerProps> = ({ map }) => {
-  const { markerVisible, setSensors } = useContext(MapContext) as ContextType;
+  const { markerVisible, sensorSelect } = useContext(MapContext) as ContextType;
 
   const [vectorLayer] = useState<VectorLayer>(
     new VectorLayer({
       source: new VectorSource({
-        url: "http://127.0.0.1:1234/api/centroid?sensor=0504&format=kml",
+        url: "http://127.0.0.1:1234/api/centroid?sensor=" + sensorSelect +"&format=kml",
         format: new KML({
           extractStyles: false,
         })
@@ -33,11 +33,7 @@ export const MarkerLayer: React.FC<MapLayerProps> = ({ map }) => {
 
   useEffect(() => {
     map.addLayer(vectorLayer);
-    vectorLayer.getSource().on('change', (e) => {
-      setSensors(e.target);
-    });
   }, []);
 
-  vectorLayer.setVisible(markerVisible);
   return null;
 }

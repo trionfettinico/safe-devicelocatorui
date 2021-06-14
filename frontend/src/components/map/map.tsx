@@ -51,9 +51,9 @@ export const MapComponent: React.FC = () => {
 
   return (
     <div className="map" ref={mapDivRef}>
-      <HeatmapLayer map={map} />
+      {/* <HeatmapLayer map={map} />
       <MarkerLayer map={map} />
-      <GeolocationLayer map={map} />
+      <GeolocationLayer map={map} /> */}
       
     </div>
   );

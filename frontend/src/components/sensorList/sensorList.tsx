@@ -1,12 +1,14 @@
 import {
   IonButton,
+  IonCheckbox,
   IonItem,
   IonLabel,
   IonList,
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Sensor } from "../../data/sensors";
 import { MapContext } from "../../provider/MapProvider";
 import { ContextType } from "../../provider/type";
 import SensorItem from "./sensoritem/SensorItem";
@@ -17,9 +19,19 @@ const SensorList: React.FC = () => {
   ) as ContextType;
 
   useEffect(() => {
-    var sensorsResponse: Array<string> = [];
-    fetch('http://127.0.0.1/api/sensors')
-      .then(response => response.json()).then(response => response);
+    let sen: Array<Sensor> = [];
+    fetch("http://127.0.0.1:1234/api/sensors")
+      .then((response) => response.json())
+      .then((response) =>
+        response.sensors.map((element: any) => {
+          sen.push({
+            id: element,
+            status: false,
+            team: "",
+          });
+        })
+      );
+    setSensors(sen);
   }, []);
 
   return (
@@ -42,7 +54,14 @@ const SensorList: React.FC = () => {
         <IonButton routerLink="/welcome">SYNC</IonButton>
         <IonButton routerLink="/teams">TEAMS</IonButton>
       </div>
-      <IonList></IonList>
+      <IonList>
+        {sensors.map((e) => (
+          <IonItem>
+            <IonCheckbox ></IonCheckbox>
+            <IonLabel >{e.id}</IonLabel>
+          </IonItem>
+        ))}
+      </IonList>
     </div>
   );
 };

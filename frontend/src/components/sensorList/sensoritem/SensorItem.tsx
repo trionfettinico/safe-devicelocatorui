@@ -11,15 +11,15 @@ import Point from "ol/geom/Point";
 import {toLonLat} from 'ol/proj';
 
 interface SensorListItemProps {
-  sensor: Feature<Geometry>;
+  sensor: Sensor
 }
 
 const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
 
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const { goToLocation } = useContext(MapContext) as ContextType;
-  const rawPoint = sensor.getGeometry() as Point;
-  const [lon,lat] = toLonLat(rawPoint.getFlatCoordinates());
+  //const rawPoint = sensor.getGeometry() as Point;
+  //const [lon,lat] = toLonLat(rawPoint.getFlatCoordinates());
 
   return (
     <IonItem detail={false}>
