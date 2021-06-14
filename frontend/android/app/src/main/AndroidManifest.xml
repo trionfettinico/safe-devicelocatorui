@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.ionic.starter">
-
+"coordinates": [
+            "{POINT_LONGITUDE}",
+            "{POINT_LATITUDE}",
+            0
+          ]
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

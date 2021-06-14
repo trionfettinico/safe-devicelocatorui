@@ -2,8 +2,6 @@ use std::collections::HashSet;
 use crate::map::TileCoords;
 
 static SURROUNDING_RANGE: f32 = 0.045;
-static CITY_RANGE: f32 = 0.01;
-static DEVICE_RANGE: f32 = 0.0018;
 
 pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32) -> HashSet<TileCoords>{
     let mut coordinates = HashSet::new();
@@ -40,7 +38,11 @@ pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32) -> HashSet<TileCoords
     return coordinates;
 }
 
-fn deg2num(lat_deg: f32, lon_deg: f32, _zoom: i32) -> (i32, i32) {
+pub fn get_range() -> f32{
+    return SURROUNDING_RANGE;
+}
+
+pub(crate) fn deg2num(lat_deg: f32, lon_deg: f32, _zoom: i32) -> (i32, i32) {
     let lat_rad = lat_deg.to_radians();
     let mut n: f64 = 2.00;
     n = n.powi(_zoom);

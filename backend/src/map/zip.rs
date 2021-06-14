@@ -1,5 +1,5 @@
 use crate::map::utils::get_data_dir;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 use zip::write::FileOptions;
 use std::io::{Write, Seek};
 use std::fs::File;
@@ -9,7 +9,8 @@ use std::io::Error as IOError;
 use std::io::ErrorKind as IoErrorKind;
 use std::io::copy;
 use std::fs;
-
+use std::collections::HashSet;
+use crate::map::coordinates;
 
 pub struct RecursiveZipWriter<W: Write + Seek> {
     zip_writer: ZipWriter<W>,
@@ -50,18 +51,9 @@ impl<W: Write + Seek> RecursiveZipWriter<W> {
     }
 }
 
-pub fn createDirectory() -> std::io::Result<()> {
-    fs::create_dir("./static/temporary")?;
-    Ok(())
-}
-
-pub fn removeDirectory() -> std::io::Result<()> {
-    fs::remove_dir_all("./static/temporary")?;
-    Ok(())
-}
-
 pub fn zip_tiles() {
-    let output_dir = get_data_dir();
+    let mut output_dir = get_data_dir();
+    output_dir = output_dir.join("copy");
     let zip_file = std::fs::File::create(output_dir.join(Path::new("tiles.zip"))).unwrap();
     let mut zipper = RecursiveZipWriter::new(zip_file);
     zipper.add_path(&*output_dir.join(Path::new("tiles/"))).unwrap();

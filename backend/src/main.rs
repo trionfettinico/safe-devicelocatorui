@@ -25,7 +25,7 @@ extern crate rocket;
 
 #[get("/<lat>/<lng>")]
 fn index(lat: String, lng: String) -> Result<NamedFile, NotFound<String>> {
-    map::zip();
+    map::zip(lat,lng);
     let path = map::get_dir();
     NamedFile::open(&path).map_err(|e| NotFound(e.to_string()))
 }
@@ -40,8 +40,8 @@ async fn main() {
         // map::download_map(CITY_LAT2, CITY_LON2).await;
         // map::download_map(CITY_LAT3, CITY_LON3).await;
     }
-    // map::createDir();
-    // map::removeDir();
+    // map::create_dir();
+    // map::remove_dir();
     //map::copy();
     rocket::ignite().mount("/", routes![index]).launch();
 }

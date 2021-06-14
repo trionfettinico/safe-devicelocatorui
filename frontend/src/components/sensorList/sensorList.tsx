@@ -17,9 +17,9 @@ const SensorList: React.FC = () => {
   ) as ContextType;
 
   useEffect(() => {
-    var sensorsResponse : Array<string> = [];
+    var sensorsResponse: Array<string> = [];
     fetch('http://127.0.0.1/api/sensors')
-    .then(response => response.json()).then(response => response);
+      .then(response => response.json()).then(response => response);
   }, []);
 
   return (
@@ -27,6 +27,7 @@ const SensorList: React.FC = () => {
       <IonItem>
         <IonLabel>Team</IonLabel>
         <IonSelect
+          multiple
           value={team}
           okText="Select"
           cancelText="Cancel"
