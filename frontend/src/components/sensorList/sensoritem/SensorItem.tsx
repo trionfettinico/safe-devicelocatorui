@@ -10,10 +10,6 @@ import {
 } from "ionicons/icons";
 import { MapContext } from "../../../provider/MapProvider";
 import { ContextType } from "../../../provider/type";
-import VectorLayer from "ol/layer/Vector";
-import VectorSource from "ol/source/Vector";
-import { Icon, Style } from "ol/style";
-import KML from "ol/format/KML";
 
 interface SensorListItemProps {
   sensor: Sensor;
@@ -74,7 +70,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
             >
               <span className="date">Find</span>
               <IonIcon icon={searchCircle} />
-            </IonFab> */}
+            </IonFab>
           </div>
         ) : null}
       </IonLabel>
