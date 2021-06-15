@@ -10,29 +10,33 @@ import { ContextType } from "../../../provider/type";
 import KML from "ol/format/KML";
 
 export const MarkerLayer: React.FC<MapLayerProps> = ({ map }) => {
-  const { markerVisible, sensorSelect } = useContext(MapContext) as ContextType;
-
-  const [vectorLayer] = useState<VectorLayer>(
-    new VectorLayer({
-      source: new VectorSource({
-        url: "http://127.0.0.1:1234/api/centroid?sensor=" + sensorSelect +"&format=kml",
-        format: new KML({
-          extractStyles: false,
-        })
-      }),
-      className: "marker",
-      visible: markerVisible,
-      style: new Style({
-        image: new Icon({
-          src: "./assets/icon/location.svg",
-          color: "blue",
-        }),
-      })
-    })
-  );
+  const { markerVisible } = useContext(MapContext) as ContextType;
 
   useEffect(() => {
-    map.addLayer(vectorLayer);
+    fetch("http://127.0.0.1:1234/api/sensors")
+      .then((response) => response.json())
+      .then((response) =>
+        response.sensors.map((element: any) => {
+          map.addLayer(new VectorLayer({
+            source: new VectorSource({
+              url: "http://127.0.0.1:1234/api/centroid?sensor=" + element + "&format=kml",
+              format: new KML({
+                extractStyles: false,
+              })
+            }),
+            className: "marker",
+            visible: markerVisible,
+            style: new Style({
+              image: new Icon({
+                src: "./assets/icon/location.svg",
+                color: "blue",
+              }),
+            })
+          }));
+          console.log("marker: " + element);
+        })
+      );
+    
   }, []);
 
   return null;

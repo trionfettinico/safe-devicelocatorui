@@ -56,11 +56,8 @@ const SensorList: React.FC = () => {
       </div>
       <IonList>
         {sensors.map((e) => (
-          <IonItem>
-            <IonCheckbox ></IonCheckbox>
-            <IonLabel >{e.id}</IonLabel>
-          </IonItem>
-        ))}
+          <SensorItem key={e.id} sensor={e}/>)
+        )}
       </IonList>
     </div>
   );
@@ -68,4 +65,4 @@ const SensorList: React.FC = () => {
 
 export default SensorList;
 
-//{sensors.map(e => <SensorItem key={e.id} sensor={e} />)}
+//

@@ -41,6 +41,7 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
         setRadius(await storageService.getRadius());
         setTeams(await storageService.getTeams());
         setTeam(await storageService.getTeam());
+        setMarkerVisible(await storageService.getMarkerVisible());
     }
 
     useEffect(()=>{

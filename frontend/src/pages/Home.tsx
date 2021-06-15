@@ -14,12 +14,9 @@ import {
 import "./Home.css";
 import { Map } from "../components/map";
 import { Motion, Plugins } from "@capacitor/core";
-import SensorList from "../components/sensorList/sensorList";
 import Popover from "../components/mapControls/Popover";
 import { LocationFab } from "../components/mapControls/locationButton";
-import { MapContext } from "../provider/MapProvider";
-import { ContextType } from "../provider/type";
-import { Sensor } from "../data/sensors";
+import SensorList from "../components/sensorList/sensorList";
 
 const { App, JarvisTransferPlugin } = Plugins;
 
