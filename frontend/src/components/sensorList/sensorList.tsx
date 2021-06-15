@@ -22,15 +22,14 @@ const SensorList: React.FC = () => {
     fetch("http://127.0.0.1:1234/api/sensors")
       .then((response) => response.json())
       .then((response) =>
-        response.sensors.map((element: any) => {
-          sen.push({
-            id: element,
-            status: false,
-            team: "",
-          });
-        })
-      );
-    setSensors(sen);
+        response.sensors.map((element: any) => ({
+            "id": element,
+            "status": false,
+            "team": "",
+          }))
+        )
+      .then(response => setSensors(response));
+    //setSensors(sen);
   }, []);
 
   return (
@@ -42,7 +41,9 @@ const SensorList: React.FC = () => {
           value={team}
           okText="Select"
           cancelText="Cancel"
-          onIonChange={(val) => setTeam(val.detail.value)}
+          onIonChange={(val) => {
+            setTeam(val.detail.value);
+          }}
         >
           {teams.map((e) => (
             <IonSelectOption value={e}>{e}</IonSelectOption>
@@ -55,8 +56,8 @@ const SensorList: React.FC = () => {
       </div>
       <IonList>
         {sensors.map((e) => (
-          <SensorItem key={e.id} sensor={e}/>)
-        )}
+          <SensorItem key={e.id} sensor={e} />
+        ))}
       </IonList>
     </div>
   );

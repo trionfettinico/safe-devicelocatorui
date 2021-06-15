@@ -13,6 +13,7 @@ import {
 import { MapContext } from "../provider/MapProvider";
 import { ContextType } from "../provider/type";
 import { trashOutline } from "ionicons/icons";
+import TeamPopOver from "../components/teamPopOver";
 
 var teams: string[];
 var team: string;
@@ -52,6 +53,7 @@ const Team: React.FC = () => {
           {teams.map((e) =>
             <IonItem>
               <IonLabel>{e}</IonLabel>
+              <TeamPopOver team={e}/>
               <IonButton onClick={() => removeTeam(teams.indexOf(e))}>
                 <IonIcon slot="end" icon={trashOutline} />
               </IonButton>

@@ -29,7 +29,6 @@ export const HeatmapLayer: React.FC<MapLayerProps> = ({ map }) => {
               return feature.get('name');
             },
           }));
-          console.log("marker: " + element);
         })
       );
   },[]);

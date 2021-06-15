@@ -27,7 +27,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
       .then((response) => {
         response.features.map((element: any) => {
           let [lon, lat] = element.geometry.coordinates;
-          goToLocation({ lat: lon, lon: lat });
+          goToLocation({ lat: lat, lon: lon });
           console.log("lon: " + lon + " lat: " + lat);
         });
       });

@@ -33,7 +33,6 @@ export const MarkerLayer: React.FC<MapLayerProps> = ({ map }) => {
               }),
             })
           }));
-          console.log("marker: " + element);
         })
       );
     
