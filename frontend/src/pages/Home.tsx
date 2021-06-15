@@ -4,11 +4,9 @@ import {
   IonMenu,
   IonPage,
   IonSplitPane,
-  useIonRouter,
 } from "@ionic/react";
 import "./Home.css";
 import { Map } from "../components/map";
-import { Motion, Plugins } from "@capacitor/core";
 import Popover from "../components/mapControls/Popover";
 import { LocationFab } from "../components/mapControls/locationButton";
 import SensorList from "../components/sensorList/sensorList";

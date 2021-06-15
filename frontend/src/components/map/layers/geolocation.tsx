@@ -1,4 +1,4 @@
-import { Motion, Plugins } from "@capacitor/core";
+import { Plugins } from "@capacitor/core";
 import React, { useContext, useEffect, useState } from 'react';
 import VectorLayer from 'ol/layer/Vector';
 import Feature from 'ol/Feature';
@@ -9,7 +9,6 @@ import VectorSource from 'ol/source/Vector';
 import { MapLayerProps } from "../map-types";
 import { ContextType } from "../../../provider/type";
 import { MapContext } from "../../../provider/MapProvider";
-import { toRadians } from 'ol/math';
 import BaseLayer from "ol/layer/Base";
 
 const { Geolocation } = Plugins;

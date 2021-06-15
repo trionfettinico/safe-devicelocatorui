@@ -23,7 +23,6 @@ const Popover: React.FC = () => {
     event: undefined,
   });
   const { heatmapVisible, markerVisible, locationVisible, centroidsVisible, radius, blur, toggleLocation, toggleMarker, toggleHeatmap, toggleCentroids, setBlur, setRadius } = useContext(MapContext) as ContextType;
-
   return (
     <>
       <IonPopover

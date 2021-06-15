@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "apptest",
+  "appName": "safeMap",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",

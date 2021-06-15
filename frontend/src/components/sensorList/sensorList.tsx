@@ -1,13 +1,12 @@
 import {
   IonButton,
-  IonCheckbox,
   IonItem,
   IonLabel,
   IonList,
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Sensor } from "../../data/sensors";
 import { MapContext } from "../../provider/MapProvider";
 import { ContextType } from "../../provider/type";
