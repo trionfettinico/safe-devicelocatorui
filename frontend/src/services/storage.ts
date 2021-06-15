@@ -19,6 +19,18 @@ class StorageService {
             return true;
     }
 
+    saveIsTilesLoaded(value:boolean){
+        this.storage.set("TilesLoaded",value);
+    }
+
+    async getIsTilesLoaded():Promise<boolean>{
+        const tilesLoaded = await this.storage.get("TilesLoaded");
+        if(tilesLoaded != null)
+            return tilesLoaded;
+        else 
+            return false;
+    }
+
     saveLocationVisible(value: boolean) {
         this.storage.set("LocationVisible", value);
     }

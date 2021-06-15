@@ -35,7 +35,6 @@ async fn main() {
     let args: Vec<String> = env::args().collect();
 
     if args.len() != 1 && args[1] == "init" {
-        println!("{}",args.len());
         map::download_map(CITY_LAT, CITY_LON).await;
         // map::download_map(CITY_LAT2, CITY_LON2).await;
         // map::download_map(CITY_LAT3, CITY_LON3).await;

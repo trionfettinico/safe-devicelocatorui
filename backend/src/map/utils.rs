@@ -18,6 +18,8 @@ pub fn create_directory(path:String) -> std::io::Result<()> {
 }
 
 pub fn remove_directory() -> std::io::Result<()> {
-    fs::remove_dir_all("./static/temporary")?;
+    let mut path_folder = get_data_dir().clone();
+    path_folder = path_folder.join("copy/");
+    fs::remove_dir(path_folder);
     Ok(())
 }

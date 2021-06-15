@@ -2,7 +2,6 @@ import { Motion, Geolocation } from "@capacitor/core";
 import React, { useEffect } from "react";
 import { LocationType, ContextType } from "./type";
 import { toRadians } from 'ol/math';
-import VectorSource from "ol/source/Vector";
 import StorageService from "../services/storage";
 import { Sensor } from "../data/sensors";
 
@@ -31,7 +30,6 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [centroidsVisible, setCentroidsVisible] = React.useState<boolean>(true);
     const [teams, setTeamsLocal] = React.useState<Array<string>>([]);
     const [team, setTeamLocal] = React.useState<string>("");
-
 
     async function loadData(){
         setHeatmapVisible(await storageService.getHeatmapVisible());

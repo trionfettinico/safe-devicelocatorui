@@ -29,7 +29,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
       ></div>
       <IonLabel className="ion-text-wrap">
         <h2 onClick={() => setShowMenu(!showMenu)} className="clickable">
-          {sensor.getId()}
+          {sensor.id}
           <span className="date">
             <IonFab vertical="top" horizontal="end" slot="fixed">
               <IonIcon icon={information} />
@@ -42,15 +42,14 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
           <div>
             <h6>
               <br />
-              {lat} {lon} <br />
               Qui ci vanno un pò di stronzate da mostrare <br />
               <br />
             </h6>
-            <IonFab onClick={() => goToLocation({ lat: lat, lon: lon })}
+            {/* <IonFab onClick={() => goToLocation({ lat: lat, lon: lon })}
               vertical="bottom" horizontal="end" slot="fixed" id={'sensor_' + sensor.getId()} className="clickable">
               <span className="date">Find</span>
               <IonIcon icon={searchCircle} />
-            </IonFab>
+            </IonFab> */}
           </div>
         ) : null}
       </IonLabel>
