@@ -10,9 +10,10 @@ import { HeatmapLayer, GeolocationLayer, MarkerLayer } from "./layers";
 import { MapContext } from "../../provider/MapProvider";
 import { ContextType } from "../../provider/type";
 import { CentroidsLayer } from "./layers/centroids";
-
+import Welcome from '../../pages/sync';
+ 
 export const MapComponent: React.FC = () => {
-  const { orientation, setFollowUser, followUser, geolocation, addMapListener } = useContext(MapContext) as ContextType;
+  const { orientation, setFollowUser, followUser, geolocation,addMapListener } = useContext(MapContext) as ContextType;
   const mapDivRef = useRef<HTMLDivElement>(null);
   const [map] = useState<Map>(new Map({
     layers: [
@@ -30,7 +31,7 @@ export const MapComponent: React.FC = () => {
     })
   }));
 
-  useEffect(() => {
+  useEffect(() => {    
     setTimeout(() => {
       if (mapDivRef.current != null) {
         map.setTarget(mapDivRef.current);

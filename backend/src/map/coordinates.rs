@@ -1,7 +1,7 @@
 use std::collections::HashSet;
 use crate::map::TileCoords;
 
-static SURROUNDING_RANGE: f32 = 0.045;
+static SURROUNDING_RANGE: f32 = 0.078;
 
 pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32) -> HashSet<TileCoords>{
     let mut coordinates = HashSet::new();

@@ -74,7 +74,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
             >
               <span className="date">Find</span>
               <IonIcon icon={searchCircle} />
-            </IonFab>
+            </IonFab> */}
           </div>
         ) : null}
       </IonLabel>

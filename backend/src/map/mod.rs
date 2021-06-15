@@ -80,7 +80,6 @@ pub fn copy_tiles(lat:String,lng:String){
                 let mut app = get_data_dir().into_os_string().into_string().unwrap();
                 app.push_str(&*var);
                 create_dir(app);
-                println!("from -> {} to -> {}",path.as_path().display().to_string(),&path_copy.as_path().display().to_string());
                 fs::copy(path.as_path().display().to_string(), path_copy.as_path().display().to_string());
                 path.pop();
                 path_copy.pop();
@@ -98,7 +97,6 @@ pub fn get_dir()-> PathBuf{
 }
 
 pub fn create_dir(path:String) {
-    println!("{}",path);
     utils::create_directory(path);
 }
 

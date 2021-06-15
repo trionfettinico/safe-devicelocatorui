@@ -9,7 +9,6 @@ import {
   IonLabel,
   IonList,
   IonPage,
-  IonSplitPane,
 } from "@ionic/react";
 import { MapContext } from "../provider/MapProvider";
 import { ContextType } from "../provider/type";
