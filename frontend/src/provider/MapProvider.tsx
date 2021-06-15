@@ -100,11 +100,9 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     }
 
     const setSensors = async (sensorsList: Array<Sensor>) => {
-        if (sensors != []) {
-            setSensorsLocal(sensorsList);
-            setMarkerVisible(await storageService.getMarkerVisible());
-            storageService.saveSensorLocal(sensorsList);
-        }
+        setSensorsLocal(sensorsList);
+        setMarkerVisible(await storageService.getMarkerVisible());
+        storageService.saveSensorLocal(sensorsList);
     }
 
     const setSensorSelected = async (sensor: string) => {
