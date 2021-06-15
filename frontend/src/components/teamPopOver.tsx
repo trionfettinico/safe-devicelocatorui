@@ -37,35 +37,33 @@ const TeamPopOver: React.FC<TeamItemProps> = ({ team }) => {
 
   return (
     <>
-      <IonList>
-        {sensors.map((e) => (
-          <>
-            <IonItem></IonItem>
-            <IonCheckbox
-              checked={checked}
-              onIonChange={(e) => setChecked(e.detail.checked)}
-            />
-          </>
-        ))}
-      </IonList>
-      <IonSelect
-        multiple
-        value={sensors}
-        okText="Select"
-        cancelText="Cancel"
-        onIonChange={(val) => {
-          let sensor: any = sensors.find((e) => {
-            val.detail.value.find(e.id);
-          });
-          sensor.team = team;
+      <IonPopover
+        isOpen={showPopover.open}
+        event={showPopover.event}
+        onDidDismiss={() => {
+          setShowPopover({ open: false, event: undefined });
         }}
       >
-        {sensors.map((e) => {
-          console.log("sensor lenght team" + sensors.length);
-          // if (e.team == team || e.team.length == 0)
-          <IonSelectOption value={e.id}>{e.id}</IonSelectOption>;
-        })}
-      </IonSelect>
+        <IonList>
+          {sensors.map((e) => {
+            console.log(JSON.stringify(e));
+            (<>
+              <IonItem>{e.id}</IonItem>
+              <IonCheckbox
+                checked={e.team == team}
+                onIonChange={(check) => {
+                  check.detail.checked ? (e.team = team) : (e.team = "");
+                }}
+              />
+            </>);
+          })}
+        </IonList>
+      </IonPopover>
+      <IonButton
+        onClick={(e) => setShowPopover({ open: true, event: e.nativeEvent })}
+      >
+        <IonIcon icon={settingsOutline} />
+      </IonButton>
     </>
   );
 };
