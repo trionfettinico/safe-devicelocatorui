@@ -1,4 +1,4 @@
-import { IonFab, IonIcon, IonItem, IonLabel } from "@ionic/react";
+import { IonButton, IonFab, IonIcon, IonItem, IonLabel } from "@ionic/react";
 import "./MessageListItem.css";
 import { Sensor } from "../../../data/sensors";
 import React, { useContext, useState } from "react";
@@ -17,7 +17,7 @@ interface SensorListItemProps {
 
 const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const { goToLocation,  } = useContext(MapContext) as ContextType;
+  const { goToLocation, } = useContext(MapContext) as ContextType;
 
   function findSensor() {
     fetch(
@@ -30,7 +30,11 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
           goToLocation({ lat: lon, lon: lat });
           console.log("lon: " + lon + " lat: " + lat);
         });
-      });    
+      });
+  }
+
+  function changeStatus(sensor : Sensor){
+    sensor.status = !sensor.status;
   }
 
   return (
@@ -58,7 +62,9 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
             <IonLabel>
               {sensor.team}
               <br />
-              {sensor.status ? <div>checked</div> : <div>unChecked</div>}
+              <IonButton onClick={()=>changeStatus(sensor)}>
+                {sensor.status ? <div>checked</div> : <div>unChecked</div>}
+              </IonButton>
             </IonLabel>
             <IonFab
               onClick={findSensor}

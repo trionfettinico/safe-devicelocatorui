@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import VectorSource from "ol/source/Vector";
 import KML from 'ol/format/KML';
 import { MapLayerProps } from "../map-types";
 import VectorLayer from "ol/layer/Vector";
-import { Style } from "ol/style";
 
 export const CentroidsLayer: React.FC<MapLayerProps> = ({ map }) => {
   const [vectorLayer] = useState<VectorLayer>(

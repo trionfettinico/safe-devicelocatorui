@@ -9,8 +9,6 @@ import "./map.css";
 import { HeatmapLayer, GeolocationLayer, MarkerLayer } from "./layers";
 import { MapContext } from "../../provider/MapProvider";
 import { ContextType } from "../../provider/type";
-import { CentroidsLayer } from "./layers/centroids";
-import Welcome from '../../pages/sync';
  
 export const MapComponent: React.FC = () => {
   const { orientation, setFollowUser, followUser, geolocation,addMapListener } = useContext(MapContext) as ContextType;
