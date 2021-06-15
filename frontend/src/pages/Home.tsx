@@ -13,7 +13,6 @@ import SensorList from "../components/sensorList/sensorList";
 import Popover from "../components/mapControls/Popover";
 import { LocationFab } from "../components/mapControls/locationButton";
 
-const { App, JarvisTransferPlugin } = Plugins;
 
 const Home: React.FC = () => {
 
