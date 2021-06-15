@@ -17,7 +17,7 @@ interface SensorListItemProps {
 
 const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const { goToLocation, } = useContext(MapContext) as ContextType;
+  const { goToLocation, sensors, setSensors } = useContext(MapContext) as ContextType;
 
   function findSensor() {
     fetch(
@@ -28,13 +28,16 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
         response.features.map((element: any) => {
           let [lon, lat] = element.geometry.coordinates;
           goToLocation({ lat: lat, lon: lon });
-          console.log("lon: " + lon + " lat: " + lat);
         });
       });
   }
 
-  function changeStatus(sensor : Sensor){
-    sensor.status = !sensor.status;
+  function changeStatus(sensor: Sensor) {
+    sensors.map((e) => {
+      if (e.id == sensor.id)
+        e.status = !e.status;
+    })
+    setSensors(sensors);
   }
 
   return (
@@ -62,7 +65,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
             <IonLabel>
               {sensor.team}
               <br />
-              <IonButton onClick={()=>changeStatus(sensor)}>
+              <IonButton onClick={() => changeStatus(sensor)}>
                 {sensor.status ? <div>checked</div> : <div>unChecked</div>}
               </IonButton>
             </IonLabel>

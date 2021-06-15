@@ -23,13 +23,15 @@ const SensorList: React.FC = () => {
       .then((response) => response.json())
       .then((response) =>
         response.sensors.map((element: any) => ({
-            "id": element,
-            "status": false,
-            "team": "",
-          }))
-        )
-      .then(response => setSensors(response));
-    //setSensors(sen);
+          "id": element,
+          "status": false,
+          "team": "",
+        }))
+      )
+      .then(response => {
+        if (sensors == [])
+          setSensors(response);
+      });
   }, []);
 
   return (
@@ -56,13 +58,11 @@ const SensorList: React.FC = () => {
       </div>
       <IonList>
         {sensors.map((e) => (
-          <SensorItem key={e.id} sensor={e} />
-        ))}
+          <SensorItem key={e.id} sensor={e} />)
+        )}
       </IonList>
     </div>
   );
 };
 
 export default SensorList;
-
-//

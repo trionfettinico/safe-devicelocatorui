@@ -10,7 +10,8 @@ export const HeatmapLayer: React.FC<MapLayerProps> = ({ map }) => {
   const { heatmapVisible, radius, blur } = useContext(MapContext) as ContextType;
   
   useEffect(()=>{
-    fetch("http://127.0.0.1:1234/api/sensors")
+    const getHeatmap = async () => {
+      await fetch("http://127.0.0.1:1234/api/sensors")
       .then((response) => response.json())
       .then((response) =>
         response.sensors.map((element: any) => {
@@ -31,6 +32,9 @@ export const HeatmapLayer: React.FC<MapLayerProps> = ({ map }) => {
           }));
         })
       );
+    };
+    getHeatmap();
+    
   },[]);
 
   return null;

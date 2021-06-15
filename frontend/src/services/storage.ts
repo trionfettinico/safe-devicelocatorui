@@ -1,10 +1,27 @@
 import { Storage } from '@ionic/storage';
+import { Session } from 'inspector';
+import { Sensor } from '../data/sensors';
 
 class StorageService {
     storage = new Storage();
 
     constructor() {
         this.storage.create();
+    }
+
+    async saveSensorLocal(value: Array<Sensor>) {
+        this.storage.set("SensorsLocal", JSON.stringify(value));
+        const sensorLocal = await this.storage.get("SensorsLocal");
+        
+    }
+
+    async getSensorLocal(): Promise<Array<Sensor>> {
+        const sensorLocal = await this.storage.get("SensorsLocal");
+        if(sensorLocal != null)
+            return JSON.parse(sensorLocal);
+        else
+            return [];
+        
     }
 
     saveHeatmapVisible(value: boolean) {

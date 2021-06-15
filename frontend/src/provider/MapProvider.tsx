@@ -4,6 +4,7 @@ import { LocationType, ContextType } from "./type";
 import { toRadians } from 'ol/math';
 import StorageService from "../services/storage";
 import { Sensor } from "../data/sensors";
+import SensorList from "../components/sensorList/sensorList";
 
 export const MapContext = React.createContext<ContextType | null>(null);
 
@@ -31,7 +32,7 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [teams, setTeamsLocal] = React.useState<Array<string>>([]);
     const [team, setTeamLocal] = React.useState<string>("");
 
-    async function loadData(){
+    async function loadData() {
         setHeatmapVisible(await storageService.getHeatmapVisible());
         setLocationVisible(await storageService.getLocationVisible());
         setCentroidsVisible(await storageService.getCentroidsVisible());
@@ -40,9 +41,10 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
         setTeams(await storageService.getTeams());
         setTeam(await storageService.getTeam());
         setMarkerVisible(await storageService.getMarkerVisible());
+        setSensorsLocal(await storageService.getSensorLocal())
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         loadData();
     }, []);
 
@@ -66,12 +68,12 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
         storageService.saveCentroidsVisible(!centroidsVisible);
     };
 
-    const setBlur = (value: number)=>{
+    const setBlur = (value: number) => {
         setBlurState(value);
         storageService.saveBlur(value);
     }
 
-    const setRadius = (value: number)=>{
+    const setRadius = (value: number) => {
         setRadiusState(value);
         storageService.saveRadius(value);
     }
@@ -93,13 +95,16 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
 
     const goToLocation = (location: LocationType) => {
         setFollowUser(false);
-        if(!markerVisible)toggleMarker();
+        if (!markerVisible) toggleMarker();
         centerChangeListeners.forEach((it) => it.notify(location));
     }
 
     const setSensors = async (sensorsList: Array<Sensor>) => {
-        setSensorsLocal(sensorsList);
-        setMarkerVisible(await storageService.getMarkerVisible());
+        if (sensors != []) {
+            setSensorsLocal(sensorsList);
+            setMarkerVisible(await storageService.getMarkerVisible());
+            storageService.saveSensorLocal(sensorsList);
+        }
     }
 
     const setSensorSelected = async (sensor: string) => {
