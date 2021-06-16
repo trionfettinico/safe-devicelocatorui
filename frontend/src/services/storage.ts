@@ -1,5 +1,4 @@
 import { Storage } from '@ionic/storage';
-import { Session } from 'inspector';
 import { Sensor } from '../data/sensors';
 
 class StorageService {

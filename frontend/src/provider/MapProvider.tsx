@@ -4,7 +4,6 @@ import { LocationType, ContextType } from "./type";
 import { toRadians } from 'ol/math';
 import StorageService from "../services/storage";
 import { Sensor } from "../data/sensors";
-import SensorList from "../components/sensorList/sensorList";
 
 export const MapContext = React.createContext<ContextType | null>(null);
 

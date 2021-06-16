@@ -1,4 +1,3 @@
-import { SelectChangeEventDetail } from "@ionic/core";
 import {
   IonButton,
   IonContent,

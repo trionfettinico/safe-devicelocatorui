@@ -1,15 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import {
-  IonCard,
-  IonFab,
-  IonFabButton,
   IonIcon,
   IonItem,
   IonLabel,
   IonPopover,
   IonButton,
   IonToggle,
-  IonCheckbox,
 } from "@ionic/react";
 import { settingsOutline } from "ionicons/icons";
 import { ContextType } from "../provider/type";
