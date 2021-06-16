@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Heatmap } from "ol/layer";
 import VectorSource from "ol/source/Vector";
 import KML from 'ol/format/KML';

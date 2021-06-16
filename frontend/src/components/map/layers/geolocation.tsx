@@ -1,4 +1,3 @@
-import { Plugins } from "@capacitor/core";
 import React, { useContext, useEffect, useState } from 'react';
 import VectorLayer from 'ol/layer/Vector';
 import Feature from 'ol/Feature';
@@ -10,8 +9,6 @@ import { MapLayerProps } from "../map-types";
 import { ContextType } from "../../../provider/type";
 import { MapContext } from "../../../provider/MapProvider";
 import BaseLayer from "ol/layer/Base";
-
-const { Geolocation } = Plugins;
 
 export const GeolocationLayer: React.FC<MapLayerProps> = ({ map }) => {
     const { locationVisible, geolocation, startLocationListeners } = useContext(MapContext) as ContextType;

@@ -1,6 +1,6 @@
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { MapLayerProps } from "../map-types";
 import { Icon, Style } from "ol/style";
 import "ol/ol.css";
@@ -10,7 +10,7 @@ import { ContextType } from "../../../provider/type";
 import KML from "ol/format/KML";
 
 export const MarkerLayer: React.FC<MapLayerProps> = ({ map }) => {
-  const { markerVisible, sensors } = useContext(MapContext) as ContextType;
+  const { markerVisible } = useContext(MapContext) as ContextType;
 
   const getMarker =  () => {
      fetch("http://127.0.0.1:1234/api/sensors")
