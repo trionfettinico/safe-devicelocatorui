@@ -48,7 +48,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
       ></div>
       <IonLabel className="ion-text-wrap">
         <h2 onClick={() => setShowMenu(!showMenu)} className="clickable">
-          {sensor.id}
+          ID: {sensor.id}
           <span className="date">
             <IonFab vertical="top" horizontal="end" slot="fixed">
               <IonIcon icon={information} />
@@ -63,7 +63,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
         {showMenu ? (
           <div>
             <IonLabel>
-              {sensor.team}
+              Team: {sensor.team}
               <br />
               <IonButton onClick={() => changeStatus(sensor)}>
                 {sensor.status ? <div>checked</div> : <div>unChecked</div>}

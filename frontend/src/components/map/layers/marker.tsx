@@ -28,8 +28,8 @@ export const MarkerLayer: React.FC<MapLayerProps> = ({ map }) => {
             visible: markerVisible,
             style: new Style({
               image: new Icon({
-                src: "./assets/icon/location.svg",
-                color: "blue",
+                src: "./assets/icon/sensor.png",
+                color: "yellow",
               }),
             })
           }));

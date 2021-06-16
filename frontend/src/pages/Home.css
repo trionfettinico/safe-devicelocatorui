@@ -1,3 +1,7 @@
 #device-menu{
     width: 20vw;
 }
+
+#ion-content {
+    height: 100vw;
+  }

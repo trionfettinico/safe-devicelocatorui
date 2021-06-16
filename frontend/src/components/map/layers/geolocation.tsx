@@ -30,8 +30,8 @@ export const GeolocationLayer: React.FC<MapLayerProps> = ({ map }) => {
     useEffect(() => {
         iconFeature.setStyle(new Style({
             image: new Icon({
-                src: "./assets/icon/location.svg",
-                color: "green"
+                src: "./assets/icon/arrow.png",
+                scale: 0.05
             }),
         }));
 

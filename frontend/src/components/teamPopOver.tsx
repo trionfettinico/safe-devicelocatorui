@@ -50,7 +50,7 @@ const TeamPopOver: React.FC<TeamItemProps> = ({ team }) => {
         (
           <IonItem>
             <IonLabel>{e.id}</IonLabel>
-            <IonToggle
+            <IonToggle  disabled={e.team != team && e.team!=""}
                 checked={e.team == team}
                 onIonChange={(check) => {
                   checkTeam(check,e,team);

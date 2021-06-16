@@ -15,22 +15,23 @@ import { ContextType } from "../provider/type";
 import { trashOutline } from "ionicons/icons";
 import TeamPopOver from "../components/teamPopOver";
 
-var team: string;
 
 const Team: React.FC = () => {
   const { teams, setTeams } = useContext(MapContext) as ContextType;
+  let inputTeam: HTMLInputElement = (document.getElementById("TeamInput") as HTMLInputElement)
 
-
-  function removeTeam(index:number) {
-    teams.splice(index,1);
+  function removeTeam(index: number) {
+    teams.splice(index, 1);
     setTeams(teams);
   }
 
   function insertTeam() {
-    if(team!=""){teams.push(team);
-    setTeams(teams);}
+    if (inputTeam.value != "") {
+      teams.push(inputTeam.value);
+      setTeams(teams);
+      inputTeam.value = "";
+    }
   }
-
   return (
     <IonPage>
       <div>
@@ -38,26 +39,26 @@ const Team: React.FC = () => {
           <IonInput
             placeholder="Enter Team"
             id="TeamInput"
-            onIonChange={(e) => team = ((e.target as HTMLInputElement).value)}
           ></IonInput>
+          <IonButton onClick={insertTeam}>load</IonButton>{" "}
         </IonItem>
-        <IonButton onClick={insertTeam}>load</IonButton>{" "}
       </div>
       <IonContent
         scrollEvents={true}
-        onIonScrollStart={() => { }}
-        onIonScroll={() => { }}
-        onIonScrollEnd={() => { }}>
+        onIonScrollStart={() => {}}
+        onIonScroll={() => {}}
+        onIonScrollEnd={() => {}}
+      >
         <IonList>
-          {teams.map((e) =>
+          {teams.map((e) => (
             <IonItem>
               <IonLabel>{e}</IonLabel>
-              <TeamPopOver team={e}/>
+              <TeamPopOver team={e} />
               <IonButton onClick={() => removeTeam(teams.indexOf(e))}>
                 <IonIcon slot="end" icon={trashOutline} />
               </IonButton>
             </IonItem>
-          )}
+          ))}
         </IonList>
       </IonContent>
     </IonPage>

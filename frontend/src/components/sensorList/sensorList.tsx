@@ -1,6 +1,7 @@
 import { SelectChangeEventDetail } from "@ionic/core";
 import {
   IonButton,
+  IonContent,
   IonItem,
   IonLabel,
   IonList,
@@ -12,6 +13,7 @@ import { Sensor } from "../../data/sensors";
 import { MapContext } from "../../provider/MapProvider";
 import { ContextType } from "../../provider/type";
 import SensorItem from "./sensoritem/SensorItem";
+import "../../pages/Home.css";
 
 const SensorList: React.FC = () => {
   const { team, teams, setTeam, sensors, setSensors } = useContext(
@@ -48,7 +50,6 @@ const SensorList: React.FC = () => {
           cancelText="Cancel"
           onIonChange={(val) => {
             setTeam(val.detail.value);
-
           }}
         >
           <IonSelectOption value={"any"}>Any</IonSelectOption>
@@ -58,16 +59,24 @@ const SensorList: React.FC = () => {
         </IonSelect>
       </IonItem>
       <div>
-        <IonButton routerLink="/welcome">SYNC</IonButton>
-        <IonButton routerLink="/teams">TEAMS</IonButton>
+        <IonButton expand="full" routerLink="/welcome">
+          MAP
+        </IonButton>
+        <IonButton expand="full" routerLink="/teams">
+          TEAMS
+        </IonButton>
       </div>
-      <IonList>
-        {team == "any"
-          ? sensors.map((e) => <SensorItem key={e.id} sensor={e} />)
-          : sensors.map((e) =>
-              e.team == team ? <SensorItem key={e.id} sensor={e} /> : null
-            )}
-      </IonList>
+      <IonContent id="ion-content"
+        scrollEvents={true}
+      >
+        <IonList>
+          {team == "any"
+            ? sensors.map((e) => <SensorItem key={e.id} sensor={e} />)
+            : sensors.map((e) =>
+                e.team == team ? <SensorItem key={e.id} sensor={e} /> : null
+              )}
+        </IonList>
+      </IonContent>
     </div>
   );
 };
