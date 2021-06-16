@@ -9,9 +9,9 @@ import "./map.css";
 import { HeatmapLayer, GeolocationLayer, MarkerLayer } from "./layers";
 import { MapContext } from "../../provider/MapProvider";
 import { ContextType } from "../../provider/type";
- 
+
 export const MapComponent: React.FC = () => {
-  const { orientation, setFollowUser, followUser, geolocation,addMapListener } = useContext(MapContext) as ContextType;
+  const { orientation, setFollowUser, followUser, geolocation, addMapListener } = useContext(MapContext) as ContextType;
   const mapDivRef = useRef<HTMLDivElement>(null);
   const [map] = useState<Map>(new Map({
     layers: [
@@ -22,29 +22,30 @@ export const MapComponent: React.FC = () => {
       }),
     ],
     view: new View({
-      center: fromLonLat([0,0]),
+      extent : [529449 - 1000, 189252 - 1000, 529449 + 1000, 189252 + 1000],
+      center: fromLonLat([0, 0]),
       zoom: 15,
       maxZoom: 22,
       minZoom: 2
     })
   }));
 
-  useEffect(() => {    
+  useEffect(() => {
     setTimeout(() => {
       if (mapDivRef.current != null) {
         map.setTarget(mapDivRef.current);
-        addMapListener((location)=>map.getView().setCenter(fromLonLat([location.lon, location.lat])))
+        addMapListener((location) => map.getView().setCenter(fromLonLat([location.lon, location.lat])))
       }
     }, 1000);
   }, []);
 
-  if(followUser){
+  if (followUser) {
     map.getView().setRotation(orientation);
     map.getView().setCenter(fromLonLat([geolocation.lon, geolocation.lat]));
   }
 
   map.on("pointermove", () => {
-    if(followUser)
+    if (followUser)
       setFollowUser(false);
   });
 
@@ -53,7 +54,7 @@ export const MapComponent: React.FC = () => {
       <HeatmapLayer map={map} />
       <MarkerLayer map={map} />
       <GeolocationLayer map={map} />
-      
+
     </div>
   );
 }

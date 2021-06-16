@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import {
   IonCard,
   IonFab,
@@ -44,24 +44,24 @@ const TeamPopOver: React.FC<TeamItemProps> = ({ team }) => {
           setShowPopover({ open: false, event: undefined });
         }}
       >
-        <IonList>
-          {sensors.map((e) => {
-            console.log(JSON.stringify(e));
-            (<>
-              <IonItem>{e.id}</IonItem>
-              <IonCheckbox
+        {/* <IonList> */}
+        {sensors.map((e) =>
+        (
+          <IonItem>
+            <IonLabel>{e.id}</IonLabel>
+            <IonCheckbox
                 checked={e.team == team}
                 onIonChange={(check) => {
                   check.detail.checked ? (e.team = team) : (e.team = "");
                 }}
               />
-            </>);
-          })}
-        </IonList>
+          </IonItem>
+        )
+        )}
+        {/* </IonList> */}
       </IonPopover>
       <IonButton
-        onClick={(e) => setShowPopover({ open: true, event: e.nativeEvent })}
-      >
+        onClick={(e) => setShowPopover({ open: true, event: e.nativeEvent })}>
         <IonIcon icon={settingsOutline} />
       </IonButton>
     </>
