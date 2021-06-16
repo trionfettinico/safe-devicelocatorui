@@ -42,7 +42,6 @@ const SensorList: React.FC = () => {
       <IonItem>
         <IonLabel>Team</IonLabel>
         <IonSelect
-          multiple
           value={team}
           okText="Select"
           cancelText="Cancel"
@@ -62,8 +61,12 @@ const SensorList: React.FC = () => {
       <IonList>
         {team == ""
           ? sensors.map((e) => <SensorItem key={e.id} sensor={e} />)
-          : sensors.map((e) => {
-              if (e.team == team) <SensorItem key={e.id} sensor={e} />;
+          : sensors.map((e) => {            
+              if (e.team == team){ 
+              <SensorItem key={e.id} sensor={e} />;
+              console.log("mamma mia "+e.team+" bella "+team);
+
+              }
             })}
       </IonList>
     </div>

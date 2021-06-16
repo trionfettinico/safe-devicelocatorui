@@ -9,10 +9,6 @@ import {
   IonPopover,
   IonButton,
   IonToggle,
-  IonRange,
-  IonList,
-  IonSelect,
-  IonSelectOption,
   IonCheckbox,
 } from "@ionic/react";
 import { settingsOutline } from "ionicons/icons";
@@ -32,8 +28,25 @@ const TeamPopOver: React.FC<TeamItemProps> = ({ team }) => {
     open: false,
     event: undefined,
   });
-  
-  const { sensors } = useContext(MapContext) as ContextType;
+
+  const { sensors , setSensors } = useContext(MapContext) as ContextType;
+
+  function checkTeam(check:CustomEvent,sensor:Sensor,team:string){
+    console.log("1234");
+    sensors.forEach((e)=>{
+      console.log(e.id);
+      console.log(e.status);
+      console.log(e.team);
+    })
+    check.detail.checked ? (sensor.team = team) : (sensor.team = "");
+    setSensors(sensors);
+    console.log("5678");
+    sensors.forEach((e)=>{
+      console.log(e.id);
+      console.log(e.status);
+      console.log(e.team);
+    })
+  }
 
   return (
     <>
@@ -49,10 +62,10 @@ const TeamPopOver: React.FC<TeamItemProps> = ({ team }) => {
         (
           <IonItem>
             <IonLabel>{e.id}</IonLabel>
-            <IonCheckbox
+            <IonToggle
                 checked={e.team == team}
                 onIonChange={(check) => {
-                  check.detail.checked ? (e.team = team) : (e.team = "");
+                  checkTeam(check,e,team);
                 }}
               />
           </IonItem>
