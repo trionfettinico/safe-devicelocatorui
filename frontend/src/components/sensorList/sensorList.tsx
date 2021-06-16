@@ -1,3 +1,4 @@
+import { SelectChangeEventDetail } from "@ionic/core";
 import {
   IonButton,
   IonItem,
@@ -47,6 +48,7 @@ const SensorList: React.FC = () => {
           cancelText="Cancel"
           onIonChange={(val) => {
             setTeam(val.detail.value);
+
           }}
         >
           <IonSelectOption value={"any"}>Any</IonSelectOption>

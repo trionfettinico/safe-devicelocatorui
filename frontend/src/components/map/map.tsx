@@ -22,7 +22,6 @@ export const MapComponent: React.FC = () => {
       }),
     ],
     view: new View({
-      extent : [529449 - 1000, 189252 - 1000, 529449 + 1000, 189252 + 1000],
       center: fromLonLat([0, 0]),
       zoom: 15,
       maxZoom: 22,

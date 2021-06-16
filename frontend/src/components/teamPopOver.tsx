@@ -32,20 +32,8 @@ const TeamPopOver: React.FC<TeamItemProps> = ({ team }) => {
   const { sensors , setSensors } = useContext(MapContext) as ContextType;
 
   function checkTeam(check:CustomEvent,sensor:Sensor,team:string){
-    console.log("1234");
-    sensors.forEach((e)=>{
-      console.log(e.id);
-      console.log(e.status);
-      console.log(e.team);
-    })
     check.detail.checked ? (sensor.team = team) : (sensor.team = "");
     setSensors(sensors);
-    console.log("5678");
-    sensors.forEach((e)=>{
-      console.log(e.id);
-      console.log(e.status);
-      console.log(e.team);
-    })
   }
 
   return (
