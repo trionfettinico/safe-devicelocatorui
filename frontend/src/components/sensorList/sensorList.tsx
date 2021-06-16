@@ -17,21 +17,24 @@ const SensorList: React.FC = () => {
     MapContext
   ) as ContextType;
 
-  useEffect(() => {
+  const getSensor = async () => {
     let sen: Array<Sensor> = [];
-    fetch("http://127.0.0.1:1234/api/sensors")
+    await fetch("http://127.0.0.1:1234/api/sensors")
       .then((response) => response.json())
       .then((response) =>
         response.sensors.map((element: any) => ({
-          "id": element,
-          "status": false,
-          "team": "",
+          id: element,
+          status: false,
+          team: "",
         }))
       )
-      .then(response => {
-        if (sensors == [])
-          setSensors(response);
+      .then((response) => {
+        setSensors(response);
       });
+  };
+
+  useEffect(() => {
+    if (sensors == []) getSensor();
   }, []);
 
   return (
@@ -57,9 +60,11 @@ const SensorList: React.FC = () => {
         <IonButton routerLink="/teams">TEAMS</IonButton>
       </div>
       <IonList>
-        {sensors.map((e) => (
-          <SensorItem key={e.id} sensor={e} />)
-        )}
+        {team == ""
+          ? sensors.map((e) => <SensorItem key={e.id} sensor={e} />)
+          : sensors.map((e) => {
+              if (e.team == team) <SensorItem key={e.id} sensor={e} />;
+            })}
       </IonList>
     </div>
   );

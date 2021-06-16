@@ -36,7 +36,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
     sensors.map((e) => {
       if (e.id == sensor.id)
         e.status = !e.status;
-    })
+    });
     setSensors(sensors);
   }
 

@@ -32,7 +32,7 @@ const TeamPopOver: React.FC<TeamItemProps> = ({ team }) => {
     open: false,
     event: undefined,
   });
-
+  
   const { sensors } = useContext(MapContext) as ContextType;
 
   return (

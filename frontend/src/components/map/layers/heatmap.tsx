@@ -9,30 +9,31 @@ import { ContextType } from "../../../provider/type";
 export const HeatmapLayer: React.FC<MapLayerProps> = ({ map }) => {
   const { heatmapVisible, radius, blur } = useContext(MapContext) as ContextType;
   
-  useEffect(()=>{
-    const getHeatmap = async () => {
-      await fetch("http://127.0.0.1:1234/api/sensors")
-      .then((response) => response.json())
-      .then((response) =>
-        response.sensors.map((element: any) => {
-          map.addLayer(new Heatmap({
-            className: "heatmap",
-            visible: heatmapVisible,
-            source: new VectorSource({
-              url: 'http://localhost:1234/api/heatmap?sensor=' + element + '&format=kml',
-              format: new KML({
-                extractStyles: false,
-              }),
+  const getHeatmap =  () => {
+     fetch("http://127.0.0.1:1234/api/sensors")
+    .then((response) => response.json())
+    .then((response) =>
+      response.sensors.map((element: any) => {
+        map.addLayer(new Heatmap({
+          className: "heatmap",
+          visible: heatmapVisible,
+          source: new VectorSource({
+            url: 'http://localhost:1234/api/heatmap?sensor=' + element + '&format=kml',
+            format: new KML({
+              extractStyles: false,
             }),
-            blur: blur,
-            radius: radius,
-            weight: function (feature) {
-              return feature.get('name');
-            },
-          }));
-        })
-      );
-    };
+          }),
+          blur: blur,
+          radius: radius,
+          weight: function (feature) {
+            return feature.get('name');
+          },
+        }));
+      })
+    );
+  };
+
+  useEffect(()=>{
     getHeatmap();
     
   },[]);

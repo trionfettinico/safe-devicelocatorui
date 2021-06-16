@@ -15,7 +15,6 @@ import { ContextType } from "../provider/type";
 import { trashOutline } from "ionicons/icons";
 import TeamPopOver from "../components/teamPopOver";
 
-var teams: string[];
 var team: string;
 
 const Team: React.FC = () => {
@@ -28,8 +27,8 @@ const Team: React.FC = () => {
   }
 
   function insertTeam() {
-    teams.push(team);
-    setTeams(teams);
+    if(team!=""){teams.push(team);
+    setTeams(teams);}
   }
 
   return (
