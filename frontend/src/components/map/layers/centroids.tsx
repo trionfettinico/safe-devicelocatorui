@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import VectorSource from "ol/source/Vector";
 import KML from 'ol/format/KML';
-import { MapLayerProps } from "../map-types";
+import { SensorLayerProps } from "../map-types";
 import VectorLayer from "ol/layer/Vector";
 
-export const CentroidsLayer: React.FC<MapLayerProps> = ({ map }) => {
+export const CentroidsLayer: React.FC<SensorLayerProps> = ({ map, sensor }) => {
   const [vectorLayer] = useState<VectorLayer>(
     new VectorLayer({
       source: new VectorSource({
@@ -14,7 +14,7 @@ export const CentroidsLayer: React.FC<MapLayerProps> = ({ map }) => {
         })
       }),
       className: "centroids",
-      visible: true,
+      visible: sensor.isCentroidVisible,
     })
   );
 
@@ -22,6 +22,6 @@ export const CentroidsLayer: React.FC<MapLayerProps> = ({ map }) => {
     map.addLayer(vectorLayer);
   }, []);
 
-  vectorLayer.setVisible(true);
+  vectorLayer.setVisible(sensor.isCentroidVisible);
   return null;
 }

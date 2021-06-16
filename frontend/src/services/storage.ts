@@ -1,5 +1,6 @@
 import { Storage } from '@ionic/storage';
 import { Sensor } from '../data/sensors';
+import ApiService from './apiService';
 
 class StorageService {
     storage = new Storage();
@@ -10,16 +11,17 @@ class StorageService {
 
     async saveSensorLocal(value: Array<Sensor>) {
         this.storage.set("SensorsLocal", JSON.stringify(value));
-        const sensorLocal = await this.storage.get("SensorsLocal");
-        
     }
 
     async getSensorLocal(): Promise<Array<Sensor>> {
-        const sensorLocal = await this.storage.get("SensorsLocal");
-        if(sensorLocal != null)
-            return JSON.parse(sensorLocal);
-        else
-            return [];
+        const sensorsLocal = await this.storage.get("SensorsLocal");
+        console.log("DIO PORCO not parsed",sensorsLocal);
+        if(!sensorsLocal){
+            return new Array();
+        }
+        const sensorsLocalParsed = JSON.parse(sensorsLocal);
+        console.log("DIO PORCO parsed",sensorsLocalParsed);
+        return sensorsLocalParsed;
         
     }
 
@@ -125,19 +127,6 @@ class StorageService {
     }
 
     async getTeam(): Promise<string> {
-        const teams = await this.storage.get("Team");
-        if(teams != null)
-            return teams;
-        else
-            return "";
-        
-    }
-
-    saveSensorSelected(value: string) {
-        this.storage.set("Team", value);
-    }
-
-    async getSensorSelected(): Promise<string> {
         const teams = await this.storage.get("Team");
         if(teams != null)
             return teams;

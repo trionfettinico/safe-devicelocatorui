@@ -8,36 +8,15 @@ import {
   IonSelectOption,
 } from "@ionic/react";
 import React, { useContext, useEffect } from "react";
-import { Sensor } from "../../data/sensors";
 import { MapContext } from "../../provider/MapProvider";
 import { ContextType } from "../../provider/type";
 import SensorItem from "./sensoritem/SensorItem";
 import "../../pages/Home.css";
 
 const SensorList: React.FC = () => {
-  const { team, teams, setTeam, sensors, setSensors } = useContext(
+  const { team, teams, setTeam, sensors } = useContext(
     MapContext
   ) as ContextType;
-
-  const getSensor = async () => {
-    let sen: Array<Sensor> = [];
-    await fetch("http://127.0.0.1:1234/api/sensors")
-      .then((response) => response.json())
-      .then((response) =>
-        response.sensors.map((element: any) => ({
-          id: element,
-          status: false,
-          team: "",
-        }))
-      )
-      .then((response) => {
-        setSensors(response);
-      });
-  };
-
-  useEffect(() => {
-    if (sensors == []) getSensor();
-  }, []);
 
   return (
     <div>

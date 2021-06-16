@@ -11,7 +11,7 @@ import { MapContext } from "../../provider/MapProvider";
 import { ContextType } from "../../provider/type";
 
 export const MapComponent: React.FC = () => {
-  const { orientation, setFollowUser, followUser, geolocation, addMapListener } = useContext(MapContext) as ContextType;
+  const { orientation, setFollowUser, followUser, geolocation, addMapListener, sensors } = useContext(MapContext) as ContextType;
   const mapDivRef = useRef<HTMLDivElement>(null);
   const [map] = useState<Map>(new Map({
     layers: [
@@ -50,10 +50,9 @@ export const MapComponent: React.FC = () => {
 
   return (
     <div className="map" ref={mapDivRef}>
-      <HeatmapLayer map={map} />
-      <MarkerLayer map={map} />
+      {sensors.map((e)=><HeatmapLayer map={map} sensor={e}/>)}
+      {sensors.map((e)=><MarkerLayer map={map} sensor={e}/>)}
       <GeolocationLayer map={map} />
-
     </div>
   );
 }

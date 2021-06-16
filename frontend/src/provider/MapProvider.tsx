@@ -4,6 +4,7 @@ import { LocationType, ContextType } from "./type";
 import { toRadians } from 'ol/math';
 import StorageService from "../services/storage";
 import { Sensor } from "../data/sensors";
+import ApiService from "../services/apiService";
 
 export const MapContext = React.createContext<ContextType | null>(null);
 
@@ -15,6 +16,7 @@ class MapCenterListener {
 }
 
 const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
+    const [apiService] = React.useState<ApiService>(new ApiService());
     const [heatmapVisible, setHeatmapVisible] = React.useState<boolean>(true);
     const [blur, setBlurState] = React.useState<number>(20);
     const [radius, setRadiusState] = React.useState<number>(8);
@@ -25,13 +27,19 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [followUser, setFollowUser] = React.useState<boolean>(true);
     const [centerChangeListeners] = React.useState<Array<MapCenterListener>>(new Array());
     const [sensors, setSensorsLocal] = React.useState(new Array<Sensor>());
-    const [sensorSelect, setSensorSelectedLocal] = React.useState<string>("");
     const [storageService] = React.useState(new StorageService());
     const [centroidsVisible, setCentroidsVisible] = React.useState<boolean>(true);
     const [teams, setTeamsLocal] = React.useState<Array<string>>([]);
     const [team, setTeamLocal] = React.useState<string>("");
 
     async function loadData() {
+        var sensorsTemp = await storageService.getSensorLocal();
+        console.log("DIO BESTIA from provider",sensorsTemp.length);
+        if(sensorsTemp.length === 0) {
+            console.log("DIO PORCO loading from api");
+            sensorsTemp = await apiService.loadSensors();
+        }
+        setSensors(sensorsTemp);
         setHeatmapVisible(await storageService.getHeatmapVisible());
         setLocationVisible(await storageService.getLocationVisible());
         setCentroidsVisible(await storageService.getCentroidsVisible());
@@ -40,7 +48,6 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
         setTeams(await storageService.getTeams());
         setTeam(await storageService.getTeam());
         setMarkerVisible(await storageService.getMarkerVisible());
-        setSensorsLocal(await storageService.getSensorLocal())
     }
 
     useEffect(() => {
@@ -104,10 +111,6 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
         storageService.saveSensorLocal(sensorsList);
     }
 
-    const setSensorSelected = async (sensor: string) => {
-        setSensorSelectedLocal(sensor);
-    }
-
     const setTeams = async (teams: Array<string>) => {
         setTeamsLocal(teams);
         storageService.saveTeams(teams);
@@ -147,8 +150,6 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
             setTeams,
             team,
             setTeam,
-            sensorSelect,
-            setSensorSelected
         }}>
             {children}
         </MapContext.Provider>

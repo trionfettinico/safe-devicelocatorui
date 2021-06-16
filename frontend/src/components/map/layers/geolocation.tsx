@@ -5,12 +5,12 @@ import Point from "ol/geom/Point";
 import { fromLonLat } from "ol/proj";
 import { Icon, Style } from 'ol/style';
 import VectorSource from 'ol/source/Vector';
-import { MapLayerProps } from "../map-types";
+import { SingleLayerProps } from "../map-types";
 import { ContextType } from "../../../provider/type";
 import { MapContext } from "../../../provider/MapProvider";
 import BaseLayer from "ol/layer/Base";
 
-export const GeolocationLayer: React.FC<MapLayerProps> = ({ map }) => {
+export const GeolocationLayer: React.FC<SingleLayerProps> = ({ map }) => {
     const { locationVisible, geolocation, startLocationListeners } = useContext(MapContext) as ContextType;
     const [iconFeature] = useState<Feature>(new Feature({
         geometry: new Point(fromLonLat([geolocation.lon, geolocation.lat])),

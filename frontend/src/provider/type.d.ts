@@ -36,6 +36,4 @@ type ContextType = {
     setTeams: (Array) => void;
     team: string;
     setTeam: (string) => void;
-    sensorSelect: string;
-    setSensorSelected: (string) => void;
 };
