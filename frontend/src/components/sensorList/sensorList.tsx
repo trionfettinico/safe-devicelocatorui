@@ -49,6 +49,7 @@ const SensorList: React.FC = () => {
             setTeam(val.detail.value);
           }}
         >
+          <IonSelectOption value={"any"}>Any</IonSelectOption>
           {teams.map((e) => (
             <IonSelectOption value={e}>{e}</IonSelectOption>
           ))}
@@ -59,15 +60,11 @@ const SensorList: React.FC = () => {
         <IonButton routerLink="/teams">TEAMS</IonButton>
       </div>
       <IonList>
-        {team == ""
+        {team == "any"
           ? sensors.map((e) => <SensorItem key={e.id} sensor={e} />)
-          : sensors.map((e) => {            
-              if (e.team == team){ 
-              <SensorItem key={e.id} sensor={e} />;
-              console.log("mamma mia "+e.team+" bella "+team);
-
-              }
-            })}
+          : sensors.map((e) =>
+              e.team == team ? <SensorItem key={e.id} sensor={e} /> : null
+            )}
       </IonList>
     </div>
   );
