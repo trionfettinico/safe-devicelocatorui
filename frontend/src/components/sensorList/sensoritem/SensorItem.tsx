@@ -83,14 +83,14 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
 
   function changeHeatMapBlur(sensor: Sensor, blur: number) {
     sensors.map((e) => {
-      if (e.id == sensor.id) e.isHeatmapVisible = !e.isHeatmapVisible;
+      if (e.id == sensor.id) e.heatmapBlur = blur;
     });
     setSensors(sensors);
   }
 
   function changeHeatMapRadius(sensor: Sensor, radius: number) {
     sensors.map((e) => {
-      if (e.id == sensor.id) e.isHeatmapVisible = !e.isHeatmapVisible;
+      if (e.id == sensor.id) e.heatmapRadius = radius;
     });
     setSensors(sensors);
   }
@@ -157,6 +157,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
                     min={5}
                     max={20}
                     step={1}
+                    snaps={true}
                     value={sensor.heatmapRadius}
                     onIonChange={(e) => {
                       changeHeatMapRadius(sensor, e.detail.value as number);
@@ -169,6 +170,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
                     min={5}
                     max={30}
                     step={1}
+                    snaps={true}
                     value={sensor.heatmapBlur}
                     onIonChange={(e) => {
                       changeHeatMapBlur(sensor, e.detail.value as number);
