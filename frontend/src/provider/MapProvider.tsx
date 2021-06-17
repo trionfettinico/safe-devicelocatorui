@@ -20,8 +20,10 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [followUser, setFollowUser] = React.useState<boolean>(true);
     const [centerChangeListeners] = React.useState<Array<MapCenterListener>>(new Array());
     const [storageService] = React.useState(new StorageService());
+    const [tilesInit, setTilesInit] = React.useState<boolean>(false);
 
     async function loadData() {
+        setTilesInit(await storageService.getIsTilesLoaded());
         setLocationVisible(await storageService.getLocationVisible());
     }
 
@@ -29,6 +31,10 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
         loadData();
     }, []);
 
+    const setTilesInitLocal = (value : boolean) => {
+        setTilesInit(value);
+        storageService.saveTilesInit(value);
+    }
     const startLocationListeners = () => {
         Geolocation.watchPosition({ enableHighAccuracy: true }, (position) => {
             if (position)
@@ -59,8 +65,10 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
             setOrientation,
             setGeolocation,
             startLocationListeners,
+            goToLocation,
             addMapListener,
-            goToLocation
+            tilesInit,
+            setTilesInit
         }}>
             {children}
         </MapContext.Provider>

@@ -1,12 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
     IonButton,
     IonInput,
     IonItem,
     IonPage,
+    useIonToast,
 } from '@ionic/react';
 import './Home.css';
 import { Plugins } from "@capacitor/core";
+import { MapContext } from "../provider/MapProvider";
+import { ContextMapType } from "../provider/type";
 const { JarvisTransferPlugin } = Plugins;
 
 // const { Network } = Plugins;
@@ -15,10 +18,16 @@ const { JarvisTransferPlugin } = Plugins;
 var city = "";
 
 const Welcome: React.FC = () => {
+    const { tilesInit, setTilesInit } = useContext(
+        MapContext
+    ) as ContextMapType;
+    const [present, dismiss] = useIonToast();
 
     // const [networkState, setNetworkState] = useState("offline");
 
     useEffect(() => {
+        if(tilesInit)
+            window.open("/home");
         // Network.addListener("networkStatusChange", status => {
         //     setNetworkState(status.connectionType);
         // });
@@ -32,22 +41,22 @@ const Welcome: React.FC = () => {
             .then(response => response.json())
             .then(async data => {
                 if (data.results.length == 0) {
-                    console.log("vuoto");
+                    present({
+                        buttons: [{ text: 'hide', handler: () => dismiss() }],
+                        message: 'nome ' + city + ' non valido',
+                        duration: 10000
+                    });
                     return;
                 }
-                if (data.results[0].components.country_code == "it") {
-                    console.log("Starting download");
-                    await JarvisTransferPlugin.download({
-                      url: "http://www.lucapatarca.cloud/"+data.results[0].geometry.lat+"/"+data.results[0].geometry.lng,
-                    });
-                    console.log("Download completed");
-                    console.log("Starting unzip");
-                    await JarvisTransferPlugin.unzip({});
-                    console.log("Unzip completed");
-                }
-                else {                    
-                    console.log("non presente");
-                }
+                console.log("Starting download");
+                await JarvisTransferPlugin.download({
+                    url: "http://www.lucapatarca.cloud/" + data.results[0].geometry.lat + "/" + data.results[0].geometry.lng,
+                });
+                console.log("Download completed");
+                console.log("Starting unzip");
+                await JarvisTransferPlugin.unzip({});
+                console.log("Unzip completed");
+                setTilesInit(true);
             });
     }
 

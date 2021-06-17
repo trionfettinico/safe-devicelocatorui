@@ -49,7 +49,7 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
             teams,
             setTeams,
             team,
-            setTeam,
+            setTeam
         }}>
             {children}
         </SensorsContext.Provider>

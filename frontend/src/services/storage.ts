@@ -8,6 +8,18 @@ class StorageService {
         this.storage.create();
     }
 
+    saveTilesInit(value:boolean){
+        this.storage.set("TilesInit",value);
+    }
+
+    async getTilesInit(): Promise<boolean> {
+        const tilesInit = await this.storage.get("TilesInit");
+        if(tilesInit != null)
+            return tilesInit;
+        else
+            return false;
+    }
+
     async saveSensorLocal(value: Array<Sensor>) {
         this.storage.set("SensorsLocal", JSON.stringify(value));
     }

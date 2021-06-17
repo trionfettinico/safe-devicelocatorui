@@ -2,8 +2,8 @@
 
 mod map;
 
-static CITY_LAT: f32 = 43.146918;
-static CITY_LON: f32 = 13.066712;
+static CITY_LAT: f32 = 43.5219801;
+static CITY_LON: f32 = 13.2443764;
 
 use rocket::response::NamedFile;
 
@@ -19,6 +19,7 @@ extern crate rocket;
 
 #[get("/<lat>/<lng>")]
 fn index(lat: String, lng: String) -> Result<NamedFile, NotFound<String>> {
+    map::remove_dir();
     map::zip(lat,lng);
     let path = map::get_dir();
     NamedFile::open(&path).map_err(|e| NotFound(e.to_string()))

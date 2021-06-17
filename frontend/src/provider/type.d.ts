@@ -19,6 +19,8 @@ type ContextMapType = {
     startLocationListeners: () => void;
     addMapListener: (fun: (center:LocationType)=>void)=>void;
     goToLocation: (location:LocationType) => void;
+    tilesInit:boolean;
+    setTilesInit : (boolean) => void;
 };
 
 type ContextSensorsType = {
