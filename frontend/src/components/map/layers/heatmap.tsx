@@ -3,8 +3,6 @@ import { Heatmap } from "ol/layer";
 import VectorSource from "ol/source/Vector";
 import KML from 'ol/format/KML';
 import { SensorLayerProps } from "../map-types";
-import { MapContext } from "../../../provider/MapProvider";
-import { ContextType } from "../../../provider/type";
 
 export const HeatmapLayer: React.FC<SensorLayerProps> = ({ map, sensor }) => {
 
@@ -17,7 +15,7 @@ export const HeatmapLayer: React.FC<SensorLayerProps> = ({ map, sensor }) => {
         extractStyles: false,
       }),
     }),
-    blur: sensor.heatmapBlur, //TODO aggiungere blue e radio per il singolo sensore
+    blur: sensor.heatmapBlur,
     radius: sensor.heatmapRadius,
     weight: function (feature) {
       return feature.get('name');

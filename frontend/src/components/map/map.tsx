@@ -8,11 +8,13 @@ import "ol/ol.css";
 import "./map.css";
 import { HeatmapLayer, GeolocationLayer, MarkerLayer } from "./layers";
 import { MapContext } from "../../provider/MapProvider";
-import { ContextType } from "../../provider/type";
+import { ContextMapType, ContextSensorsType } from "../../provider/type";
 import { CentroidsLayer } from "./layers/centroids";
+import { SensorsContext } from "../../provider/SensorsProvider";
 
 export const MapComponent: React.FC = () => {
-  const { orientation, setFollowUser, followUser, geolocation, addMapListener, sensors } = useContext(MapContext) as ContextType;
+  const { orientation, setFollowUser, followUser, geolocation, addMapListener } = useContext(MapContext) as ContextMapType;
+  const { sensors } = useContext(SensorsContext) as ContextSensorsType;
   const mapDivRef = useRef<HTMLDivElement>(null);
   const [map] = useState<Map>(new Map({
     layers: [

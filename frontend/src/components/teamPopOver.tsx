@@ -8,8 +8,8 @@ import {
   IonToggle,
 } from "@ionic/react";
 import { settingsOutline } from "ionicons/icons";
-import { ContextType } from "../provider/type";
-import { MapContext } from "../provider/MapProvider";
+import { ContextSensorsType } from "../provider/type";
+import { SensorsContext } from "../provider/SensorsProvider";
 import { Sensor } from "../data/sensors";
 
 interface TeamItemProps {
@@ -25,7 +25,7 @@ const TeamPopOver: React.FC<TeamItemProps> = ({ team }) => {
     event: undefined,
   });
 
-  const { sensors , setSensors } = useContext(MapContext) as ContextType;
+  const { sensors , setSensors } = useContext(SensorsContext) as ContextSensorsType;
 
   function checkTeam(check:CustomEvent,sensor:Sensor,team:string){
     check.detail.checked ? (sensor.team = team) : (sensor.team = "");

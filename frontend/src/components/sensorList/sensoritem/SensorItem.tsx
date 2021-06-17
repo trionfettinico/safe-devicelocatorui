@@ -20,7 +20,8 @@ import {
 } from "ionicons/icons";
 import { settingsOutline } from "ionicons/icons";
 import { MapContext } from "../../../provider/MapProvider";
-import { ContextType } from "../../../provider/type";
+import { ContextMapType, ContextSensorsType } from "../../../provider/type";
+import { SensorsContext } from "../../../provider/SensorsProvider";
 
 interface SensorListItemProps {
   sensor: Sensor;
@@ -28,9 +29,10 @@ interface SensorListItemProps {
 
 const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const { goToLocation, sensors, setSensors } = useContext(
+  const { goToLocation } = useContext(
     MapContext
-  ) as ContextType;
+  ) as ContextMapType;
+  const {sensors, setSensors} = useContext(SensorsContext) as ContextSensorsType;
   const [showPopover, setShowPopover] = useState<{
     open: boolean;
     event: Event | undefined;

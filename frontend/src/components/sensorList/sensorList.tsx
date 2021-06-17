@@ -8,15 +8,15 @@ import {
   IonSelectOption,
 } from "@ionic/react";
 import React, { useContext, useEffect } from "react";
-import { MapContext } from "../../provider/MapProvider";
-import { ContextType } from "../../provider/type";
+import { ContextSensorsType } from "../../provider/type";
 import SensorItem from "./sensoritem/SensorItem";
 import "../../pages/Home.css";
+import { SensorsContext } from "../../provider/SensorsProvider";
 
 const SensorList: React.FC = () => {
   const { team, teams, setTeam, sensors, setSensors } = useContext(
-    MapContext
-  ) as ContextType;
+    SensorsContext
+  ) as ContextSensorsType;
 
   return (
     <div>
