@@ -73,7 +73,7 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
             startLocationListeners,
             goToLocation,
             addMapListener,
-            toggleLocation
+            toggleLocation,
             tilesInit,
             setTilesInit
         }}>
