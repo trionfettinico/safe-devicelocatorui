@@ -1,6 +1,5 @@
 import { Storage } from '@ionic/storage';
 import { Sensor } from '../data/sensors';
-import ApiService from './apiService';
 
 class StorageService {
     storage = new Storage();

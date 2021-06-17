@@ -8,7 +8,7 @@ export const CentroidsLayer: React.FC<SensorLayerProps> = ({ map, sensor }) => {
   const [vectorLayer] = useState<VectorLayer>(
     new VectorLayer({
       source: new VectorSource({
-        url: "http://135.181.24.224:5000/api/sampling/centroid-area?sensor=0504&format=kml",
+        url: "http://127.0.0.1:1234/api/centroid-area?sensor="+sensor.id+"&format=kml",
         format: new KML({
           extractStyles: false,
         })

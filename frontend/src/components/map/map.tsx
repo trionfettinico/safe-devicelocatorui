@@ -9,6 +9,7 @@ import "./map.css";
 import { HeatmapLayer, GeolocationLayer, MarkerLayer } from "./layers";
 import { MapContext } from "../../provider/MapProvider";
 import { ContextType } from "../../provider/type";
+import { CentroidsLayer } from "./layers/centroids";
 
 export const MapComponent: React.FC = () => {
   const { orientation, setFollowUser, followUser, geolocation, addMapListener, sensors } = useContext(MapContext) as ContextType;
@@ -50,11 +51,10 @@ export const MapComponent: React.FC = () => {
 
   return (
     <div className="map" ref={mapDivRef}>
-      {sensors.map((e)=><HeatmapLayer map={map} sensor={e}/>)}
+      {sensors.map((e)=><CentroidsLayer map={map} sensor={e}/>)}
       {sensors.map((e)=><MarkerLayer map={map} sensor={e}/>)}
+      {sensors.map((e)=><HeatmapLayer map={map} sensor={e}/>)}
       <GeolocationLayer map={map} />
     </div>
   );
 }
-
-//<CentroidsLayer map={map} />
