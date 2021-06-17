@@ -18,7 +18,7 @@ export const MapComponent: React.FC = () => {
     layers: [
       new TileLayer({
         source: new XYZ({
-          url: (window['Ionic' as any]['WebView' as any] as any).convertFileSrc("file:///storage/emulated/0/Android/data/io.ionic.starter/files/tiles/tiles/{z}/{x}/{y}.png"),//"https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+          url: /*(window['Ionic' as any]['WebView' as any] as any).convertFileSrc("file:///storage/emulated/0/Android/data/io.ionic.starter/files/tiles/tiles/{z}/{x}/{y}.png"),*/"https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         })
       }),
     ],
@@ -51,9 +51,9 @@ export const MapComponent: React.FC = () => {
 
   return (
     <div className="map" ref={mapDivRef}>
+      {sensors.map((e)=><HeatmapLayer map={map} sensor={e}/>)}
       {sensors.map((e)=><CentroidsLayer map={map} sensor={e}/>)}
       {sensors.map((e)=><MarkerLayer map={map} sensor={e}/>)}
-      {sensors.map((e)=><HeatmapLayer map={map} sensor={e}/>)}
       <GeolocationLayer map={map} />
     </div>
   );
