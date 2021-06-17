@@ -10,7 +10,6 @@ import { ContextType } from "../../../provider/type";
 import KML from "ol/format/KML";
 
 export const MarkerLayer: React.FC<SensorLayerProps> = ({ map, sensor }) => {
-  const { markerVisible } = useContext(MapContext) as ContextType;
 
   const [layer] = React.useState<VectorLayer>(new VectorLayer({
     source: new VectorSource({
@@ -20,7 +19,7 @@ export const MarkerLayer: React.FC<SensorLayerProps> = ({ map, sensor }) => {
       })
     }),
     className: "marker",
-    visible: markerVisible,
+    visible: true,
     style: new Style({
       image: new Icon({
         src: "./assets/icon/sensor.png",

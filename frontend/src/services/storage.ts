@@ -14,11 +14,8 @@ class StorageService {
 
     async getSensorLocal(): Promise<Array<Sensor>> {
         const sensorsLocal = await this.storage.get("SensorsLocal");
-        if(!sensorsLocal){
-            return new Array();
-        }
-        const sensorsLocalParsed = JSON.parse(sensorsLocal);
-        return sensorsLocalParsed;
+        if(!sensorsLocal) return new Array();
+        return JSON.parse(sensorsLocal);
         
     }
 
