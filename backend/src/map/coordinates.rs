@@ -6,7 +6,7 @@ static SURROUNDING_RANGE: f32 = 0.078;
 pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32) -> HashSet<TileCoords>{
     let mut coordinates = HashSet::new();
 
-    for z in 15..16 {
+    for z in 15..21 {
         let (min_x, min_y) = deg2num(city_lat+SURROUNDING_RANGE, city_lon-SURROUNDING_RANGE, z);
         let (max_x, max_y) = deg2num(city_lat-SURROUNDING_RANGE, city_lon+SURROUNDING_RANGE, z);
         for _x in min_x..max_x {

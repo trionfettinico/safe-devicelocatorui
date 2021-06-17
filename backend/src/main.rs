@@ -5,12 +5,6 @@ mod map;
 static CITY_LAT: f32 = 43.146918;
 static CITY_LON: f32 = 13.066712;
 
-static CITY_LAT2: f32 = 43.0817007;
-static CITY_LON2: f32 = 13.0429675;
-
-static CITY_LAT3: f32 = 43.208151;
-static CITY_LON3: f32 = 13.053671;
-
 use rocket::response::NamedFile;
 
 use rocket::response::status::NotFound;
