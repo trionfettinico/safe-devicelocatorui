@@ -1,14 +1,12 @@
-import { Motion, Geolocation } from "@capacitor/core";
 import React, { useEffect } from "react";
-import { LocationType, ContextSensorsType } from "./type";
-import { toRadians } from 'ol/math';
+import { ContextSensorsType } from "./type";
 import StorageService from "../services/storage";
 import { Sensor } from "../data/sensors";
 import ApiService from "../services/apiService";
 
 export const SensorsContext = React.createContext<ContextSensorsType | null>(null);
 
-const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
+const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [apiService] = React.useState<ApiService>(new ApiService());
     const [sensors, setSensorsLocal] = React.useState(new Array<Sensor>());
     const [storageService] = React.useState(new StorageService());
@@ -58,4 +56,4 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     );
 };
 
-export default MapProvider;
+export default SensorsProvider;

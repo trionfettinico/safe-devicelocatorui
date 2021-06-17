@@ -1,7 +1,7 @@
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-import React, { useContext, useEffect } from "react";
-import { SensorLayerProps, SingleLayerProps } from "../map-types";
+import React, { useEffect } from "react";
+import { SensorLayerProps } from "../map-types";
 import { Icon, Style } from "ol/style";
 import "ol/ol.css";
 import KML from "ol/format/KML";

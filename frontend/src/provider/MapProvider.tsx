@@ -3,8 +3,6 @@ import React, { useEffect } from "react";
 import { LocationType, ContextMapType } from "./type";
 import { toRadians } from 'ol/math';
 import StorageService from "../services/storage";
-import { Sensor } from "../data/sensors";
-import ApiService from "../services/apiService";
 
 export const MapContext = React.createContext<ContextMapType | null>(null);
 

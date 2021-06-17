@@ -36,8 +36,7 @@ const Home: React.FC = () => {
           <SensorList />
         </IonMenu>
         <IonContent id="map">
-          <Map />
-          <Popover />
+          <Map/>
           <LocationFab />
         </IonContent>
       </IonSplitPane>
