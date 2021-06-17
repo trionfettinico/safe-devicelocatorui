@@ -55,6 +55,12 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
         centerChangeListeners.forEach((it) => it.notify(location));
     }
 
+    const toggleLocation = () => {
+        setLocationVisible(!locationVisible);
+        storageService.saveLocationVisible(!locationVisible);
+        
+    }
+
     return (
         <MapContext.Provider value={{
             locationVisible,
@@ -67,6 +73,7 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
             startLocationListeners,
             goToLocation,
             addMapListener,
+            toggleLocation
             tilesInit,
             setTilesInit
         }}>

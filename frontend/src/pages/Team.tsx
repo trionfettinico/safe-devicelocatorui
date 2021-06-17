@@ -15,10 +15,8 @@ import { trashOutline } from "ionicons/icons";
 import TeamPopOver from "../components/teamPopOver";
 import { SensorsContext } from "../provider/SensorsProvider";
 
-
 const Team: React.FC = () => {
   const { teams, setTeams } = useContext(SensorsContext) as ContextSensorsType;
-  let inputTeam: HTMLInputElement = (document.getElementById("TeamInput") as HTMLInputElement)
 
   function removeTeam(index: number) {
     teams.splice(index, 1);
@@ -26,20 +24,21 @@ const Team: React.FC = () => {
   }
 
   function insertTeam() {
+    var inputTeam: HTMLInputElement = document.getElementById(
+      "TeamInput"
+    ) as HTMLInputElement;
     if (inputTeam.value != "") {
       teams.push(inputTeam.value);
       setTeams(teams);
       inputTeam.value = "";
     }
+    console.log("pippo molto molto" + JSON.stringify(teams));
   }
   return (
     <IonPage>
       <div>
         <IonItem>
-          <IonInput
-            placeholder="Enter Team"
-            id="TeamInput"
-          ></IonInput>
+          <IonInput placeholder="Enter Team" id="TeamInput"></IonInput>
           <IonButton onClick={insertTeam}>load</IonButton>{" "}
         </IonItem>
       </div>

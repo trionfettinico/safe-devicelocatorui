@@ -34,13 +34,6 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
     MapContext
   ) as ContextMapType;
   const {sensors, setSensors} = useContext(SensorsContext) as ContextSensorsType;
-  const [showPopover, setShowPopover] = useState<{
-    open: boolean;
-    event: Event | undefined;
-  }>({
-    open: false,
-    event: undefined,
-  });
   function findSensor() {
     fetch(
       "http://127.0.0.1:1234/api/centroid?sensor=" + sensor.id + "&format=json"

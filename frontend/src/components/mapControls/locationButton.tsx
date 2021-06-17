@@ -1,16 +1,34 @@
-import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
+import {
+  IonFab,
+  IonFabButton,
+  IonIcon,
+  IonItem,
+  IonToggle,
+} from "@ionic/react";
 import React, { useContext } from "react";
-import { location } from "ionicons/icons"
+import { location, locationOutline, options } from "ionicons/icons";
 import { MapContext } from "../../provider/MapProvider";
 import { ContextMapType } from "../../provider/type";
 
 export const LocationFab: React.FC = () => {
-  const { setFollowUser } = useContext(MapContext) as ContextMapType;
+  const { setFollowUser, toggleLocation, locationVisible } = useContext(
+    MapContext
+  ) as ContextMapType;
+
   return (
-    <IonFab vertical="bottom" horizontal="end" slot="fixed">
-      <IonFabButton onClick={()=>setFollowUser(true)}>
-        <IonIcon icon={location} />
-      </IonFabButton>
-    </IonFab>
+    <>
+      <IonFab vertical="bottom" horizontal="end" slot="fixed">
+        <>
+          <IonToggle
+            checked={locationVisible}
+            value="locationVisible"
+            onIonChange={toggleLocation}
+          />
+          <IonFabButton onClick={setFollowUser} disabled={!locationVisible}>
+            <IonIcon icon={locationVisible ? location : locationOutline} />
+          </IonFabButton>
+        </>
+      </IonFab>
+    </>
   );
-}
+};
