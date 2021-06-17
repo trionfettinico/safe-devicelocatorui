@@ -5,4 +5,6 @@ export interface Sensor {
     isHeatmapVisible: boolean;
     isMarkerVisible: boolean;
     isCentroidVisible: boolean;
+    heatmapRadius: number;
+    heatmapBlur: number;
 }

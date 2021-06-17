@@ -15,13 +15,8 @@ class StorageService {
 
     async getSensorLocal(): Promise<Array<Sensor>> {
         const sensorsLocal = await this.storage.get("SensorsLocal");
-        console.log("DIO PORCO not parsed",sensorsLocal);
-        if(!sensorsLocal){
-            return new Array();
-        }
-        const sensorsLocalParsed = JSON.parse(sensorsLocal);
-        console.log("DIO PORCO parsed",sensorsLocalParsed);
-        return sensorsLocalParsed;
+        if(!sensorsLocal) return new Array();
+        return JSON.parse(sensorsLocal);
         
     }
 

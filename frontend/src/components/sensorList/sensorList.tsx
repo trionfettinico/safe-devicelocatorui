@@ -14,7 +14,7 @@ import SensorItem from "./sensoritem/SensorItem";
 import "../../pages/Home.css";
 
 const SensorList: React.FC = () => {
-  const { team, teams, setTeam, sensors } = useContext(
+  const { team, teams, setTeam, sensors, setSensors } = useContext(
     MapContext
   ) as ContextType;
 

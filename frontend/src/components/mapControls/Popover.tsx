@@ -20,7 +20,7 @@ const Popover: React.FC = () => {
     open: false,
     event: undefined,
   });
-  const { heatmapVisible, markerVisible, locationVisible, centroidsVisible, radius, blur, toggleLocation, toggleMarker, toggleHeatmap, toggleCentroids, setBlur, setRadius } = useContext(MapContext) as ContextType;
+  const { locationVisible } = useContext(MapContext) as ContextType;
   return (
     <>
       <IonPopover
@@ -30,7 +30,7 @@ const Popover: React.FC = () => {
           setShowPopover({ open: false, event: undefined });
         }}
       >
-        <IonItem>
+        {/* <IonItem>
           <IonLabel>heatmap</IonLabel>
           <IonToggle checked={heatmapVisible} value="heatmap" onIonChange={toggleHeatmap} />
         </IonItem>
@@ -57,7 +57,7 @@ const Popover: React.FC = () => {
             Blur
           </IonLabel>
           <IonRange min={5} max={30} step={1} value={blur} onIonChange={(e) => { setBlur(e.detail.value as number) }} />
-        </IonItem>
+        </IonItem> */}
       </IonPopover>
       <IonFab vertical="top" horizontal="end" slot="fixed">
         <IonButton onClick={(e) => setShowPopover({ open: true, event: e.nativeEvent })}>

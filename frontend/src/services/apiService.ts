@@ -13,6 +13,8 @@ class ApiService{
               isHeatmapVisible: true,
               isMarkerVisible: true,
               isCentroidVisible: true,
+              heatmapRadius: 20,
+              heatmapBlur: 18,
             })));
       };
 }

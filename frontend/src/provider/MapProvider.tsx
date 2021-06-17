@@ -17,10 +17,6 @@ class MapCenterListener {
 
 const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [apiService] = React.useState<ApiService>(new ApiService());
-    const [heatmapVisible, setHeatmapVisible] = React.useState<boolean>(true);
-    const [blur, setBlurState] = React.useState<number>(20);
-    const [radius, setRadiusState] = React.useState<number>(8);
-    const [markerVisible, setMarkerVisible] = React.useState<boolean>(true);
     const [locationVisible, setLocationVisible] = React.useState<boolean>(true);
     const [geolocation, setGeolocation] = React.useState<LocationType>({ lat: 0, lon: 0 });
     const [orientation, setOrientation] = React.useState<number>(0);
@@ -34,55 +30,20 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
 
     async function loadData() {
         var sensorsTemp = await storageService.getSensorLocal();
-        console.log("DIO BESTIA from provider",sensorsTemp.length);
         if(sensorsTemp.length === 0) {
             console.log("DIO PORCO loading from api");
             sensorsTemp = await apiService.loadSensors();
         }
         setSensors(sensorsTemp);
-        setHeatmapVisible(await storageService.getHeatmapVisible());
         setLocationVisible(await storageService.getLocationVisible());
         setCentroidsVisible(await storageService.getCentroidsVisible());
-        setBlur(await storageService.getBlur());
-        setRadius(await storageService.getRadius());
         setTeams(await storageService.getTeams());
         setTeam(await storageService.getTeam());
-        setMarkerVisible(await storageService.getMarkerVisible());
     }
 
     useEffect(() => {
         loadData();
     }, []);
-
-    const toggleHeatmap = () => {
-        setHeatmapVisible(!heatmapVisible);
-        storageService.saveHeatmapVisible(!heatmapVisible);
-    };
-
-    const toggleMarker = () => {
-        setMarkerVisible(!markerVisible);
-        storageService.saveMarkerVisible(!markerVisible);
-    }
-
-    const toggleLocation = () => {
-        setLocationVisible(!locationVisible);
-        storageService.saveLocationVisible(!locationVisible);
-    }
-
-    const toggleCentroids = () => {
-        setCentroidsVisible(!centroidsVisible);
-        storageService.saveCentroidsVisible(!centroidsVisible);
-    };
-
-    const setBlur = (value: number) => {
-        setBlurState(value);
-        storageService.saveBlur(value);
-    }
-
-    const setRadius = (value: number) => {
-        setRadiusState(value);
-        storageService.saveRadius(value);
-    }
 
     const startLocationListeners = () => {
         Geolocation.watchPosition({ enableHighAccuracy: true }, (position) => {
@@ -101,13 +62,11 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
 
     const goToLocation = (location: LocationType) => {
         setFollowUser(false);
-        if (!markerVisible) toggleMarker();
         centerChangeListeners.forEach((it) => it.notify(location));
     }
 
     const setSensors = async (sensorsList: Array<Sensor>) => {
         setSensorsLocal(sensorsList);
-        setMarkerVisible(await storageService.getMarkerVisible());
         storageService.saveSensorLocal(sensorsList);
     }
 
@@ -123,27 +82,16 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
 
     return (
         <MapContext.Provider value={{
-            heatmapVisible,
-            markerVisible,
             locationVisible,
-            centroidsVisible,
             geolocation,
             orientation,
             followUser,
             setFollowUser,
             setOrientation,
             setGeolocation,
-            toggleHeatmap,
-            toggleMarker,
-            toggleLocation,
-            toggleCentroids,
             startLocationListeners,
             addMapListener,
             goToLocation,
-            blur,
-            setBlur,
-            radius,
-            setRadius,
             sensors,
             setSensors,
             teams,
