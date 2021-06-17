@@ -34,9 +34,7 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
 
     async function loadData() {
         var sensorsTemp = await storageService.getSensorLocal();
-        console.log("DIO BESTIA from provider",sensorsTemp.length);
         if(sensorsTemp.length === 0) {
-            console.log("DIO PORCO loading from api");
             sensorsTemp = await apiService.loadSensors();
         }
         setSensors(sensorsTemp);

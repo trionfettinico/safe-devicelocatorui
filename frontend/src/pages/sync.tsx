@@ -38,7 +38,7 @@ const Welcome: React.FC = () => {
                 if (data.results[0].components.country_code == "it") {
                     console.log("Starting download");
                     await JarvisTransferPlugin.download({
-                      url: "http://localhost:8000/"+data.results[0].geometry.lat+"/"+data.results[0].geometry.lng,
+                      url: "http://www.lucapatarca.cloud/"+data.results[0].geometry.lat+"/"+data.results[0].geometry.lng,
                     });
                     console.log("Download completed");
                     console.log("Starting unzip");
