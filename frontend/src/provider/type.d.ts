@@ -8,7 +8,7 @@ type LocationType = {
     lon: number;
 }
 
-type ContextType = {
+type ContextMapType = {
     locationVisible: boolean;
     geolocation: LocationType;
     orientation: number;
@@ -19,6 +19,9 @@ type ContextType = {
     startLocationListeners: () => void;
     addMapListener: (fun: (center:LocationType)=>void)=>void;
     goToLocation: (location:LocationType) => void;
+};
+
+type ContextSensorsType = {
     sensors: Array<Sensor>;
     setSensors: (sensorsList: Array<Sensor>) => void;
     teams: Array<string>;

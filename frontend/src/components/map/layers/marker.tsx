@@ -4,9 +4,6 @@ import React, { useContext, useEffect } from "react";
 import { SensorLayerProps, SingleLayerProps } from "../map-types";
 import { Icon, Style } from "ol/style";
 import "ol/ol.css";
-
-import { MapContext } from "../../../provider/MapProvider";
-import { ContextType } from "../../../provider/type";
 import KML from "ol/format/KML";
 
 export const MarkerLayer: React.FC<SensorLayerProps> = ({ map, sensor }) => {

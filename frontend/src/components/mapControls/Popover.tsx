@@ -11,7 +11,7 @@ import {
 } from '@ionic/react';
 import { settingsOutline } from 'ionicons/icons';
 import { MapContext } from '../../provider/MapProvider';
-import { ContextType } from '../../provider/type';
+import { ContextMapType } from '../../provider/type';
 
 
 const Popover: React.FC = () => {
@@ -20,7 +20,7 @@ const Popover: React.FC = () => {
     open: false,
     event: undefined,
   });
-  const { locationVisible } = useContext(MapContext) as ContextType;
+  const { locationVisible } = useContext(MapContext) as ContextMapType;
   return (
     <>
       <IonPopover

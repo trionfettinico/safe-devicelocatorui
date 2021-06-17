@@ -10,14 +10,14 @@ import {
   IonList,
   IonPage,
 } from "@ionic/react";
-import { MapContext } from "../provider/MapProvider";
-import { ContextType } from "../provider/type";
+import { ContextSensorsType } from "../provider/type";
 import { trashOutline } from "ionicons/icons";
 import TeamPopOver from "../components/teamPopOver";
+import { SensorsContext } from "../provider/SensorsProvider";
 
 
 const Team: React.FC = () => {
-  const { teams, setTeams } = useContext(MapContext) as ContextType;
+  const { teams, setTeams } = useContext(SensorsContext) as ContextSensorsType;
   let inputTeam: HTMLInputElement = (document.getElementById("TeamInput") as HTMLInputElement)
 
   function removeTeam(index: number) {
