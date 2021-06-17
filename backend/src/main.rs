@@ -30,11 +30,7 @@ async fn main() {
 
     if args.len() != 1 && args[1] == "init" {
         map::download_map(CITY_LAT, CITY_LON).await;
-        // map::download_map(CITY_LAT2, CITY_LON2).await;
-        // map::download_map(CITY_LAT3, CITY_LON3).await;
     }
-    // map::create_dir();
-    // map::remove_dir();
-    //map::copy();
+
     rocket::ignite().mount("/", routes![index]).launch();
 }

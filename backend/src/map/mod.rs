@@ -11,7 +11,6 @@ use crate::map::coordinates::get_range;
 use std::fs;
 use std::ops::Add;
 
-
 mod coordinates;
 mod tiles;
 mod utils;
@@ -28,11 +27,12 @@ pub async fn download_map(lat: f32, lon: f32){
     println!("Getting devices");
     println!("Generating tiles coordinates");
     let coordinates = coordinates::get_tiles_coordinates(lat, lon);
+    let total = coordinates.len();
     println!("Downloading map");
     let (tx, rx) = channel();
     let receiver = spawn(move || {
        while rx.try_recv().is_err(){
-           println!("{}%", tiles::get_percent());
+           println!("{}%", tiles::get_percent(total));
            sleep(Duration::from_secs(2));
        }
     });
