@@ -9,7 +9,7 @@ import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
 
 export const CentroidsLayer: React.FC<SensorLayerProps> = ({ map, sensor }) => {
 
-  var styles = [
+  const [styles] = React.useState([
     new Style({
       stroke: new Stroke({
         color: "blue",
@@ -27,11 +27,11 @@ export const CentroidsLayer: React.FC<SensorLayerProps> = ({ map, sensor }) => {
         }),
       }),
     }),
-  ];
+  ]);
 
-  var source = new VectorSource({
+  const [source] = React.useState(new VectorSource({
     format: new GeoJSON(),
-  });
+  }));
 
   const [layer] = React.useState<VectorLayer>(new VectorLayer({
     source: source,
@@ -44,12 +44,10 @@ export const CentroidsLayer: React.FC<SensorLayerProps> = ({ map, sensor }) => {
     )
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
+        console.log("TEST", JSON.stringify(response));
         source.addFeatures(new GeoJSON().readFeatures(response));
         map.addLayer(layer);
       });
-      
-    
   }, []);
 
   layer.setVisible(sensor.isCentroidVisible);

@@ -26,24 +26,8 @@ import MapProvider from './provider/MapProvider';
 import Welcome from './pages/sync';
 import Teams from './pages/Team';
 import SensorsProvider from './provider/SensorsProvider';
-import { Plugins } from "@capacitor/core";
-
-function enableHardwareBackButton(ionRouter: UseIonRouterResult){
-  document.addEventListener('ionBackButton', (ev: any) => {
-    ev.detail.register(-1, () => {
-      if (!ionRouter.canGoBack()) {
-        Plugins.App.exitApp();
-      }
-    });
-  });
-}
 
 const App: React.FC = () => {
-  
-  const ionRouter = useIonRouter();
-  useEffect(()=>{
-    enableHardwareBackButton(ionRouter);
-  }, []);
 
   return (
     <SensorsProvider>
