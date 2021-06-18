@@ -22,7 +22,8 @@ type ContextMapType = {
     goToLocation: (location:LocationType) => void;
     toggleLocation: () => void;
     tilesInit:boolean;
-    setTilesInit : (boolean) => void;
+    setTilesInitLocal : (boolean) => void;
+    clearAll:()=>void;
 };
 
 type ContextSensorsType = {

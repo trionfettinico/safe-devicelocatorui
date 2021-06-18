@@ -8,6 +8,7 @@ import {
   IonPopover,
   IonRange,
   IonToggle,
+  useIonToast,
 } from "@ionic/react";
 import "./MessageListItem.css";
 import { Sensor } from "../../../data/sensors";
@@ -29,6 +30,7 @@ interface SensorListItemProps {
 }
 
 const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
+  const [popoverState, setShowPopover] = useState({ showPopover: false, event: undefined });
   const [showMenu, setShowMenu] = useState<boolean>(false);
   const { goToLocation } = useContext(
     MapContext
@@ -44,7 +46,10 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
           let [lon, lat] = element.geometry.coordinates;
           goToLocation({ lat: lat, lon: lon });
         });
-      });
+      }).catch(() => {
+        setShowPopover({ showPopover: true, event: undefined })
+      }
+      );
   }
 
   function changeStatus(sensor: Sensor) {
@@ -56,6 +61,14 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
 
   return (
     <IonItem detail={false}>
+      <IonPopover
+        cssClass='my-custom-class'
+        event={popoverState.event}
+        isOpen={popoverState.showPopover}
+      >
+        ERRORE<br />
+        Avviare app Safe per abilitare questa funzionalita
+      </IonPopover>
       <div
         slot="start"
         className={sensor.status ? "dot dot-read" : "dot dot-unread"}
@@ -79,20 +92,20 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
             <IonLabel>
               Team: {sensor.team}
               <br />
-              
+
               <IonFab vertical="top" horizontal="end" slot="fixed"></IonFab>
               <IonButton onClick={() => changeStatus(sensor)}>
                 {sensor.status ? <div>checked</div> : <div>unChecked</div>}
               </IonButton>
             </IonLabel>
-              <IonList>
-              <Popover sensor={sensor}/>
+            <IonList>
+              <Popover sensor={sensor} />
               <IonButton onClick={findSensor}>
                 Find
                 <IonIcon icon={searchCircle} />
               </IonButton>
               <span className="date"></span>
-              </IonList>
+            </IonList>
           </div>
         ) : null}
       </IonLabel>

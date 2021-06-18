@@ -18,7 +18,7 @@ const { JarvisTransferPlugin } = Plugins;
 var city = "";
 
 const Welcome: React.FC = () => {
-    const { tilesInit, setTilesInit } = useContext(
+    const { tilesInit, setTilesInitLocal , clearAll } = useContext(
         MapContext
     ) as ContextMapType;
     const [present, dismiss] = useIonToast();
@@ -56,8 +56,19 @@ const Welcome: React.FC = () => {
                 console.log("Starting unzip");
                 await JarvisTransferPlugin.unzip({});
                 console.log("Unzip completed");
-                setTilesInit(true);
+                setTilesInitLocal(true);
             });
+    }
+
+    function reset(){
+        clearAll();
+        JarvisTransferPlugin.reset();
+        present({
+            buttons: [{ text: 'hide', handler: () => dismiss() }],
+            message: 'rimossi tutti i dati',
+            duration: 10000
+        });
+        return;
     }
 
     return (
@@ -68,7 +79,10 @@ const Welcome: React.FC = () => {
             <IonButton onClick={() => loadTiles()} >
                 load
             </IonButton>
-            <IonButton routerLink="/home">
+            <IonButton onClick={() => reset()} >
+                reset all
+            </IonButton>
+            <IonButton /*disabled={!tilesInit}*/ routerLink="/home">
                 skip
             </IonButton>
             {/* <IonCardContent>Network status: {networkState}</IonCardContent> */}

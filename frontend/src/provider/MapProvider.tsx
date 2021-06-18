@@ -22,6 +22,10 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [storageService] = React.useState(new StorageService());
     const [tilesInit, setTilesInit] = React.useState<boolean>(false);
 
+    async function clearAll() {
+        await storageService.clearAll();
+    }
+
     async function loadData() {
         setTilesInit(await storageService.getIsTilesLoaded());
         setLocationVisible(await storageService.getLocationVisible());
@@ -31,7 +35,7 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
         loadData();
     }, []);
 
-    const setTilesInitLocal = (value : boolean) => {
+    const setTilesInitLocal = (value:boolean) => {
         setTilesInit(value);
         storageService.saveTilesInit(value);
     }
@@ -75,7 +79,8 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
             addMapListener,
             toggleLocation,
             tilesInit,
-            setTilesInit
+            setTilesInitLocal,
+            clearAll
         }}>
             {children}
         </MapContext.Provider>

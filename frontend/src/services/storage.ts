@@ -8,6 +8,10 @@ class StorageService {
         this.storage.create();
     }
 
+    async clearAll(){
+        await this.storage.clear();
+    }
+
     saveTilesInit(value:boolean){
         this.storage.set("TilesInit",value);
     }

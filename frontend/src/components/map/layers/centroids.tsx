@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import VectorSource from "ol/source/Vector";
 import KML from "ol/format/KML";
 import { SensorLayerProps } from "../map-types";
+import "ol/ol.css";
+import { Heatmap as HeatmapLayer, Tile as TileLayer } from "ol/layer";
+import "ol/ol.css";
+import GeoJSON from "ol/format/GeoJSON";
 import VectorLayer from "ol/layer/Vector";
 import Polygon from "ol/geom/Polygon";
 import { Feature } from "ol";
@@ -53,6 +57,5 @@ export const CentroidsLayer: React.FC<SensorLayerProps> = ({ map, sensor }) => {
     loadSensors();
   }, []);
 
-  vectorLayer.setVisible(sensor.isCentroidVisible);
   return null;
 };
