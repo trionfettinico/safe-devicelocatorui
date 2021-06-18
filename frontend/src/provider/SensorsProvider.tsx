@@ -41,9 +41,7 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
 
     const setTeams = async (teams: Array<string>) => {
         setTeamsLocal(teams);
-        console.log("abc");
         storageService.saveTeams(teams);
-        console.log("def");
     }
 
     const setTeam = async (team: string) => {

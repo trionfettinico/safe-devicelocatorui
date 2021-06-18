@@ -32,7 +32,6 @@ const Team: React.FC = () => {
       setTeams(teams);
       inputTeam.value = "";
     }
-    console.log("pippo molto molto" + JSON.stringify(teams));
   }
   return (
     <IonPage>
