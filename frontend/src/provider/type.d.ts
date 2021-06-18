@@ -3,6 +3,7 @@ import Geometry from 'ol/geom/Geometry';
 import VectorSource from 'ol/source/Vector';
 import { ContextType } from 'react';
 import { Sensor } from '../data/sensors';
+
 type LocationType = {
     lat: number;
     lon: number;

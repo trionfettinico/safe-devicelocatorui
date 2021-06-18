@@ -1,4 +1,5 @@
 #![feature(proc_macro_hygiene, decl_macro)]
+#![feature(in_band_lifetimes)]
 
 mod map;
 
@@ -12,14 +13,11 @@ use rocket::response::status::NotFound;
 
 use std::env;
 
-use std::path::Path;
-
 #[macro_use]
 extern crate rocket;
 
 #[get("/<lat>/<lng>")]
-fn index(lat: String, lng: String) -> Result<NamedFile, NotFound<String>> {
-    map::remove_dir();
+fn index(lat: f32, lng: f32) -> Result<NamedFile, NotFound<String>> {
     map::zip(lat,lng);
     let path = map::get_dir();
     NamedFile::open(&path).map_err(|e| NotFound(e.to_string()))

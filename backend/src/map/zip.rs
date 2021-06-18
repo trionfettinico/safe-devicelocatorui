@@ -51,11 +51,13 @@ impl<W: Write + Seek> RecursiveZipWriter<W> {
     }
 }
 
-pub fn zip_tiles() {
+pub fn zip_tiles(lat: f32, lon: f32) {
     let mut output_dir = get_data_dir();
-    output_dir = output_dir.join("copy");
+    let coordinates = coordinates::get_tiles_coordinates(lat,lon,coordinates::CITY_RANGE);
     let zip_file = std::fs::File::create(output_dir.join(Path::new("tiles.zip"))).unwrap();
     let mut zipper = RecursiveZipWriter::new(zip_file);
-    zipper.add_path(&*output_dir.join(Path::new("tiles/"))).unwrap();
+    for coord in coordinates.iter(){
+        zipper.add_path(&*output_dir.join(Path::new(&String::from(format!("tiles/{}_{}_{}.png", coord.zoom, coord.x, coord.y))))).unwrap();
+    }
     zipper.finish().unwrap();
 }

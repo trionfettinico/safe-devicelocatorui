@@ -6,7 +6,6 @@ use bytes::Bytes;
 use crate::map::TileCoords;
 use futures::{stream, StreamExt};
 use crate::map::utils::get_data_dir;
-use std::time::Duration;
 use walkdir::WalkDir;
 
 const PARALLEL_REQUESTS: usize = 128;
@@ -43,7 +42,7 @@ pub async fn get_map_tiles(coordinates: HashSet<TileCoords>){
 }
 
 fn save_image(coords: TileCoords, res: Bytes, output_dir: &Path) {
-    let path = output_dir.join(String::from(format!("tiles/{}/{}/{}.png", coords.zoom, coords.x, coords.y)));
+    let path = output_dir.join(String::from(format!("tiles/{}_{}_{}.png", coords.zoom, coords.x, coords.y)));
     std::fs::create_dir_all(path.parent().unwrap()).unwrap();
     std::fs::write(&path, res.as_ref()).unwrap();
 }

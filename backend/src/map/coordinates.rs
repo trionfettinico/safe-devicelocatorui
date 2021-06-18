@@ -1,20 +1,21 @@
 use crate::map::TileCoords;
 use std::collections::HashSet;
 
-static SURROUNDING_RANGE: f32 = 0.1;
+pub static SURROUNDING_RANGE: f32 = 0.1;
+pub static CITY_RANGE: f32 = 0.05;
 
-pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32) -> HashSet<TileCoords> {
+pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32, range: f32) -> HashSet<TileCoords> {
     let mut coordinates = HashSet::new();
 
-    for z in 15..21 {
+    for z in 15..17 {
         let (min_x, min_y) = deg2num(
-            city_lat + SURROUNDING_RANGE,
-            city_lon - SURROUNDING_RANGE,
+            city_lat + range,
+            city_lon - range,
             z,
         );
         let (max_x, max_y) = deg2num(
-            city_lat - SURROUNDING_RANGE,
-            city_lon + SURROUNDING_RANGE,
+            city_lat - range,
+            city_lon + range,
             z,
         );
         for _x in min_x..max_x {
@@ -28,10 +29,6 @@ pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32) -> HashSet<TileCoords
         }
     }
     return coordinates;
-}
-
-pub fn get_range() -> f32 {
-    return SURROUNDING_RANGE;
 }
 
 pub(crate) fn deg2num(lat_deg: f32, lon_deg: f32, _zoom: i32) -> (i32, i32) {
