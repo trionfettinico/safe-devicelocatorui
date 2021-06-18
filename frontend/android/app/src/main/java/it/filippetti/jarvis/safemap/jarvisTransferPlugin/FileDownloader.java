@@ -1,20 +1,17 @@
-package io.ionic.starter.jarvisTransferPlugin;
+package it.filippetti.jarvis.safemap.jarvisTransferPlugin;
 
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Objects;
 
 public class FileDownloader extends AsyncTask<String, String, String> {
 

@@ -3,8 +3,8 @@
 
 mod map;
 
-static CITY_LAT: f32 = 43.5219801;
-static CITY_LON: f32 = 13.2443764;
+static CITY_LAT: f32 = 43.1357641;
+static CITY_LON: f32 = 13.0683092;
 
 use rocket::response::NamedFile;
 

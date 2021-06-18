@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package it.filippetti.jarvis.safemap;
 
 import android.os.Bundle;
 
@@ -7,8 +7,7 @@ import com.getcapacitor.Plugin;
 
 import java.util.ArrayList;
 
-import io.ionic.starter.jarvisTransferPlugin.JarvisTransfer;
-import io.ionic.starter.jarvisTransferPlugin.JarvisTransferPlugin;
+import it.filippetti.jarvis.safemap.jarvisTransferPlugin.JarvisTransferPlugin;
 
 public class MainActivity extends BridgeActivity {
   @Override

@@ -1,27 +1,16 @@
-package io.ionic.starter.jarvisTransferPlugin;
+package it.filippetti.jarvis.safemap.jarvisTransferPlugin;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.os.Build;
-import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
-
-import com.getcapacitor.JSObject;
 import com.getcapacitor.NativePlugin;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
 import com.getcapacitor.PluginMethod;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
-
-import io.ionic.starter.jarvisTransferPlugin.JarvisTransfer;
 
 @NativePlugin()
 public class JarvisTransferPlugin extends Plugin implements DownloadEventListener{
@@ -63,6 +52,15 @@ public class JarvisTransferPlugin extends Plugin implements DownloadEventListene
             e.printStackTrace();
             call.reject("error");
         }
+    }
+
+    @PluginMethod()
+    public void reset(PluginCall call){
+        boolean result = implementation.reset(getZipPath());
+        if(result)
+            call.resolve();
+        else
+            call.reject("Impossibile rimuovere la cartella tiles");
     }
 
     @Override
@@ -108,6 +106,10 @@ public class JarvisTransferPlugin extends Plugin implements DownloadEventListene
     }
 
     private String getZipPath(){
-        return getContext().getExternalFilesDir(null).getPath()+"/tiles.zip";
+        return getFolderPath()+".zip";
+    }
+
+    private String getFolderPath(){
+        return getContext().getExternalFilesDir(null).getPath()+"/tiles";
     }
 }

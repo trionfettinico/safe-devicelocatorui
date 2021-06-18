@@ -7,7 +7,7 @@ pub static CITY_RANGE: f32 = 0.05;
 pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32, range: f32) -> HashSet<TileCoords> {
     let mut coordinates = HashSet::new();
 
-    for z in 15..17 {
+    for z in 15..20 {
         let (min_x, min_y) = deg2num(
             city_lat + range,
             city_lon - range,

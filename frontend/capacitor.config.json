@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "it.filippetti.jarvis.safemap",
   "appName": "safeMap",
   "bundledWebRuntime": false,
   "npmClient": "npm",
@@ -9,6 +9,5 @@
       "launchShowDuration": 0
     }
   },
-  "cordova": {},
-  "linuxAndroidStudioPath": "/home/nico/.local/share/JetBrains/Toolbox/apps/AndroidStudio/ch-0/201.7199119/bin/studio.sh"
+  "cordova": {}
 }

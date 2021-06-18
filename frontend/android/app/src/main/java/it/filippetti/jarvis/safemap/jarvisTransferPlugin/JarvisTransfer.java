@@ -1,7 +1,8 @@
-package io.ionic.starter.jarvisTransferPlugin;
+package it.filippetti.jarvis.safemap.jarvisTransferPlugin;
 
 import android.content.Context;
 
+import java.io.File;
 import java.io.IOException;
 
 public class JarvisTransfer {
@@ -20,6 +21,11 @@ public class JarvisTransfer {
     public void unzip(String zipPath) throws IOException {
         unzipper.unzip(zipPath);
         unzipper.deleteZipFile(zipPath);
+    }
+
+    public boolean reset(String folderPath){
+        File file = new File(folderPath);
+        return file.delete();
     }
 }
 

@@ -8,7 +8,7 @@ import {
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { ContextSensorsType } from "../../provider/type";
 import SensorItem from "./sensoritem/SensorItem";
 import "../../pages/Home.css";

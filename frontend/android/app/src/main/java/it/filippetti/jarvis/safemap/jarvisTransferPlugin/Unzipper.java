@@ -1,4 +1,4 @@
-package io.ionic.starter.jarvisTransferPlugin;
+package it.filippetti.jarvis.safemap.jarvisTransferPlugin;
 
 import android.util.Log;
 
