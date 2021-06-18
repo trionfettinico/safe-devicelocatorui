@@ -37,8 +37,8 @@ impl<W: Write + Seek> RecursiveZipWriter<W> {
             }
             Ok(())
         } else {
-            Err(ZipError::Io(IOError::new(IoErrorKind::InvalidInput,
-                                          "Cannot add non file/directory.")))
+            eprintln!("tile not found {}",real_path.to_str().unwrap());
+            Ok(())
         }
     }
 
