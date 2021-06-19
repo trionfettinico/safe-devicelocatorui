@@ -33,14 +33,7 @@ const TeamItem: React.FC<TeamItemProps> = ({ team }) => {
     SensorsContext
   ) as ContextSensorsType;
 
-  function removeTeam() {
-    sensors.map((e) => {
-      if (e.team === team) e.team = "";
-    });
-    setSensors(sensors);
-    teams.splice(teams.indexOf(team), 1);
-    setTeams(teams);
-  }
+  
 
   return (
     <>
@@ -54,9 +47,7 @@ const TeamItem: React.FC<TeamItemProps> = ({ team }) => {
             <IonIcon icon={arrowDownSharp} />
           )}
         </IonButton>
-        <IonButton onClick={() => removeTeam()}>
-          <IonIcon slot="end" icon={trashOutline} />
-        </IonButton>
+        
       </IonItem>
       {showMenu
         ? (<TeamSensors team={team}/>)

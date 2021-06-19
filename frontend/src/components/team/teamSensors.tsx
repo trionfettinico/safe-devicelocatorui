@@ -6,7 +6,10 @@ import {
   IonRow,
   IonCol,
   IonSearchbar,
+  IonButton,
+  IonIcon,
 } from "@ionic/react";
+import { trashOutline } from "ionicons/icons";
 import { useContext, useState } from "react";
 import { Sensor } from "../../data/sensors";
 import { SensorsContext } from "../../provider/SensorsProvider";
@@ -18,7 +21,7 @@ interface TeamItemProps {
 }
 
 const TeamSensors: React.FC<TeamItemProps> = ({ team }) => {
-  const { sensors, setSensors } = useContext(
+  const { sensors, setSensors, teams, setTeams } = useContext(
     SensorsContext
   ) as ContextSensorsType;
 
@@ -28,6 +31,15 @@ const TeamSensors: React.FC<TeamItemProps> = ({ team }) => {
   function checkTeam(check: CustomEvent, sensor: Sensor, team: string) {
     check.detail.checked ? (sensor.team = team) : (sensor.team = "");
     setSensors(sensors);
+  }
+
+  function removeTeam() {
+    sensors.map((e) => {
+      if (e.team === team) e.team = "";
+    });
+    setSensors(sensors);
+    teams.splice(teams.indexOf(team), 1);
+    setTeams(teams);
   }
 
   return (
@@ -50,6 +62,12 @@ const TeamSensors: React.FC<TeamItemProps> = ({ team }) => {
                 onIonChange={() => setViewAviable(!viewAviable)}
               />
             </IonItem>
+          </IonCol>
+          <IonCol>
+            <IonButton onClick={() => removeTeam()}>
+              Delete team
+              <IonIcon slot="end" icon={trashOutline} />
+            </IonButton>
           </IonCol>
         </IonRow>
       </IonGrid>
