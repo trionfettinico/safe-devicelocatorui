@@ -42,12 +42,10 @@ export const CentroidsLayer: React.FC<SensorLayerProps> = ({ map, sensor }) => {
     )
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
+        console.log("TEST", JSON.stringify(response));
         source.addFeatures(new GeoJSON().readFeatures(response));
         map.addLayer(layer);
       });
-      
-    
   }, []);
 
   layer.setVisible(sensor.isCentroidVisible);

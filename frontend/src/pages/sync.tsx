@@ -4,13 +4,25 @@ import {
     IonInput,
     IonItem,
     IonPage,
+    useIonRouter,
+    UseIonRouterResult,
     useIonToast,
 } from '@ionic/react';
 import './Home.css';
 import { Plugins } from "@capacitor/core";
 import { MapContext } from "../provider/MapProvider";
 import { ContextMapType } from "../provider/type";
-const { JarvisTransferPlugin } = Plugins;
+const { JarvisTransferPlugin, App } = Plugins;
+
+function enableHardwareBackButton(ionRouter: UseIonRouterResult){
+  document.addEventListener('ionBackButton', (ev: any) => {
+    ev.detail.register(-1, () => {
+      if (!ionRouter.canGoBack()) {
+        App.exitApp();
+      }
+    });
+  });
+}
 
 // const { Network } = Plugins;
 
@@ -18,6 +30,8 @@ const { JarvisTransferPlugin } = Plugins;
 var city = "";
 
 const Welcome: React.FC = () => {
+    const ionRouter = useIonRouter();
+
     const { tilesInit, setTilesInitLocal , clearAll } = useContext(
         MapContext
     ) as ContextMapType;
@@ -26,6 +40,7 @@ const Welcome: React.FC = () => {
     // const [networkState, setNetworkState] = useState("offline");
 
     useEffect(() => {
+        enableHardwareBackButton(ionRouter);
         if(tilesInit)
             window.open("/home");
         // Network.addListener("networkStatusChange", status => {
