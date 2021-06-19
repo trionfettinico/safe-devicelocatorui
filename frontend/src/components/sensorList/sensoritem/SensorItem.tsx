@@ -10,7 +10,7 @@ import {
   IonToggle,
   useIonToast,
 } from "@ionic/react";
-import "./MessageListItem.css";
+import "../../MessageListItem.css";
 import { Sensor } from "../../../data/sensors";
 import React, { useContext, useState } from "react";
 import {

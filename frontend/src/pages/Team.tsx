@@ -1,27 +1,28 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Home.css";
 import {
   IonButton,
+  IonCol,
   IonContent,
+  IonGrid,
   IonIcon,
   IonInput,
   IonItem,
   IonLabel,
   IonList,
   IonPage,
+  IonRow,
+  IonSearchbar,
 } from "@ionic/react";
 import { ContextSensorsType } from "../provider/type";
-import { trashOutline } from "ionicons/icons";
-import TeamPopOver from "../components/teamPopOver";
 import { SensorsContext } from "../provider/SensorsProvider";
+import TeamItem from "../components/team/teamItem";
+import TeamPopOver from "../components/team/teamPopOver";
 
 const Team: React.FC = () => {
   const { teams, setTeams } = useContext(SensorsContext) as ContextSensorsType;
 
-  function removeTeam(index: number) {
-    teams.splice(index, 1);
-    setTeams(teams);
-  }
+  const [searchText, setSearchText] = useState("");
 
   function insertTeam() {
     var inputTeam: HTMLInputElement = document.getElementById(
@@ -36,10 +37,16 @@ const Team: React.FC = () => {
   return (
     <IonPage>
       <div>
-        <IonItem>
-          <IonInput placeholder="Enter Team" id="TeamInput"></IonInput>
-          <IonButton onClick={insertTeam}>load</IonButton>{" "}
-        </IonItem>
+            <IonItem>
+              <IonSearchbar
+                placeholder="Filter Team"
+                value={searchText}
+                onIonChange={(e) => setSearchText(e.detail.value!)}
+                showCancelButton="focus"
+                animated
+              />
+              <TeamPopOver />
+            </IonItem>
       </div>
       <IonContent
         scrollEvents={true}
@@ -48,15 +55,11 @@ const Team: React.FC = () => {
         onIonScrollEnd={() => {}}
       >
         <IonList>
-          {teams.map((e) => (
-            <IonItem>
-              <IonLabel>{e}</IonLabel>
-              <TeamPopOver team={e} />
-              <IonButton onClick={() => removeTeam(teams.indexOf(e))}>
-                <IonIcon slot="end" icon={trashOutline} />
-              </IonButton>
-            </IonItem>
-          ))}
+          {teams.map((e) =>
+            e.toUpperCase().startsWith(searchText.toUpperCase()) ? (
+              <TeamItem team={e} />
+            ) : null
+          )}
         </IonList>
       </IonContent>
     </IonPage>

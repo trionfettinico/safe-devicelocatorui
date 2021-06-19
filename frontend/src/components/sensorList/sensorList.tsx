@@ -4,7 +4,6 @@ import {
   IonItem,
   IonLabel,
   IonList,
-  IonListHeader,
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
@@ -15,7 +14,7 @@ import "../../pages/Home.css";
 import { SensorsContext } from "../../provider/SensorsProvider";
 
 const SensorList: React.FC = () => {
-  const { team, teams, setTeam, sensors, setSensors } = useContext(
+  const { team, teams, setTeam, sensors } = useContext(
     SensorsContext
   ) as ContextSensorsType;
 
