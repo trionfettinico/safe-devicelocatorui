@@ -1,23 +1,14 @@
-use crate::map::TileCoords;
+use crate::map::{TileCoords};
 use std::collections::HashSet;
+use json::{JsonValue, Error};
+use crate::city_api::Bounds;
 
-pub static SURROUNDING_RANGE: f32 = 0.1;
-pub static CITY_RANGE: f32 = 0.05;
-
-pub fn get_tiles_coordinates(city_lat: f32, city_lon: f32, range: f32) -> HashSet<TileCoords> {
+pub fn get_tiles_coordinates(bounds: Bounds, max_zoom: i32, min_zoom: i32) -> HashSet<TileCoords> {
     let mut coordinates = HashSet::new();
 
-    for z in 15..20 {
-        let (min_x, min_y) = deg2num(
-            city_lat + range,
-            city_lon - range,
-            z,
-        );
-        let (max_x, max_y) = deg2num(
-            city_lat - range,
-            city_lon + range,
-            z,
-        );
+    for z in min_zoom..max_zoom+1 {
+        let (min_x, min_y) = deg2num(bounds.north,bounds.west,z);
+        let (max_x, max_y) = deg2num(bounds.south,bounds.east,z);
         for _x in min_x..max_x {
             for _y in min_y..max_y {
                 coordinates.insert(TileCoords {

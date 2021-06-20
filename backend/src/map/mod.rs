@@ -1,9 +1,11 @@
-use crate::map::utils::get_data_dir;
+use crate::map::utils::{get_data_dir, remove_directory, create_directory};
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::sync::mpsc::{channel};
 use std::thread::{sleep, spawn};
 use std::time::Duration;
+use json::{JsonValue, Error};
+use crate::city_api::Bounds;
 
 mod coordinates;
 mod tiles;
@@ -17,17 +19,16 @@ pub struct TileCoords {
     pub y: i32,
 }
 
-pub async fn download_map(lat: f32, lon: f32) {
-    println!("Getting devices");
-    println!("Generating tiles coordinates");
-    let coordinates = coordinates::get_tiles_coordinates(lat, lon, coordinates::SURROUNDING_RANGE);
+pub async fn download_map(bounds: Bounds, min_zoom: i32, max_zoom: i32) {
+    remove_directory("temp".parse().unwrap());
+    create_directory("temp".parse().unwrap());
+    let coordinates = coordinates::get_tiles_coordinates(bounds, max_zoom, min_zoom);
     let total = coordinates.len();
-    println!("Downloading map");
     let (tx, rx) = channel();
     let receiver = spawn(move || {
         while rx.try_recv().is_err() {
             println!("{}%", tiles::get_percent(total));
-            sleep(Duration::from_secs(2));
+            sleep(Duration::from_secs(5));
         }
     });
     tiles::get_map_tiles(coordinates).await;
@@ -35,12 +36,12 @@ pub async fn download_map(lat: f32, lon: f32) {
     receiver.join();
 }
 
-pub fn zip(lat: f32, lng: f32) {
+pub fn zip(city_name: &str) {
     println!("Zipping files");
-    zip::zip_tiles(lat,lng);
-    println!("Done.");
+    zip::zip_tiles(city_name);
+    remove_directory(String::from("temp"));
 }
 
 pub fn get_dir() -> PathBuf {
-    return utils::get_data_dir().join(Path::new("tiles.zip"));
+    return utils::get_data_dir().join(Path::new("tiles"));
 }

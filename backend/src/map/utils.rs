@@ -17,9 +17,9 @@ pub fn create_directory(path:String) -> std::io::Result<()> {
     Ok(())
 }
 
-pub fn remove_directory() -> std::io::Result<()> {
+pub fn remove_directory(path: String) -> std::io::Result<()> {
     let mut path_folder = get_data_dir().clone();
-    path_folder = path_folder.join("copy/");
+    path_folder = path_folder.join(path);
     fs::remove_dir_all(path_folder)?;
     Ok(())
 }

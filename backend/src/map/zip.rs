@@ -1,4 +1,4 @@
-use crate::map::utils::get_data_dir;
+use crate::map::utils::{get_data_dir, create_directory};
 use std::path::{Path, PathBuf};
 use zip::write::FileOptions;
 use std::io::{Write, Seek};
@@ -43,7 +43,7 @@ impl<W: Write + Seek> RecursiveZipWriter<W> {
     }
 
     pub fn add_path(&mut self, real_path: &Path) -> Result<(), ZipError> {
-        self.zip_path(real_path, &Path::new(real_path.file_name().unwrap()))
+        self.zip_path(real_path, &Path::new("tiles"))
     }
 
     pub fn finish(&mut self) -> ZipResult<W> {
@@ -51,13 +51,11 @@ impl<W: Write + Seek> RecursiveZipWriter<W> {
     }
 }
 
-pub fn zip_tiles(lat: f32, lon: f32) {
+pub fn zip_tiles(city_name: &str) {
     let mut output_dir = get_data_dir();
-    let coordinates = coordinates::get_tiles_coordinates(lat,lon,coordinates::CITY_RANGE);
-    let zip_file = std::fs::File::create(output_dir.join(Path::new("tiles.zip"))).unwrap();
+    create_directory("tiles".parse().unwrap());
+    let zip_file = std::fs::File::create(output_dir.join(Path::new(&format!("tiles/{}.zip",city_name)))).unwrap();
     let mut zipper = RecursiveZipWriter::new(zip_file);
-    for coord in coordinates.iter(){
-        zipper.add_path(&*output_dir.join(Path::new(&String::from(format!("tiles/{}_{}_{}.png", coord.zoom, coord.x, coord.y))))).unwrap();
-    }
+    zipper.add_path(&*output_dir.join(Path::new("temp"))).unwrap();
     zipper.finish().unwrap();
 }
