@@ -42,7 +42,7 @@ pub async fn get_map_tiles(coordinates: HashSet<TileCoords>){
 }
 
 fn save_image(coords: TileCoords, res: Bytes, output_dir: &Path) {
-    let path = output_dir.join(String::from(format!("temp/{}_{}_{}.png", coords.zoom, coords.x, coords.y)));
+    let path = output_dir.join(String::from(format!("temp/{}/{}/{}.png", coords.zoom, coords.x, coords.y)));
     std::fs::create_dir_all(path.parent().unwrap()).unwrap();
     std::fs::write(&path, res.as_ref()).unwrap();
 }
