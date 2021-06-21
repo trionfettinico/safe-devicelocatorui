@@ -1,8 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import {
     IonButton,
+    IonCheckbox,
     IonInput,
     IonItem,
+    IonLabel,
+    IonList,
     IonPage,
     useIonRouter,
     UseIonRouterResult,
@@ -14,70 +17,57 @@ import { MapContext } from "../provider/MapProvider";
 import { ContextMapType } from "../provider/type";
 const { JarvisTransferPlugin, App } = Plugins;
 
-function enableHardwareBackButton(ionRouter: UseIonRouterResult){
-  document.addEventListener('ionBackButton', (ev: any) => {
-    ev.detail.register(-1, () => {
-      if (!ionRouter.canGoBack()) {
-        App.exitApp();
-      }
+function enableHardwareBackButton(ionRouter: UseIonRouterResult) {
+    document.addEventListener('ionBackButton', (ev: any) => {
+        ev.detail.register(-1, () => {
+            if (!ionRouter.canGoBack()) {
+                App.exitApp();
+            }
+        });
     });
-  });
 }
-
-// const { Network } = Plugins;
-
-
-var city = "";
 
 const Welcome: React.FC = () => {
     const ionRouter = useIonRouter();
 
-    const { tilesInit, setTilesInitLocal , clearAll } = useContext(
+    const { downloadedCities, setDownloadedCities, clearAll } = useContext(
         MapContext
     ) as ContextMapType;
     const [present, dismiss] = useIonToast();
 
-    // const [networkState, setNetworkState] = useState("offline");
+    const [availableCities, setAvailableCities] = React.useState<Array<string>>(new Array());
 
     useEffect(() => {
         enableHardwareBackButton(ionRouter);
-        if(tilesInit)
-            window.open("/home");
-        // Network.addListener("networkStatusChange", status => {
-        //     setNetworkState(status.connectionType);
-        // });
+        loadAvailableCities();
     }, []);
 
-    function loadTiles() {
-        var request = "http://api.opencagedata.com/geocode/v1/json?q=";
-        request += city;
-        request += "&key=6124b12559354447bfa6fd61c1316325";
+    function loadAvailableCities() {
+        var request = "http://www.lucapatarca.cloud/list/available";
         fetch(request)
             .then(response => response.json())
             .then(async data => {
-                if (data.results.length == 0) {
-                    present({
-                        buttons: [{ text: 'hide', handler: () => dismiss() }],
-                        message: 'nome ' + city + ' non valido',
-                        duration: 10000
-                    });
-                    return;
-                }
-                console.log("Starting download");
-                await JarvisTransferPlugin.download({
-                    url: "http://www.lucapatarca.cloud/" + data.results[0].geometry.lat + "/" + data.results[0].geometry.lng,
-                });
-                console.log("Download completed");
-                console.log("Starting unzip");
-                await JarvisTransferPlugin.unzip({});
-                console.log("Unzip completed");
-                setTilesInitLocal(true);
+                setAvailableCities(data);
             });
     }
 
-    function reset(){
+    async function downloadCity(city_name: string) {
+        console.log("Starting download");
+        await JarvisTransferPlugin.download({
+            url: "http://www.lucapatarca.cloud/download/" + city_name,
+        });
+        console.log("Download completed");
+        console.log("Starting unzip");
+        await JarvisTransferPlugin.unzip({});
+        console.log("Unzip completed");
+        const newArray = downloadedCities.concat(city_name);
+        setDownloadedCities(newArray);
+    }
+
+    function reset() {
         clearAll();
         JarvisTransferPlugin.reset();
+        setDownloadedCities(new Array());
         present({
             buttons: [{ text: 'hide', handler: () => dismiss() }],
             message: 'rimossi tutti i dati',
@@ -88,19 +78,20 @@ const Welcome: React.FC = () => {
 
     return (
         <IonPage id="home-page">
-            <IonItem>
-                <IonInput placeholder="Enter Input" onIonChange={(e) => city = ((e.target as HTMLInputElement).value)}></IonInput>
-            </IonItem>
-            <IonButton onClick={() => loadTiles()} >
-                load
-            </IonButton>
+            <IonList>
+                {availableCities.map((cityName) => <IonItem>
+                    <IonLabel>{cityName}</IonLabel>
+                    {downloadedCities.find((e) => e == cityName) === undefined ?
+                        <IonButton onClick={() => downloadCity(cityName)}>download</IonButton>
+                        : <div />}
+                </IonItem>)}
+            </IonList>
             <IonButton onClick={() => reset()} >
                 reset all
             </IonButton>
-            <IonButton /*disabled={!tilesInit}*/ routerLink="/home">
+            <IonButton disabled={downloadedCities.length === 0} routerLink="/home">
                 skip
             </IonButton>
-            {/* <IonCardContent>Network status: {networkState}</IonCardContent> */}
         </IonPage>
     );
 };

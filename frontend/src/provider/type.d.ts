@@ -21,8 +21,8 @@ type ContextMapType = {
     addMapListener: (fun: (center:LocationType)=>void)=>void;
     goToLocation: (location:LocationType) => void;
     toggleLocation: () => void;
-    tilesInit:boolean;
-    setTilesInitLocal : (boolean) => void;
+    downloadedCities:string[];
+    setDownloadedCities : (string) => void;
     clearAll:()=>void;
 };
 

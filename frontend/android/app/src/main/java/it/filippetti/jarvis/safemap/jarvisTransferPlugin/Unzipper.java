@@ -18,8 +18,8 @@ public class Unzipper {
 
     public void unzip(String filename) throws IOException {
         Log.d("UNZIP", "Unzip started");
-        String outputPath = filename.substring(0, filename.length() - 4);
         File file = new File(filename);
+        String outputPath = file.getParent();
         FileInputStream is = new FileInputStream(file);
         ZipInputStream zip = new ZipInputStream(is);
         File outputPathFile = new File(outputPath);

@@ -25,9 +25,7 @@ extern crate rocket;
 
 fn make_cors() -> Cors {
     let allowed_origins = AllowedOrigins::some_exact(&[
-        "http://127.0.0.1:8000",
-        "http://localhost:8000",
-        "http://0.0.0.0:80",
+        "http://localhost",
     ]);
 
     CorsOptions {
@@ -38,7 +36,7 @@ fn make_cors() -> Cors {
             "Accept",
             "Access-Control-Allow-Origin",
         ]),
-        allow_credentials: true,
+        allow_credentials: false,
         ..Default::default()
     }
         .to_cors()

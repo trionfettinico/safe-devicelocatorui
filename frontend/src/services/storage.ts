@@ -12,18 +12,6 @@ class StorageService {
         await this.storage.clear();
     }
 
-    saveTilesInit(value:boolean){
-        this.storage.set("TilesInit",value);
-    }
-
-    async getTilesInit(): Promise<boolean> {
-        const tilesInit = await this.storage.get("TilesInit");
-        if(tilesInit != null)
-            return tilesInit;
-        else
-            return false;
-    }
-
     async saveSensorLocal(value: Array<Sensor>) {
         this.storage.set("SensorsLocal", JSON.stringify(value));
     }
@@ -47,16 +35,16 @@ class StorageService {
             return true;
     }
 
-    saveIsTilesLoaded(value:boolean){
-        this.storage.set("TilesLoaded",value);
+    saveDownloadedCities(value:string[]){
+        this.storage.set("DownloadedCities",value);
     }
 
-    async getIsTilesLoaded():Promise<boolean>{
-        const tilesLoaded = await this.storage.get("TilesLoaded");
+    async getDownloadedCities():Promise<string[]>{
+        const tilesLoaded = await this.storage.get("DownloadedCities");
         if(tilesLoaded != null)
             return tilesLoaded;
         else 
-            return false;
+            return new Array();
     }
 
     saveLocationVisible(value: boolean) {

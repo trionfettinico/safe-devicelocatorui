@@ -20,14 +20,14 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [followUser, setFollowUser] = React.useState<boolean>(true);
     const [centerChangeListeners] = React.useState<Array<MapCenterListener>>(new Array());
     const [storageService] = React.useState(new StorageService());
-    const [tilesInit, setTilesInit] = React.useState<boolean>(false);
+    const [downloadedCities, setDownloadedCitiesLocal] = React.useState<Array<string>>(new Array());
 
     async function clearAll() {
         await storageService.clearAll();
     }
 
     async function loadData() {
-        setTilesInit(await storageService.getIsTilesLoaded());
+        setDownloadedCitiesLocal(await storageService.getDownloadedCities());
         setLocationVisible(await storageService.getLocationVisible());
     }
 
@@ -35,10 +35,11 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
         loadData();
     }, []);
 
-    const setTilesInitLocal = (value:boolean) => {
-        setTilesInit(value);
-        storageService.saveTilesInit(value);
+    const setDownloadedCities = (cities: string[])=>{
+        setDownloadedCitiesLocal(cities);
+        storageService.saveDownloadedCities(cities);
     }
+
     const startLocationListeners = () => {
         Geolocation.watchPosition({ enableHighAccuracy: true }, (position) => {
             if (position)
@@ -78,8 +79,8 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
             goToLocation,
             addMapListener,
             toggleLocation,
-            tilesInit,
-            setTilesInitLocal,
+            downloadedCities,
+            setDownloadedCities,
             clearAll
         }}>
             {children}
