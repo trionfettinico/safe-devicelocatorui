@@ -4,6 +4,7 @@
 mod map;
 mod city_api;
 mod config;
+mod data;
 
 use rocket::response::NamedFile;
 use rocket::response::status::NotFound;
@@ -13,44 +14,31 @@ use std::io::Error;
 use std::path::Path;
 use crate::city_api::CityInfo;
 use crate::config::AppConfig;
+use rocket::response::content::Json;
+use json::JsonValue;
 
 #[macro_use]
 extern crate rocket;
 
-#[get("/<city_name>")]
-fn index(city_name: String) -> Result<NamedFile, NotFound<String>> {
-    let tiles_dir = map::get_dir();
-    let available_cities = tiles_dir.read_dir().unwrap();
-    let city_found = available_cities.filter_map(|entry|{
-        match entry {
-            Ok(e) =>{
-                let file_name = e.file_name().to_string_lossy().to_ascii_lowercase();
-                if file_name.contains(&city_name.to_ascii_lowercase()) {
-                    Some(file_name)
-                } else {
-                    None
-                }
-            },
-            _ => None,
-        }
-    }).collect::<Vec<String>>();
-    match city_found.get(0) {
-        Some(s) => {
-            let path = map::get_dir().join(Path::new(s));
-            NamedFile::open(&path).map_err(|e| NotFound(e.to_string()))
-        },
-        None => Err(NotFound(format!("La mappa della città '{}' non è stata trovata",city_name)))
-    }
-
+#[get("/download/<city_name>")]
+fn download(city_name: String) -> Result<NamedFile, NotFound<String>> {
+    let path = data::get_tiles_dir().join(Path::new(&format!("{}.zip",city_name)));
+    NamedFile::open(&path).map_err(|e| NotFound(e.to_string()))
+}
+#[get("/list/available")]
+fn list() -> Json<String> {
+    let available_cities = data::get_available_cities();
+    let json_vec: Vec<JsonValue> = available_cities.iter().map(|e| { JsonValue::String(e.to_owned()) }).collect();
+    let available_cities_json = JsonValue::Array(json_vec);
+    Json(available_cities_json.to_string())
 }
 
 #[tokio::main]
 async fn main() {
     let args: Vec<String> = env::args().collect();
     //TODO si possono rimettere le cartelle dei tiles come erano prima
-    //TODO verifica data di download dei tiles (da mettere sulla cartella data)
     if args.len() == 1 {
-        rocket::ignite().mount("/", routes![index]).launch();
+        rocket::ignite().mount("/", routes![download,list]).launch();
     } else if args.len() == 2 && args[1] == "init" {
         let config = AppConfig::load();
         for city_name in config.cities{

@@ -5,8 +5,8 @@ use std::path::Path;
 use bytes::Bytes;
 use crate::map::TileCoords;
 use futures::{stream, StreamExt};
-use crate::map::utils::get_data_dir;
 use walkdir::WalkDir;
+use crate::data::get_data_dir;
 
 const PARALLEL_REQUESTS: usize = 128;
 

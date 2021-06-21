@@ -1,4 +1,3 @@
-use crate::map::utils::{get_data_dir, remove_directory, create_directory};
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::sync::mpsc::{channel};
@@ -6,10 +5,11 @@ use std::thread::{sleep, spawn};
 use std::time::Duration;
 use json::{JsonValue, Error};
 use crate::city_api::Bounds;
+use crate::data;
+use crate::data::{reset_temp_folder, remove_temp_folder};
 
 mod coordinates;
 mod tiles;
-mod utils;
 mod zip;
 
 #[derive(Eq, PartialEq, Hash, Clone)]
@@ -20,8 +20,7 @@ pub struct TileCoords {
 }
 
 pub async fn download_map(bounds: Bounds, min_zoom: i32, max_zoom: i32) {
-    remove_directory("temp".parse().unwrap());
-    create_directory("temp".parse().unwrap());
+    reset_temp_folder();
     let coordinates = coordinates::get_tiles_coordinates(bounds, max_zoom, min_zoom);
     let total = coordinates.len();
     let (tx, rx) = channel();
@@ -39,9 +38,9 @@ pub async fn download_map(bounds: Bounds, min_zoom: i32, max_zoom: i32) {
 pub fn zip(city_name: &str) {
     println!("Zipping files");
     zip::zip_tiles(city_name);
-    remove_directory(String::from("temp"));
+    remove_temp_folder();
 }
 
 pub fn get_dir() -> PathBuf {
-    return utils::get_data_dir().join(Path::new("tiles"));
+    return data::get_data_dir().join(Path::new("tiles"));
 }
