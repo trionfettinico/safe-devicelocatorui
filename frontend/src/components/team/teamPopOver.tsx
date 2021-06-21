@@ -5,11 +5,14 @@ import {
   IonButton,
   IonInput,
 } from "@ionic/react";
-import {  push } from "ionicons/icons";
+import { push } from "ionicons/icons";
 import { ContextSensorsType } from "../../provider/type";
 import { SensorsContext } from "../../provider/SensorsProvider";
 
+
+
 const TeamPopOver: React.FC = () => {
+  const { teams, setTeams } = useContext(SensorsContext) as ContextSensorsType;
   const [showPopover, setShowPopover] = useState<{
     open: boolean;
     event: Event | undefined;
@@ -17,8 +20,6 @@ const TeamPopOver: React.FC = () => {
     open: false,
     event: undefined,
   });
-
-  const { teams, setTeams } = useContext(SensorsContext) as ContextSensorsType;
 
   function insertTeam() {
     var inputTeam: HTMLInputElement = document.getElementById(

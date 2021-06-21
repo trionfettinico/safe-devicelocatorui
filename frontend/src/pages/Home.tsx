@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   IonContent,
   IonMenu,
   IonPage,
   IonSplitPane,
-  useIonRouter,
-  UseIonRouterResult,
 } from "@ionic/react";
 import "./Home.css";
 import { Map } from "../components/map";
-import Popover from "../components/mapControls/Popover";
 import { LocationFab } from "../components/mapControls/locationButton";
 import SensorList from "../components/sensorList/sensorList";
 

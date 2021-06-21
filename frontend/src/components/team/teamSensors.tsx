@@ -12,6 +12,7 @@ import {
 import { trashOutline } from "ionicons/icons";
 import { useContext, useState } from "react";
 import { Sensor } from "../../data/sensors";
+import Team from "../../pages/Team";
 import { SensorsContext } from "../../provider/SensorsProvider";
 import { ContextSensorsType } from "../../provider/type";
 import "../MessageListItem.css";

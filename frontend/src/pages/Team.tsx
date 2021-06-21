@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Home.css";
 import {
   IonContent,
@@ -38,7 +38,7 @@ const Team: React.FC = () => {
         onIonScrollEnd={() => { }}
       >
         <IonList>
-          {teams.map((e) => 
+          {teams.map((e) =>
             e.toUpperCase().startsWith(searchText.toUpperCase()) ? (
               <TeamItem team={e} />
             ) : null

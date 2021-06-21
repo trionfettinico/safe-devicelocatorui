@@ -24,7 +24,7 @@ import { Redirect, Route } from 'react-router';
 import { IonReactRouter } from '@ionic/react-router';
 import MapProvider from './provider/MapProvider';
 import Welcome from './pages/sync';
-import Teams from './pages/Team';
+import Team from './pages/Team';
 import SensorsProvider from './provider/SensorsProvider';
 
 const App: React.FC = () => {
@@ -36,7 +36,7 @@ const App: React.FC = () => {
           <IonReactRouter>
             <Route path="/home" component={Home} />
             <Route path="/welcome" component={Welcome} />
-            <Route path="/teams" component={Teams} />
+            <Route path="/teams" component={Team} />
             <Redirect exact from="/" to="/welcome" />
           </IonReactRouter>
         </IonApp>

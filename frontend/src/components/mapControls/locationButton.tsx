@@ -2,7 +2,6 @@ import {
   IonFab,
   IonFabButton,
   IonIcon,
-  IonItem,
   IonToggle,
 } from "@ionic/react";
 import React, { useContext } from "react";

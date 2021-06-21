@@ -12,7 +12,7 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [apiService] = React.useState<ApiService>(new ApiService());
     const [sensors, setSensorsLocal] = React.useState(new Array<Sensor>());
     const [storageService] = React.useState(new StorageService());
-    const [teams, setTeamsLocal] = React.useState<Array<string>>([]);
+    const [teams, setTeamsLocal] = React.useState<Array<string>>(new Array());
     const [team, setTeamLocal] = React.useState<string>("");
 
     async function loadData() {
