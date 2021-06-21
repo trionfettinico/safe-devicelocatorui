@@ -59,7 +59,7 @@ const SensorList: React.FC = () => {
                   <IonSelectOption value={e}>{e}</IonSelectOption>
                 ))}
               </IonSelect>
-              </IonRow>
+            </IonRow>
           </IonRow>
 
         </IonItem>

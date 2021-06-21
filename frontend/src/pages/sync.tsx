@@ -1,27 +1,26 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     IonButton,
-    IonCheckbox,
+    IonCol,
     IonIcon,
-    IonInput,
     IonItem,
     IonLabel,
     IonList,
     IonPage,
+    IonPopover,
     useIonRouter,
     UseIonRouterResult,
     useIonToast,
 } from '@ionic/react';
-
 import { Plugins } from "@capacitor/core";
 import { MapContext } from "../provider/MapProvider";
 import { ContextMapType } from "../provider/type";
-import { Icon } from "ol/style";
-import { cloudDoneOutline, download, downloadOutline } from "ionicons/icons";
+import { cloudDoneOutline, downloadOutline } from "ionicons/icons";
+
 
 import './sync.css';
 
-const { JarvisTransferPlugin, App } = Plugins;
+const { JarvisTransferPlugin, App, Network } = Plugins;
 
 function enableHardwareBackButton(ionRouter: UseIonRouterResult) {
     document.addEventListener('ionBackButton', (ev: any) => {
@@ -34,7 +33,10 @@ function enableHardwareBackButton(ionRouter: UseIonRouterResult) {
 }
 
 const Welcome: React.FC = () => {
+
     const ionRouter = useIonRouter();
+
+    const [popoverState, setShowPopover] = useState({ showPopover: false, event: undefined });
 
     const { downloadedCities, setDownloadedCities, clearAll } = useContext(
         MapContext
@@ -43,9 +45,22 @@ const Welcome: React.FC = () => {
 
     const [availableCities, setAvailableCities] = React.useState<Array<string>>(new Array());
 
+    function loadData() {
+        window.location.reload();
+    }
+
+    const connection = async () => {
+        var prova = await Network.getStatus();
+        if (!prova.connected)
+            setShowPopover({ showPopover: true, event: undefined })
+    }
+
     useEffect(() => {
+        connection();
         enableHardwareBackButton(ionRouter);
         loadAvailableCities();
+
+
     }, []);
 
     function loadAvailableCities() {
@@ -58,6 +73,7 @@ const Welcome: React.FC = () => {
     }
 
     async function downloadCity(city_name: string) {
+        connection();
         console.log("Starting download");
         await JarvisTransferPlugin.download({
             url: "http://www.lucapatarca.cloud/download/" + city_name,
@@ -72,7 +88,7 @@ const Welcome: React.FC = () => {
 
     function reset() {
         clearAll();
-        try{
+        try {
             JarvisTransferPlugin.reset();
             setDownloadedCities(new Array());
             present({
@@ -95,8 +111,8 @@ const Welcome: React.FC = () => {
                 {availableCities.map((cityName) => <IonItem>
                     <IonLabel className="left-item">{cityName}</IonLabel>
                     {downloadedCities.find((e) => e == cityName) === undefined ?
-                        <IonButton onClick={() => downloadCity(cityName)} className="right-item"><IonIcon icon={downloadOutline} size="large"/></IonButton>
-                        : <IonIcon icon={cloudDoneOutline} className="right-item" size="large"/>}
+                        <IonButton onClick={() => downloadCity(cityName)} className="right-item"><IonIcon icon={downloadOutline} size="large" /></IonButton>
+                        : <IonIcon icon={cloudDoneOutline} className="right-item" size="large" />}
                 </IonItem>)}
             </IonList>
             <IonButton color="danger" size="small" onClick={() => reset()} >
@@ -105,6 +121,17 @@ const Welcome: React.FC = () => {
             <IonButton disabled={downloadedCities.length === 0} color="secondary" routerLink="/home">
                 fatto
             </IonButton>
+            <IonPopover
+                cssClass='my-custom-class'
+                event={popoverState.event}
+                isOpen={popoverState.showPopover}
+                backdropDismiss={false}
+            >
+                ERRORE<br />
+                Attivare internet
+                <br />
+                <IonButton onClick={() => loadData()}>reload</IonButton>
+            </IonPopover>
         </IonPage>
     );
 };
