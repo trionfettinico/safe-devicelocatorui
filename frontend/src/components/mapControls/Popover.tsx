@@ -10,8 +10,7 @@ import {
   IonRange,
 } from "@ionic/react";
 import { settingsOutline } from "ionicons/icons";
-import { MapContext } from "../../provider/MapProvider";
-import { ContextMapType, ContextSensorsType } from "../../provider/type";
+import { ContextSensorsType } from "../../provider/type";
 import { Sensor } from "../../data/sensors";
 import { SensorsContext } from "../../provider/SensorsProvider";
 

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { SensorLayerProps } from "../map-types";
 import "ol/ol.css";
 import "ol/ol.css";

@@ -6,9 +6,6 @@ import {
   IonLabel,
   IonList,
   IonPopover,
-  IonRange,
-  IonToggle,
-  useIonToast,
 } from "@ionic/react";
 import "../../MessageListItem.css";
 import { Sensor } from "../../../data/sensors";
@@ -19,7 +16,6 @@ import {
   information,
   searchCircle,
 } from "ionicons/icons";
-import { settingsOutline } from "ionicons/icons";
 import { MapContext } from "../../../provider/MapProvider";
 import { ContextMapType, ContextSensorsType } from "../../../provider/type";
 import { SensorsContext } from "../../../provider/SensorsProvider";

@@ -1,9 +1,11 @@
 import {
   IonButton,
+  IonCol,
   IonContent,
   IonItem,
   IonLabel,
   IonList,
+  IonRow,
   IonSelect,
   IonSelectOption,
 } from "@ionic/react";
@@ -37,21 +39,29 @@ const SensorList: React.FC = () => {
     <IonContent id="ion-content">
       <div>
         <IonItem>
-          <IonLabel>Team</IonLabel>
-          <IonSelect
-            value={team}
-            okText="Select"
-            cancelText="Cancel"
-            onIonChange={(val) => {
-              setTeam(val.detail.value);
-              test(val.detail.value);
-            }}
-          >
-            <IonSelectOption value={"any"}>Any</IonSelectOption>
-            {teams.map((e) => (
-              <IonSelectOption value={e}>{e}</IonSelectOption>
-            ))}
-          </IonSelect>
+          <IonRow>
+            <IonCol>
+              <img src="assets/icon/Logo.png" height="40 px" width="40 px" />
+            </IonCol>
+            <IonRow>
+              <IonLabel>Team</IonLabel>
+              <IonSelect
+                value={team}
+                okText="Select"
+                cancelText="Cancel"
+                onIonChange={(val) => {
+                  setTeam(val.detail.value);
+                  test(val.detail.value);
+                }}
+              >
+                <IonSelectOption value={"any"}>Any</IonSelectOption>
+                {teams.map((e) => (
+                  <IonSelectOption value={e}>{e}</IonSelectOption>
+                ))}
+              </IonSelect>
+              </IonRow>
+          </IonRow>
+
         </IonItem>
         <IonButton expand="full" routerLink="/welcome">
           MAP

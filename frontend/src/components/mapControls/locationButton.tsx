@@ -2,11 +2,10 @@ import {
   IonFab,
   IonFabButton,
   IonIcon,
-  IonItem,
   IonToggle,
 } from "@ionic/react";
 import React, { useContext } from "react";
-import { location, locationOutline, options } from "ionicons/icons";
+import { location, locationOutline } from "ionicons/icons";
 import { MapContext } from "../../provider/MapProvider";
 import { ContextMapType } from "../../provider/type";
 
