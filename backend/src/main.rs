@@ -17,9 +17,33 @@ use crate::config::AppConfig;
 use rocket::response::content::Json;
 use json::JsonValue;
 use crate::data::is_up_to_date;
+use rocket::http::Method;
+use rocket_cors::{Cors, AllowedOrigins, CorsOptions, AllowedHeaders};
 
 #[macro_use]
 extern crate rocket;
+
+fn make_cors() -> Cors {
+    let allowed_origins = AllowedOrigins::some_exact(&[
+        "http://127.0.0.1:8000",
+        "http://localhost:8000",
+        "http://0.0.0.0:80",
+    ]);
+
+    CorsOptions {
+        allowed_origins,
+        allowed_methods: vec![Method::Get].into_iter().map(From::from).collect(),
+        allowed_headers: AllowedHeaders::some(&[
+            "Authorization",
+            "Accept",
+            "Access-Control-Allow-Origin",
+        ]),
+        allow_credentials: true,
+        ..Default::default()
+    }
+        .to_cors()
+        .expect("error while building CORS")
+}
 
 #[get("/download/<city_name>")]
 fn download(city_name: String) -> Result<NamedFile, NotFound<String>> {
@@ -39,7 +63,7 @@ async fn main() {
     let args: Vec<String> = env::args().collect();
     //TODO si possono rimettere le cartelle dei tiles come erano prima
     if args.len() == 1 {
-        rocket::ignite().mount("/", routes![download,list]).launch();
+        rocket::ignite().mount("/", routes![download,list]).attach(make_cors()).launch();
     } else if args.len() == 2 && args[1] == "init" {
         let config = AppConfig::load();
         for city_name in config.cities{
