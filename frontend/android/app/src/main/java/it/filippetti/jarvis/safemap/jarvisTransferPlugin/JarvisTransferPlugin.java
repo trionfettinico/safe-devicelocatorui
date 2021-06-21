@@ -25,9 +25,9 @@ public class JarvisTransferPlugin extends Plugin implements DownloadEventListene
         this.downloadCalls = new HashMap<>();
     }
 
-    public void showDialog(){
+    public void showDialog(String message){
         dialog = new ProgressDialog(getContext());
-        dialog.setMessage("Connecting to server...");
+        dialog.setMessage(message);
         dialog.setIndeterminate(true);
         dialog.setMax(100);
         dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -45,12 +45,15 @@ public class JarvisTransferPlugin extends Plugin implements DownloadEventListene
     @PluginMethod()
     public void unzip(PluginCall call){
         try {
+            showDialog("Estrazione della mappa...");
             implementation.unzip(getZipPath());
             call.resolve();
-            Toast.makeText(getContext(), "Unzip completed", Toast.LENGTH_LONG).show();
+            dialog.dismiss();
         } catch (IOException e) {
             e.printStackTrace();
             call.reject("error");
+            dialog.dismiss();
+            Toast.makeText(getContext(), "Errore durante l'estrazione della mappa", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -90,14 +93,14 @@ public class JarvisTransferPlugin extends Plugin implements DownloadEventListene
 
     @Override
     public void connectingToServer() {
-        showDialog();
+        showDialog("Connessione al server...");
     }
 
     @Override
     public void serverConnected() {
         dialog.dismiss();
         dialog = new ProgressDialog(getContext());
-        dialog.setMessage("Downloading file...");
+        dialog.setMessage("Scaricamento mappa...");
         dialog.setIndeterminate(false);
         dialog.setMax(100);
         dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);

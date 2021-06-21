@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import {
     IonButton,
     IonCheckbox,
+    IonIcon,
     IonInput,
     IonItem,
     IonLabel,
@@ -11,10 +12,15 @@ import {
     UseIonRouterResult,
     useIonToast,
 } from '@ionic/react';
-import './Home.css';
+
 import { Plugins } from "@capacitor/core";
 import { MapContext } from "../provider/MapProvider";
 import { ContextMapType } from "../provider/type";
+import { Icon } from "ol/style";
+import { cloudDoneOutline, download, downloadOutline } from "ionicons/icons";
+
+import './sync.css';
+
 const { JarvisTransferPlugin, App } = Plugins;
 
 function enableHardwareBackButton(ionRouter: UseIonRouterResult) {
@@ -66,31 +72,38 @@ const Welcome: React.FC = () => {
 
     function reset() {
         clearAll();
-        JarvisTransferPlugin.reset();
-        setDownloadedCities(new Array());
-        present({
-            buttons: [{ text: 'hide', handler: () => dismiss() }],
-            message: 'rimossi tutti i dati',
-            duration: 10000
-        });
-        return;
+        try{
+            JarvisTransferPlugin.reset();
+            setDownloadedCities(new Array());
+            present({
+                buttons: [{ text: 'ok', handler: () => dismiss() }],
+                message: 'rimossi tutti i dati',
+                duration: 10000
+            });
+        } catch {
+            present({
+                buttons: [{ text: 'ok', handler: () => dismiss() }],
+                message: 'impossibile cancellare i dati',
+                duration: 10000
+            });
+        }
     }
 
     return (
         <IonPage id="home-page">
-            <IonList>
+            <IonList className="available-list">
                 {availableCities.map((cityName) => <IonItem>
-                    <IonLabel>{cityName}</IonLabel>
+                    <IonLabel className="left-item">{cityName}</IonLabel>
                     {downloadedCities.find((e) => e == cityName) === undefined ?
-                        <IonButton onClick={() => downloadCity(cityName)}>download</IonButton>
-                        : <div />}
+                        <IonButton onClick={() => downloadCity(cityName)} className="right-item"><IonIcon icon={downloadOutline} size="large"/></IonButton>
+                        : <IonIcon icon={cloudDoneOutline} className="right-item" size="large"/>}
                 </IonItem>)}
             </IonList>
-            <IonButton onClick={() => reset()} >
-                reset all
+            <IonButton color="danger" size="small" onClick={() => reset()} >
+                cancella tutto
             </IonButton>
-            <IonButton disabled={downloadedCities.length === 0} routerLink="/home">
-                skip
+            <IonButton disabled={downloadedCities.length === 0} color="secondary" routerLink="/home">
+                fatto
             </IonButton>
         </IonPage>
     );
