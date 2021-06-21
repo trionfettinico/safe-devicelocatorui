@@ -1,17 +1,13 @@
 import React, { useContext, useState } from "react";
 import {
   IonIcon,
-  IonItem,
-  IonLabel,
   IonPopover,
   IonButton,
-  IonToggle,
   IonInput,
 } from "@ionic/react";
-import { settingsOutline, push } from "ionicons/icons";
+import {  push } from "ionicons/icons";
 import { ContextSensorsType } from "../../provider/type";
 import { SensorsContext } from "../../provider/SensorsProvider";
-import { Sensor } from "../../data/sensors";
 
 const TeamPopOver: React.FC = () => {
   const [showPopover, setShowPopover] = useState<{

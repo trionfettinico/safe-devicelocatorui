@@ -14,13 +14,13 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [storageService] = React.useState(new StorageService());
     const [teams, setTeamsLocal] = React.useState<Array<string>>([]);
     const [team, setTeamLocal] = React.useState<string>("");
-    
+
     async function loadData() {
         var sensorsTemp = await storageService.getSensorLocal();
         if (sensorsTemp.length === 0) {
             try {
                 sensorsTemp = await apiService.loadSensors();
-                setShowPopover({showPopover:false,event:undefined});
+                setShowPopover({ showPopover: false, event: undefined });
             } catch {
                 setShowPopover({ showPopover: true, event: undefined });
             }
@@ -65,9 +65,9 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
                 isOpen={popoverState.showPopover}
                 backdropDismiss={false}
             >
-                ERRORE<br/>
+                ERRORE<br />
                 Avviare app Safe
-                <br/>
+                <br />
                 <IonButton onClick={() => loadData()}>reload</IonButton>
             </IonPopover>
         </SensorsContext.Provider>

@@ -14,9 +14,24 @@ import "../../pages/Home.css";
 import { SensorsContext } from "../../provider/SensorsProvider";
 
 const SensorList: React.FC = () => {
-  const { team, teams, setTeam, sensors } = useContext(
+  const { team, teams, setTeam, sensors, setSensors } = useContext(
     SensorsContext
   ) as ContextSensorsType;
+
+  function test(val: string) {
+    sensors.forEach((e) => {
+      if (e.team != val && val != "any") {
+        e.isCentroidVisible = false;
+        e.isHeatmapVisible = false;
+        e.isMarkerVisible = false;
+      } else {
+        e.isCentroidVisible = true;
+        e.isHeatmapVisible = true;
+        e.isMarkerVisible = true;
+      }
+    })
+    setSensors(sensors);
+  }
 
   return (
     <IonContent id="ion-content">
@@ -29,6 +44,7 @@ const SensorList: React.FC = () => {
             cancelText="Cancel"
             onIonChange={(val) => {
               setTeam(val.detail.value);
+              test(val.detail.value);
             }}
           >
             <IonSelectOption value={"any"}>Any</IonSelectOption>

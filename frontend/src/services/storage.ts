@@ -141,7 +141,7 @@ class StorageService {
         if(teams != null)
             return teams;
         else
-            return "";
+            return "any";
         
     }
 }
