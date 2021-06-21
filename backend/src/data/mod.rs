@@ -1,5 +1,5 @@
 use std::path::{PathBuf, Path};
-use crate::data::data::{get_city_name_form_filename, remove_directory};
+use crate::data::data::{get_city_name_form_filename, remove_directory, get_city_metadata};
 
 mod data;
 
@@ -20,7 +20,12 @@ pub fn reset_temp_folder() {
 
 pub fn is_up_to_date(city_file: String) -> bool{
     //TODO verifica data di download dei tiles
-    false
+    match get_city_metadata(city_file) {
+        Some(metadata) => {
+            data::is_up_to_date(metadata)
+        },
+        None => false
+    }
 }
 
 pub fn get_data_dir() -> PathBuf {

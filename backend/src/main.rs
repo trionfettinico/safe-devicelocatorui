@@ -16,6 +16,7 @@ use crate::city_api::CityInfo;
 use crate::config::AppConfig;
 use rocket::response::content::Json;
 use json::JsonValue;
+use crate::data::is_up_to_date;
 
 #[macro_use]
 extern crate rocket;
@@ -44,10 +45,14 @@ async fn main() {
         for city_name in config.cities{
             match CityInfo::get_for(city_name.to_owned(),config.api_key.to_owned()).await {
                 Ok(city_info) => {
-                    println!("Downloading map for {}", city_info.complete_name);
-                    map::download_map(city_info.bounds,config.min_zoom,config.max_zoom).await;
-                    map::zip(city_info.simple_name.as_str());
-                    println!("Done.");
+                    if is_up_to_date(city_info.simple_name.to_owned()) {
+                        println!("Map for '{}' is already up to date", city_info.complete_name);
+                    }else{
+                        println!("Downloading map for '{}'", city_info.complete_name);
+                        map::download_map(city_info.bounds,config.min_zoom,config.max_zoom).await;
+                        map::zip(city_info.simple_name.as_str());
+                        println!("Done.");
+                    }
                 },
                 Err(e) => println!("{}", e.message)
             }
