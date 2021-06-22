@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @NativePlugin()
-public class JarvisTransferPlugin extends Plugin implements DownloadEventListener{
+public class JarvisTransferPlugin extends Plugin implements DownloadEventListener, UnzipEventListener{
 
     private final JarvisTransfer implementation;
     private final Map<String, PluginCall> downloadCalls;
@@ -21,16 +21,19 @@ public class JarvisTransferPlugin extends Plugin implements DownloadEventListene
 
     public JarvisTransferPlugin() {
         super();
-        this.implementation = new JarvisTransfer(this);
+        this.implementation = new JarvisTransfer(this, this);
         this.downloadCalls = new HashMap<>();
     }
 
-    public void showDialog(String message){
+    public void showDialog(String message, boolean indeterminate){
+        if(dialog != null)
+            dialog.dismiss();
         dialog = new ProgressDialog(getContext());
         dialog.setMessage(message);
-        dialog.setIndeterminate(true);
-        dialog.setMax(100);
-        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        dialog.setIndeterminate(indeterminate);
+        if(!indeterminate)
+            dialog.setMax(100);
+        dialog.setProgressStyle(indeterminate? ProgressDialog.STYLE_SPINNER : ProgressDialog.STYLE_HORIZONTAL);
         dialog.setCancelable(false);
         dialog.show();
     }
@@ -42,17 +45,15 @@ public class JarvisTransferPlugin extends Plugin implements DownloadEventListene
         implementation.downloadFile(url, getZipPath());
     }
 
-    @PluginMethod()
     public void unzip(PluginCall call){
+        showDialog("Estrazione mappa...", true);
         try {
-            showDialog("Estrazione della mappa...");
+            downloadCalls.put(getZipPath(), call);
             implementation.unzip(getZipPath());
-            call.resolve();
-            dialog.dismiss();
         } catch (IOException e) {
             e.printStackTrace();
-            call.reject("error");
             dialog.dismiss();
+            call.reject("error");
             Toast.makeText(getContext(), "Errore durante l'estrazione della mappa", Toast.LENGTH_LONG).show();
         }
     }
@@ -68,11 +69,10 @@ public class JarvisTransferPlugin extends Plugin implements DownloadEventListene
 
     @Override
     public void downloadCompleted(String url) {
-        dialog.dismiss();
         PluginCall toResolve = downloadCalls.get(url);
         if(toResolve!=null){
-            toResolve.resolve();
             downloadCalls.remove(url);
+            unzip(toResolve);
         }
     }
 
@@ -93,19 +93,12 @@ public class JarvisTransferPlugin extends Plugin implements DownloadEventListene
 
     @Override
     public void connectingToServer() {
-        showDialog("Connessione al server...");
+        showDialog("Connessione al server...", true);
     }
 
     @Override
     public void serverConnected() {
-        dialog.dismiss();
-        dialog = new ProgressDialog(getContext());
-        dialog.setMessage("Scaricamento mappa...");
-        dialog.setIndeterminate(false);
-        dialog.setMax(100);
-        dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        dialog.setCancelable(false);
-        dialog.show();
+        showDialog("Scaricamento mappa...", false);
     }
 
     private String getZipPath(){
@@ -114,5 +107,14 @@ public class JarvisTransferPlugin extends Plugin implements DownloadEventListene
 
     private String getFolderPath(){
         return getContext().getExternalFilesDir(null).getPath()+"/tiles";
+    }
+
+    @Override
+    public void unzipCompleted(String file) {
+        dialog.dismiss();
+        PluginCall toResolve = downloadCalls.get(file);
+        if(toResolve!=null){
+            toResolve.resolve();
+        }
     }
 }

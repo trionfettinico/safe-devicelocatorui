@@ -1,11 +1,13 @@
 package it.filippetti.jarvis.safemap.jarvisTransferPlugin;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Enumeration;
@@ -14,21 +16,15 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
-public class Unzipper {
+public class Unzipper extends AsyncTask<String, String, String> {
 
-    public void unzip(String filename) throws IOException {
-        Log.d("UNZIP", "Unzip started");
-        File file = new File(filename);
-        String outputPath = file.getParent();
-        FileInputStream is = new FileInputStream(file);
-        ZipInputStream zip = new ZipInputStream(is);
-        File outputPathFile = new File(outputPath);
-        outputPathFile.mkdir();
-        unzipAllEntries(zip, outputPath);
-        Log.d("UNZIP", "Unzip finished");
+    private final UnzipEventListener listener;
+
+    public Unzipper(UnzipEventListener listener) {
+        this.listener = listener;
     }
 
-    public boolean deleteZipFile(String filename){
+    private boolean deleteZipFile(String filename){
         File file = new File(filename);
         return file.delete();
     }
@@ -61,5 +57,31 @@ public class Unzipper {
             dest.flush();
             zip.closeEntry();
         }
+    }
+
+    @Override
+    protected String doInBackground(String... strings) {
+        Log.d("UNZIP", "Unzip started");
+        try {
+            File file = new File(strings[0]);
+            String outputPath = file.getParent();
+            FileInputStream is = new FileInputStream(file);
+            ZipInputStream zip = new ZipInputStream(is);
+            File outputPathFile = new File(outputPath);
+            outputPathFile.mkdir();
+            unzipAllEntries(zip, outputPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return strings[0];
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        Log.d("UNZIP", "Unzip finished");
+        listener.unzipCompleted(s);
+        deleteZipFile(s);
+        super.onPostExecute(s);
     }
 }

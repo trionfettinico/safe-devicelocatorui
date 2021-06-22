@@ -3,12 +3,14 @@ import {
     IonButton,
     IonCol,
     IonContent,
+    IonButtons,
     IonIcon,
     IonItem,
     IonLabel,
     IonList,
     IonPage,
     IonPopover,
+    IonToolbar,
     useIonRouter,
     UseIonRouterResult,
     useIonToast,
@@ -80,9 +82,6 @@ const Welcome: React.FC = () => {
             url: "http://www.lucapatarca.cloud/download/" + city_name,
         });
         console.log("Download completed");
-        console.log("Starting unzip");
-        await JarvisTransferPlugin.unzip({});
-        console.log("Unzip completed");
         const newArray = downloadedCities.concat(city_name);
         setDownloadedCities(newArray);
     }
@@ -115,16 +114,10 @@ const Welcome: React.FC = () => {
                 {availableCities.map((cityName) => <IonItem>
                     <IonLabel className="left-item">{cityName}</IonLabel>
                     {downloadedCities.find((e) => e == cityName) === undefined ?
-                        <IonButton onClick={() => downloadCity(cityName)} className="right-item"><IonIcon icon={downloadOutline} size="large" /></IonButton>
+                        <IonButton onClick={() => downloadCity(cityName)} className="right-item" size="default"><IonIcon icon={downloadOutline} size="default" /></IonButton>
                         : <IonIcon icon={cloudDoneOutline} className="right-item" size="large" />}
                 </IonItem>)}
             </IonList>
-            <IonButton color="danger" size="small" onClick={() => reset()} >
-                cancella tutto
-            </IonButton>
-            <IonButton disabled={downloadedCities.length === 0} color="secondary" routerLink="/home">
-                mappa
-            </IonButton>
             <IonPopover
                 cssClass='my-custom-class'
                 event={popoverState.event}
@@ -136,6 +129,18 @@ const Welcome: React.FC = () => {
                 <br />
                 <IonButton onClick={() => loadData()}>reload</IonButton>
             </IonPopover>
+            <IonToolbar>
+                <IonButtons slot="end">
+                    <IonButton disabled={downloadedCities.length === 0} color="secondary" routerLink="/home">
+                        fatto
+                    </IonButton>
+                </IonButtons>
+                <IonButtons slot="start">
+                    <IonButton color="danger" size="small" onClick={() => reset()} >
+                        cancella tutto
+                    </IonButton>
+                </IonButtons>
+            </IonToolbar>
         </IonPage>
     );
 };
