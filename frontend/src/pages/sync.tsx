@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import {
     IonButton,
     IonCol,
+    IonContent,
     IonIcon,
     IonItem,
     IonLabel,
@@ -16,7 +17,6 @@ import { Plugins } from "@capacitor/core";
 import { MapContext } from "../provider/MapProvider";
 import { ContextMapType } from "../provider/type";
 import { cloudDoneOutline, downloadOutline } from "ionicons/icons";
-
 
 import './sync.css';
 
@@ -51,16 +51,17 @@ const Welcome: React.FC = () => {
 
     const connection = async () => {
         var prova = await Network.getStatus();
-        if (!prova.connected)
+        if (!prova.connected && downloadCity.length === 0)
             setShowPopover({ showPopover: true, event: undefined })
     }
 
     useEffect(() => {
-        connection();
+        Network.addListener("networkStatusChange", status => {
+            loadData();
+        });
         enableHardwareBackButton(ionRouter);
         loadAvailableCities();
-
-
+        connection();
     }, []);
 
     function loadAvailableCities() {
@@ -107,6 +108,9 @@ const Welcome: React.FC = () => {
 
     return (
         <IonPage id="home-page">
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <img src="assets/icon/splash.png" height="70 px" width="70 px" />
+            </div>
             <IonList className="available-list">
                 {availableCities.map((cityName) => <IonItem>
                     <IonLabel className="left-item">{cityName}</IonLabel>
@@ -119,7 +123,7 @@ const Welcome: React.FC = () => {
                 cancella tutto
             </IonButton>
             <IonButton disabled={downloadedCities.length === 0} color="secondary" routerLink="/home">
-                fatto
+                mappa
             </IonButton>
             <IonPopover
                 cssClass='my-custom-class'
