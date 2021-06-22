@@ -17,10 +17,11 @@ import {
 } from '@ionic/react';
 import { Plugins } from "@capacitor/core";
 import { MapContext } from "../provider/MapProvider";
-import { ContextMapType } from "../provider/type";
+import { ContextMapType, ContextSensorsType } from "../provider/type";
 import { cloudDoneOutline, downloadOutline } from "ionicons/icons";
 
 import './sync.css';
+import { SensorsContext } from "../provider/SensorsProvider";
 
 const { JarvisTransferPlugin, App, Network } = Plugins;
 
@@ -40,9 +41,14 @@ const Welcome: React.FC = () => {
 
     const [popoverState, setShowPopover] = useState({ showPopover: false, event: undefined });
 
-    const { downloadedCities, setDownloadedCities, clearAll } = useContext(
+    const { downloadedCities, setDownloadedCities ,loadDataMap } = useContext(
         MapContext
     ) as ContextMapType;
+
+    const { clearAll ,loadDataSensor } = useContext(
+        SensorsContext
+    ) as ContextSensorsType
+
     const [present, dismiss] = useIonToast();
 
     const [availableCities, setAvailableCities] = React.useState<Array<string>>(new Array());
@@ -53,8 +59,8 @@ const Welcome: React.FC = () => {
 
     const connection = async () => {
         var prova = await Network.getStatus();
-        if (!prova.connected && downloadCity.length === 0)
-            setShowPopover({ showPopover: true, event: undefined })
+        if (!prova.connected || downloadCity.length === 0)
+            setShowPopover({ showPopover: true, event: undefined });
     }
 
     useEffect(() => {
@@ -83,7 +89,7 @@ const Welcome: React.FC = () => {
         });
         console.log("Download completed");
         var newArray = new Array();
-        newArray = newArray.concat(downloadedCities)
+        newArray = newArray.concat(downloadedCities);
         newArray = newArray.concat(city_name);
         setDownloadedCities(newArray);
         present({
@@ -96,13 +102,15 @@ const Welcome: React.FC = () => {
     function reset() {
         clearAll();
         try {
-            JarvisTransferPlugin.reset();
-            setDownloadedCities(new Array());
+            //JarvisTransferPlugin.reset();
+            //setDownloadedCities(new Array());
             present({
                 buttons: [{ text: 'ok', handler: () => dismiss() }],
                 message: 'rimossi tutti i dati',
                 duration: 10000
             });
+            loadDataMap();
+            loadDataSensor();
         } catch {
             present({
                 buttons: [{ text: 'ok', handler: () => dismiss() }],
@@ -110,10 +118,12 @@ const Welcome: React.FC = () => {
                 duration: 10000
             });
         }
+        
     }
 
     return (
         <IonPage id="home-page">
+            <br/>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img src="assets/icon/splash.png" height="70 px" width="70 px" />
             </div>
@@ -126,7 +136,6 @@ const Welcome: React.FC = () => {
                 </IonItem>)}
             </IonList>
             <IonPopover
-                cssClass='my-custom-class'
                 event={popoverState.event}
                 isOpen={popoverState.showPopover}
                 backdropDismiss={false}

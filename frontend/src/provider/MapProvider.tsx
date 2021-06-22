@@ -22,17 +22,13 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [storageService] = React.useState(new StorageService());
     const [downloadedCities, setDownloadedCitiesLocal] = React.useState<Array<string>>(new Array());
 
-    async function clearAll() {
-        await storageService.clearAll();
-    }
-
-    async function loadData() {
+    async function loadDataMap() {
         setDownloadedCitiesLocal(await storageService.getDownloadedCities());
         setLocationVisible(await storageService.getLocationVisible());
     }
 
     useEffect(() => {
-        loadData();
+        loadDataMap();
     }, []);
 
     const setDownloadedCities = (cities: string[])=>{
@@ -81,7 +77,7 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
             toggleLocation,
             downloadedCities,
             setDownloadedCities,
-            clearAll
+            loadDataMap
         }}>
             {children}
         </MapContext.Provider>

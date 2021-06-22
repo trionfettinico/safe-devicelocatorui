@@ -23,7 +23,7 @@ type ContextMapType = {
     toggleLocation: () => void;
     downloadedCities:string[];
     setDownloadedCities : (string) => void;
-    clearAll:()=>void;
+    loadDataMap : () => void;
 };
 
 type ContextSensorsType = {
@@ -33,4 +33,6 @@ type ContextSensorsType = {
     setTeams: (Array) => void;
     team: string;
     setTeam: (string) => void;
+    clearAll:() => void;
+    loadDataSensor : () => void;
 };

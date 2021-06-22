@@ -15,23 +15,38 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
     const [teams, setTeamsLocal] = React.useState<Array<string>>(new Array());
     const [team, setTeamLocal] = React.useState<string>("");
 
-    async function loadData() {
+    async function clearAll() {
+        setSensors(new Array<Sensor>());
+        //storageService.clearAll();
+        setTeam("");
+        setTeams(new Array<string>());
+    }
+
+    async function loadDataSensor() {
         var sensorsTemp = await storageService.getSensorLocal();
         if (sensorsTemp.length === 0) {
             try {
+                console.log("prova -> 1234");
+                
                 sensorsTemp = await apiService.loadSensors();
+
+                console.log("prova -> 5678");
+
                 setShowPopover({ showPopover: false, event: undefined });
             } catch {
+                console.log("prova -> error");
                 setShowPopover({ showPopover: true, event: undefined });
             }
         }
+        console.log("dio porco");
+        
         setSensors(sensorsTemp);
         setTeams(await storageService.getTeams());
         setTeam(await storageService.getTeam());
     }
 
     useEffect(() => {
-        loadData();
+        loadDataSensor();
     }, []);
 
     const setSensors = async (sensorsList: Array<Sensor>) => {
@@ -57,6 +72,8 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
             setTeams,
             team,
             setTeam,
+            clearAll,
+            loadDataSensor
         }}>
             {children}
             <IonPopover
@@ -68,7 +85,7 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
                 ERRORE<br />
                 Avviare app Safe
                 <br />
-                <IonButton onClick={() => loadData()}>reload</IonButton>
+                <IonButton onClick={() => loadDataSensor()}>reload</IonButton>
             </IonPopover>
         </SensorsContext.Provider>
     );
