@@ -82,8 +82,15 @@ const Welcome: React.FC = () => {
             url: "http://www.lucapatarca.cloud/download/" + city_name,
         });
         console.log("Download completed");
-        const newArray = downloadedCities.concat(city_name);
+        var newArray = new Array();
+        newArray = newArray.concat(downloadedCities)
+        newArray = newArray.concat(city_name);
         setDownloadedCities(newArray);
+        present({
+            buttons: [{ text: 'ok', handler: () => dismiss() }],
+            message: 'unzip eseguito con successo',
+            duration: 10000
+        });
     }
 
     function reset() {
