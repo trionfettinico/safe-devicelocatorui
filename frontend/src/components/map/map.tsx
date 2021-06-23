@@ -14,7 +14,7 @@ import { SensorsContext } from "../../provider/SensorsProvider";
 
 export const MapComponent: React.FC = () => {
   const { orientation, setFollowUser, followUser, geolocation, addMapListener } = useContext(MapContext) as ContextMapType;
-  const { sensors, team } = useContext(SensorsContext) as ContextSensorsType;
+  const { sensors , loadDataSensor} = useContext(SensorsContext) as ContextSensorsType;
   const mapDivRef = useRef<HTMLDivElement>(null);
   const [map] = useState<Map>(new Map({
     layers: [
@@ -34,6 +34,7 @@ export const MapComponent: React.FC = () => {
   }));
 
   useEffect(() => {
+    loadDataSensor();
     setTimeout(() => {
       if (mapDivRef.current != null) {
         map.setTarget(mapDivRef.current);

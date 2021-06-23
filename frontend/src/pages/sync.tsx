@@ -39,11 +39,11 @@ const Welcome: React.FC = () => {
 
     const [popoverState, setShowPopover] = useState({ showPopover: false, event: undefined });
 
-    const { downloadedCities, setDownloadedCities ,loadDataMap ,deletAllMap } = useContext(
+    const { downloadedCities, setDownloadedCities, loadDataMap, deletAllMap } = useContext(
         MapContext
     ) as ContextMapType;
 
-    const { clearAll ,loadDataSensor } = useContext(
+    const { clearAll, loadDataSensor } = useContext(
         SensorsContext
     ) as ContextSensorsType
 
@@ -115,12 +115,12 @@ const Welcome: React.FC = () => {
                 duration: 10000
             });
         }
-        
+
     }
 
     return (
         <IonPage id="home-page">
-            <br/>
+            <br />
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img src="assets/icon/splash.png" height="70 px" width="70 px" />
             </div>
@@ -137,7 +137,7 @@ const Welcome: React.FC = () => {
                 isOpen={popoverState.showPopover}
                 backdropDismiss={false}
             >
-                ERRORE<br />
+                ATTENZIONE<br />
                 Attivare internet
                 <br />
                 <IonButton onClick={() => loadData()}>reload</IonButton>
