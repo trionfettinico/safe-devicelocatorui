@@ -14,6 +14,8 @@ import { ContextSensorsType } from "../../provider/type";
 import { Sensor } from "../../data/sensors";
 import { SensorsContext } from "../../provider/SensorsProvider";
 
+import './popover.css';
+
 interface SensorItemProps {
   sensor: Sensor;
 }
@@ -75,7 +77,8 @@ const Popover: React.FC<SensorItemProps> = ({ sensor }) => {
           setShowPopover({ open: false, event: undefined });
         }}
       >
-        <IonItem>
+        <IonItem
+        className="padding-top">
           <IonLabel>heatmap</IonLabel>
           <IonToggle
             checked={sensor.isHeatmapVisible}
@@ -83,7 +86,8 @@ const Popover: React.FC<SensorItemProps> = ({ sensor }) => {
             onIonChange={() => changeHeatMapVisible(sensor)}
           />
         </IonItem>
-        <IonItem>
+        <IonItem
+        className="padding-side">
           <IonLabel>marker</IonLabel>
           <IonToggle
             checked={sensor.isMarkerVisible}
@@ -91,16 +95,18 @@ const Popover: React.FC<SensorItemProps> = ({ sensor }) => {
             onIonChange={() => changeMarkerVisible(sensor)}
           />
         </IonItem>
-        <IonItem>
-          <IonLabel>centroids</IonLabel>
+        <IonItem
+        className="padding-side">
+          <IonLabel>area</IonLabel>
           <IonToggle
             checked={sensor.isCentroidVisible}
             value="centroids"
             onIonChange={() => changeCentroidVisible(sensor)}
           />
         </IonItem>
-        <IonItem>
-          <IonLabel>Radius</IonLabel>
+        <IonItem
+        className="padding-side">
+          <IonLabel>radius</IonLabel>
           <IonRange
             min={5}
             max={20}
@@ -112,8 +118,9 @@ const Popover: React.FC<SensorItemProps> = ({ sensor }) => {
             }}
           />
         </IonItem>
-        <IonItem>
-          <IonLabel>Blur</IonLabel>
+        <IonItem
+        className="padding-bottom">
+          <IonLabel>blur</IonLabel>
           <IonRange
             min={5}
             max={30}
@@ -129,7 +136,7 @@ const Popover: React.FC<SensorItemProps> = ({ sensor }) => {
       <IonButton
         onClick={(e) => setShowPopover({ open: true, event: e.nativeEvent })}
       >
-        Setting
+        Impostazioni
         <IonIcon icon={settingsOutline} />
       </IonButton>
     </>

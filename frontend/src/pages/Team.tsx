@@ -22,7 +22,7 @@ const Team: React.FC = () => {
       <div>
         <IonItem>
           <IonSearchbar
-            placeholder="Filter Team"
+            placeholder="Cerca Team"
             value={searchText}
             onIonChange={(e) => setSearchText(e.detail.value!)}
             showCancelButton="focus"

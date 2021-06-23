@@ -140,7 +140,7 @@ const Welcome: React.FC = () => {
                 ATTENZIONE<br />
                 Attivare internet
                 <br />
-                <IonButton onClick={() => loadData()}>reload</IonButton>
+                <IonButton onClick={() => loadData()}>aggiorna</IonButton>
             </IonPopover>
             <IonToolbar>
                 <IonButtons slot="end">

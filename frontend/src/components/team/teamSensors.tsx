@@ -51,6 +51,7 @@ const TeamSensors: React.FC<TeamItemProps> = ({ team }) => {
           <IonCol>
             <IonSearchbar
               value={searchText}
+              placeholder="Cerca sensore"
               onIonChange={(e) => setSearchText(e.detail.value!)}
               showCancelButton="focus"
               animated
@@ -58,7 +59,7 @@ const TeamSensors: React.FC<TeamItemProps> = ({ team }) => {
           </IonCol>
           <IonCol>
             <IonItem>
-              <IonLabel>view available</IonLabel>
+              <IonLabel>nascondi già assegnati</IonLabel>
               <IonToggle
                 checked={viewAviable}
                 onIonChange={() => setViewAviable(!viewAviable)}
@@ -67,7 +68,7 @@ const TeamSensors: React.FC<TeamItemProps> = ({ team }) => {
           </IonCol>
           <IonCol>
             <IonButton onClick={() => removeTeam()}>
-              Delete team
+              Elimina team
               <IonIcon slot="end" icon={trashOutline} />
             </IonButton>
           </IonCol>

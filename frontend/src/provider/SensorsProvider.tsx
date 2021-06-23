@@ -80,7 +80,7 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
                 ATTENZIONE<br />
                 Avviare app Safe
                 <br />
-                <IonButton onClick={() => loadDataSensor()}>reload</IonButton>
+                <IonButton onClick={() => loadDataSensor()}>aggiorna</IonButton>
             </IonPopover>
         </SensorsContext.Provider>
     );

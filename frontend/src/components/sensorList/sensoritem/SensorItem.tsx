@@ -91,13 +91,13 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
 
               <IonFab vertical="top" horizontal="end" slot="fixed"></IonFab>
               <IonButton onClick={() => changeStatus(sensor)}>
-                {sensor.status ? <div>checked</div> : <div>unChecked</div>}
+                {sensor.status ? <div>controllato</div> : <div>non controllato</div>}
               </IonButton>
             </IonLabel>
             <IonList>
               <Popover sensor={sensor} />
               <IonButton onClick={findSensor}>
-                Find
+                Trova
                 <IonIcon icon={searchCircle} />
               </IonButton>
               <span className="date"></span>

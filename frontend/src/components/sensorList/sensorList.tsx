@@ -46,14 +46,14 @@ const SensorList: React.FC = () => {
             <IonItem style={{ display: 'flex', justifyContent: 'right', alignItems: 'right' }}>
               <IonSelect
                 value={team}
-                okText="Select"
-                cancelText="Cancel"
+                okText="Seleziona"
+                cancelText="Annulla"
                 onIonChange={(val) => {
                   setTeam(val.detail.value);
                   test(val.detail.value);
                 }}
               >
-                <IonSelectOption value={"any"}>Any</IonSelectOption>
+                <IonSelectOption value={"any"}>Tutti</IonSelectOption>
                 {teams.map((e) => (
                   <IonSelectOption value={e}>{e}</IonSelectOption>
                 ))}
@@ -63,10 +63,10 @@ const SensorList: React.FC = () => {
 
         </IonItem>
         <IonButton expand="full" routerLink="/welcome">
-          MAP
+          MAPPE
         </IonButton>
         <IonButton expand="full" routerLink="/teams">
-          TEAMS
+          TEAM
         </IonButton>
       </div>
       <IonList>

@@ -48,13 +48,13 @@ const TeamPopOver: React.FC = () => {
             setShowPopover({ open: false, event: e.nativeEvent });
           }}
         >
-          load
+          inserisci
         </IonButton>{" "}
       </IonPopover>
       <IonButton
         onClick={(e) => setShowPopover({ open: true, event: e.nativeEvent })}
       >
-        Insert new team
+        Inserisci nuovo team
         <IonIcon icon={push} />
       </IonButton>
     </>
