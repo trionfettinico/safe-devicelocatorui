@@ -24,6 +24,7 @@ type ContextMapType = {
     downloadedCities:string[];
     setDownloadedCities : (string) => void;
     loadDataMap : () => void;
+    deletAllMap : () => void;
 };
 
 type ContextSensorsType = {

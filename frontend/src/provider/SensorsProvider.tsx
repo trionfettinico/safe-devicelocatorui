@@ -17,7 +17,7 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
 
     async function clearAll() {
         setSensors(new Array<Sensor>());
-        //storageService.clearAll();
+        storageService.clearAll();
         setTeam("");
         setTeams(new Array<string>());
     }

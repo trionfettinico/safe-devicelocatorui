@@ -41,7 +41,7 @@ const Welcome: React.FC = () => {
 
     const [popoverState, setShowPopover] = useState({ showPopover: false, event: undefined });
 
-    const { downloadedCities, setDownloadedCities ,loadDataMap } = useContext(
+    const { downloadedCities, setDownloadedCities ,loadDataMap ,deletAllMap } = useContext(
         MapContext
     ) as ContextMapType;
 
@@ -102,8 +102,9 @@ const Welcome: React.FC = () => {
     function reset() {
         clearAll();
         try {
-            //JarvisTransferPlugin.reset();
-            //setDownloadedCities(new Array());
+            JarvisTransferPlugin.reset();
+            setDownloadedCities(new Array());
+            deletAllMap();
             present({
                 buttons: [{ text: 'ok', handler: () => dismiss() }],
                 message: 'rimossi tutti i dati',

@@ -86,7 +86,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
         {showMenu ? (
           <div>
             <IonLabel>
-              Team: {sensor.team}
+              Team: {sensor.team === ""? "non assegnato" : sensor.team}
               <br />
 
               <IonFab vertical="top" horizontal="end" slot="fixed"></IonFab>

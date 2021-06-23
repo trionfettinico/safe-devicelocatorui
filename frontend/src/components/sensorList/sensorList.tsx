@@ -8,6 +8,7 @@ import {
   IonRow,
   IonSelect,
   IonSelectOption,
+  IonTitle,
 } from "@ionic/react";
 import React, { useContext } from "react";
 import { ContextSensorsType } from "../../provider/type";
@@ -40,11 +41,11 @@ const SensorList: React.FC = () => {
       <div>
         <IonItem>
           <IonRow>
-            <IonCol>
-              <img src="assets/icon/Logo.png" height="40 px" width="40 px" />
-            </IonCol>
-            <IonRow>
-              <IonLabel>Team</IonLabel>
+            <img src="assets/icon/Logo.png" height="45 px" width="45 px" />
+            
+              <IonTitle>Team     </IonTitle>
+
+            <IonItem style={{ display: 'flex', justifyContent: 'right', alignItems: 'right' }}>
               <IonSelect
                 value={team}
                 okText="Select"
@@ -59,7 +60,7 @@ const SensorList: React.FC = () => {
                   <IonSelectOption value={e}>{e}</IonSelectOption>
                 ))}
               </IonSelect>
-            </IonRow>
+            </IonItem>
           </IonRow>
 
         </IonItem>

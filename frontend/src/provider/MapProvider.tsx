@@ -27,6 +27,10 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
         setLocationVisible(await storageService.getLocationVisible());
     }
 
+    async function deletAllMap() {
+        setDownloadedCitiesLocal(new Array<string>());
+    }
+
     useEffect(() => {
         loadDataMap();
     }, []);
@@ -77,7 +81,8 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
             toggleLocation,
             downloadedCities,
             setDownloadedCities,
-            loadDataMap
+            loadDataMap,
+            deletAllMap
         }}>
             {children}
         </MapContext.Provider>
