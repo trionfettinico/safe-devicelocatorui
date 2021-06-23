@@ -42,10 +42,6 @@ const TeamSensors: React.FC<TeamItemProps> = ({ team }) => {
     teams.splice(teams.indexOf(team), 1);
     var newArray = new Array();
     newArray = newArray.concat(teams);
-    newArray.forEach((e)=>{
-      console.log("dio"+e);
-      
-    })
     setTeams(newArray);
   }
 

@@ -35,7 +35,6 @@ export const GeolocationLayer: React.FC<SingleLayerProps> = ({ map }) => {
         map.addLayer(layer);
 
         startLocationListeners();
-        console.log("started location listeners");
 
     }, []);
 

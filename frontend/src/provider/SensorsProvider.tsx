@@ -26,20 +26,12 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
         var sensorsTemp = await storageService.getSensorLocal();
         if (sensorsTemp.length === 0) {
             try {
-                console.log("prova -> 1234");
-                
                 sensorsTemp = await apiService.loadSensors();
-
-                console.log("prova -> 5678");
-
                 setShowPopover({ showPopover: false, event: undefined });
             } catch {
-                console.log("prova -> error");
                 setShowPopover({ showPopover: true, event: undefined });
             }
         }
-        console.log("dio porco");
-        
         setSensors(sensorsTemp);
         setTeams(await storageService.getTeams());
         setTeam(await storageService.getTeam());

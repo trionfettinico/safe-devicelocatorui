@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
     IonButton,
-    IonCol,
-    IonContent,
     IonButtons,
     IonIcon,
     IonItem,
@@ -83,11 +81,9 @@ const Welcome: React.FC = () => {
 
     async function downloadCity(city_name: string) {
         connection();
-        console.log("Starting download");
         await JarvisTransferPlugin.download({
             url: "http://www.lucapatarca.cloud/download/" + city_name,
         });
-        console.log("Download completed");
         var newArray = new Array();
         newArray = newArray.concat(downloadedCities);
         newArray = newArray.concat(city_name);
@@ -148,7 +144,7 @@ const Welcome: React.FC = () => {
             </IonPopover>
             <IonToolbar>
                 <IonButtons slot="end">
-                    <IonButton disabled={downloadedCities.length === 0} color="secondary" routerLink="/home">
+                    <IonButton disabled={downloadedCities.length === 0} color="primary" fill="solid" routerLink="/home">
                         fatto
                     </IonButton>
                 </IonButtons>
