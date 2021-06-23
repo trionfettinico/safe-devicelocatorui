@@ -58,9 +58,9 @@ const Welcome: React.FC = () => {
     }
 
     const connection = async () => {
-        var prova = await Network.getStatus();
-        if (!prova.connected || downloadCity.length === 0)
-            setShowPopover({ showPopover: true, event: undefined });
+        var internetStatus = await Network.getStatus();
+        if (!internetStatus.connected && downloadedCities.length === 0)
+            setShowPopover({ showPopover: true, event: undefined })
     }
 
     useEffect(() => {
