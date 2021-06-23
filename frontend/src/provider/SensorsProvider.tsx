@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { ContextSensorsType } from "./type";
+import React, { useContext, useEffect, useState } from "react";
+import { ContextMapType, ContextSensorsType } from "./type";
 import StorageService from "../services/storage";
 import { Sensor } from "../data/sensors";
 import ApiService from "../services/apiService";
 import { IonButton, IonPopover } from "@ionic/react";
+import { MapContext } from "./MapProvider";
 
 export const SensorsContext = React.createContext<ContextSensorsType | null>(null);
 
 const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
+    const { downloadedCities } = useContext(MapContext) as ContextMapType;
     const [popoverState, setShowPopover] = useState({ showPopover: false, event: undefined });
     const [apiService] = React.useState<ApiService>(new ApiService());
     const [sensors, setSensorsLocal] = React.useState(new Array<Sensor>());
@@ -26,20 +28,13 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
         var sensorsTemp = await storageService.getSensorLocal();
         if (sensorsTemp.length === 0) {
             try {
-                console.log("prova -> 1234");
-                
                 sensorsTemp = await apiService.loadSensors();
-
-                console.log("prova -> 5678");
-
                 setShowPopover({ showPopover: false, event: undefined });
             } catch {
-                console.log("prova -> error");
-                setShowPopover({ showPopover: true, event: undefined });
+                if (downloadedCities.length !== 0)
+                    setShowPopover({ showPopover: true, event: undefined });
             }
         }
-        console.log("dio porco");
-        
         setSensors(sensorsTemp);
         setTeams(await storageService.getTeams());
         setTeam(await storageService.getTeam());
@@ -82,7 +77,7 @@ const SensorsProvider: React.FC<React.ReactNode> = ({ children }) => {
                 isOpen={popoverState.showPopover}
                 backdropDismiss={false}
             >
-                ERRORE<br />
+                ATTENZIONE<br />
                 Avviare app Safe
                 <br />
                 <IonButton onClick={() => loadDataSensor()}>reload</IonButton>

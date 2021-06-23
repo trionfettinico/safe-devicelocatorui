@@ -1,4 +1,4 @@
-import { IonApp, useIonRouter, UseIonRouterResult } from '@ionic/react';
+import { IonApp } from '@ionic/react';
 import Home from './pages/Home';
 
 /* Core CSS required for Ionic components to work properly */
@@ -19,7 +19,7 @@ import "@ionic/react/css/display.css";
 /* Theme variables */
 import "./theme/variables.css";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { Redirect, Route } from 'react-router';
 import { IonReactRouter } from '@ionic/react-router';
 import MapProvider from './provider/MapProvider';
@@ -30,8 +30,8 @@ import SensorsProvider from './provider/SensorsProvider';
 const App: React.FC = () => {
 
   return (
-    <SensorsProvider>
-      <MapProvider>
+    <MapProvider>
+      <SensorsProvider>
         <IonApp>
           <IonReactRouter>
             <Route path="/home" component={Home} />
@@ -40,8 +40,8 @@ const App: React.FC = () => {
             <Redirect exact from="/" to="/welcome" />
           </IonReactRouter>
         </IonApp>
-      </MapProvider>
-    </SensorsProvider>
+      </SensorsProvider>
+    </MapProvider>
   );
 };
 

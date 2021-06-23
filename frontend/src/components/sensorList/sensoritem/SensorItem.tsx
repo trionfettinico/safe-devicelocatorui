@@ -31,7 +31,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
   const { goToLocation } = useContext(
     MapContext
   ) as ContextMapType;
-  const {sensors, setSensors} = useContext(SensorsContext) as ContextSensorsType;
+  const { sensors, setSensors } = useContext(SensorsContext) as ContextSensorsType;
   function findSensor() {
     fetch(
       "http://127.0.0.1:1234/api/centroid?sensor=" + sensor.id + "&format=json"
@@ -62,7 +62,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
         event={popoverState.event}
         isOpen={popoverState.showPopover}
       >
-        ERRORE<br />
+        ATTENZIONE<br />
         Avviare app Safe per abilitare questa funzionalita
       </IonPopover>
       <div
@@ -86,7 +86,7 @@ const SensorItem: React.FC<SensorListItemProps> = ({ sensor }) => {
         {showMenu ? (
           <div>
             <IonLabel>
-              Team: {sensor.team === ""? "non assegnato" : sensor.team}
+              Team: {sensor.team === "" ? "non assegnato" : sensor.team}
               <br />
 
               <IonFab vertical="top" horizontal="end" slot="fixed"></IonFab>
