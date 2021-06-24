@@ -19,7 +19,7 @@ const SensorList: React.FC = () => {
     SensorsContext
   ) as ContextSensorsType;
 
-  function test(val: string) {
+  function showSensor(val: string) {
     sensors.forEach((e) => {
       if (e.team != val && val != "any") {
         e.isCentroidVisible = false;
@@ -50,7 +50,7 @@ const SensorList: React.FC = () => {
                 cancelText="Annulla"
                 onIonChange={(val) => {
                   setTeam(val.detail.value);
-                  test(val.detail.value);
+                  showSensor(val.detail.value);
                 }}
               >
                 <IonSelectOption value={"any"}>Tutti</IonSelectOption>
