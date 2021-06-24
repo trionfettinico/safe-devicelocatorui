@@ -63,7 +63,9 @@ const MapProvider: React.FC<React.ReactNode> = ({ children }) => {
     const toggleLocation = () => {
         setLocationVisible(!locationVisible);
         storageService.saveLocationVisible(!locationVisible);
-        
+        if(locationVisible) {
+            setFollowUser(false);
+        }
     }
 
     return (

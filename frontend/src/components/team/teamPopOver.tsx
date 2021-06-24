@@ -41,7 +41,7 @@ const TeamPopOver: React.FC = () => {
           setShowPopover({ open: false, event: undefined });
         }}
       >
-        <IonInput placeholder="Enter new team" id="TeamInput" />
+        <IonInput placeholder="Inserisci nuovo team" id="TeamInput" />
         <IonButton
           onClick={(e) => {
             insertTeam();

@@ -12,6 +12,8 @@ import {
     useIonRouter,
     UseIonRouterResult,
     useIonToast,
+    useIonViewDidEnter,
+    useIonViewDidLeave,
 } from '@ionic/react';
 import { Plugins } from "@capacitor/core";
 import { MapContext } from "../provider/MapProvider";
@@ -37,7 +39,9 @@ const Welcome: React.FC = () => {
 
     const ionRouter = useIonRouter();
 
-    const [popoverState, setShowPopover] = useState({ showPopover: false, event: undefined });
+    const [popoverState, setShowPopover] = useState(false);
+
+    const [loadError, setLoadError] = useState(false);
 
     const { downloadedCities, setDownloadedCities, loadDataMap, deletAllMap } = useContext(
         MapContext
@@ -51,23 +55,14 @@ const Welcome: React.FC = () => {
 
     const [availableCities, setAvailableCities] = React.useState<Array<string>>(new Array());
 
-    function loadData() {
-        window.location.reload();
-    }
-
-    const connection = async () => {
-        var internetStatus = await Network.getStatus();
-        if (!internetStatus.connected && downloadedCities.length === 0)
-            setShowPopover({ showPopover: true, event: undefined })
-    }
-
     useEffect(() => {
-        Network.addListener("networkStatusChange", status => {
-            loadData();
-        });
         enableHardwareBackButton(ionRouter);
         loadAvailableCities();
-        connection();
+        Network.addListener("networkStatusChange", status => {
+            if(status.connected){
+                loadAvailableCities();
+            }
+        });
     }, []);
 
     function loadAvailableCities() {
@@ -76,23 +71,29 @@ const Welcome: React.FC = () => {
             .then(response => response.json())
             .then(async data => {
                 setAvailableCities(data);
+                setLoadError(false);
+            }).catch((e) => {
+                setLoadError(true);
             });
     }
 
     async function downloadCity(city_name: string) {
-        connection();
-        await JarvisTransferPlugin.download({
-            url: "http://www.lucapatarca.cloud/download/" + city_name,
-        });
-        var newArray = new Array();
-        newArray = newArray.concat(downloadedCities);
-        newArray = newArray.concat(city_name);
-        setDownloadedCities(newArray);
-        present({
-            buttons: [{ text: 'ok', handler: () => dismiss() }],
-            message: 'unzip eseguito con successo',
-            duration: 10000
-        });
+        try {
+            await JarvisTransferPlugin.download({
+                url: "http://www.lucapatarca.cloud/download/" + city_name,
+            });
+            var newArray = new Array();
+            newArray = newArray.concat(downloadedCities);
+            newArray = newArray.concat(city_name);
+            setDownloadedCities(newArray);
+            present({
+                buttons: [{ text: 'ok', handler: () => dismiss() }],
+                message: 'mappa scaricata con successo',
+                duration: 10000
+            });
+        } catch (e) {
+            setShowPopover(true);
+        }
     }
 
     function reset() {
@@ -125,7 +126,7 @@ const Welcome: React.FC = () => {
                 <img src="assets/icon/splash.png" height="70 px" width="70 px" />
             </div>
             <IonList className="available-list">
-                {availableCities.map((cityName) => <IonItem>
+                {loadError? <IonItem><IonLabel className="left-item">Impossibile caricare le mappe disponibili</IonLabel></IonItem>: availableCities.map((cityName) => <IonItem>
                     <IonLabel className="left-item">{cityName}</IonLabel>
                     {downloadedCities.find((e) => e == cityName) === undefined ?
                         <IonButton onClick={() => downloadCity(cityName)} className="right-item" size="default"><IonIcon icon={downloadOutline} size="default" /></IonButton>
@@ -133,18 +134,17 @@ const Welcome: React.FC = () => {
                 </IonItem>)}
             </IonList>
             <IonPopover
-                event={popoverState.event}
-                isOpen={popoverState.showPopover}
+                event={undefined}
+                isOpen={popoverState}
                 backdropDismiss={false}
             >
-                ATTENZIONE<br />
-                Attivare internet
-                <br />
-                <IonButton onClick={() => loadData()}>aggiorna</IonButton>
+                <IonLabel className="right-item left-item">ATTENZIONE<br />
+                Attivare internet per scaricare le mappe</IonLabel>
+                <IonButton onClick={() => setShowPopover(false)}>aggiorna</IonButton>
             </IonPopover>
             <IonToolbar>
                 <IonButtons slot="end">
-                    <IonButton disabled={downloadedCities.length === 0} color="primary" fill="solid" routerLink="/home">
+                    <IonButton disabled={downloadedCities.length === 0} color="primary" fill="solid" routerLink="/home" onClick={()=>Network.removeAllListeners()}>
                         fatto
                     </IonButton>
                 </IonButtons>
