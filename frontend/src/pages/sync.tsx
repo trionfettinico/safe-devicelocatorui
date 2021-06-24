@@ -140,7 +140,7 @@ const Welcome: React.FC = () => {
             >
                 <IonLabel className="right-item left-item">ATTENZIONE<br />
                 Attivare internet per scaricare le mappe</IonLabel>
-                <IonButton onClick={() => setShowPopover(false)}>aggiorna</IonButton>
+                <IonButton onClick={() => setShowPopover(false)}>ok</IonButton>
             </IonPopover>
             <IonToolbar>
                 <IonButtons slot="end">
