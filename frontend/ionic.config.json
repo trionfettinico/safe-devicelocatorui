@@ -1,0 +1,7 @@
+{
+  "name": "safeMap",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
